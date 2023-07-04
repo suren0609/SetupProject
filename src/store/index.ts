@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import saga from "redux-saga";
 import { all, fork } from "redux-saga/effects";
 import { watchCommonSaga } from "./sagas";
-import RootReducer from "./slices"
+import { rootReducer } from "./rootReducer";
 
 function* RootSaga() {
     yield all([fork(watchCommonSaga)])
@@ -12,7 +12,7 @@ function* RootSaga() {
 const sagaMiddleware = saga();
 
 const store = configureStore({
-    reducer: RootReducer,
+    reducer: rootReducer,
     middleware: [sagaMiddleware],
     devTools: process.env.NODE_ENV !== "production",
 })

@@ -1,18 +1,23 @@
 import React, { useEffect } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
-import useActions from './hooks/useActions';
-import useTypedSelector from './hooks/useTypedSelector';
 import styles from "./App.module.scss";
+import { useDispatch, useSelector } from 'react-redux';
+import { clearStore, getPostsApi } from './store/actions';
+import { removePost } from './store/slices';
+
+import { stateSelector } from './store/selectors';
 
 function App() {
-  const actions = useActions();
+  const dispatch = useDispatch();
 
-  const state = useTypedSelector(state => state);
+  const state = useSelector(stateSelector);
 
   useEffect(() => {
-    actions.getPostsApi({ limit: 10 });
+    dispatch(getPostsApi({ limit: 10 }));
   }, []);
+
+  
 
 
   return (
@@ -26,7 +31,7 @@ function App() {
                 <div key={item.id} className={styles.postWrapper}>
                   {item.title}{' '}
                   <span
-                    onClick={() => actions.removePost(item.id)}
+                    onClick={() => dispatch(removePost(item.id))}
                     className={styles.deleteButton}
                   >
                     <i className='bx bxs-trash'></i>
@@ -38,16 +43,16 @@ function App() {
       )}
 
       <div className={styles.buttonsWrapper}>
-        <button onClick={() => actions.getPostsApi({ limit: 1 })}>
+        <button onClick={() => dispatch(getPostsApi({ limit: 1 }))}>
           Load 1 post
         </button>
-        <button onClick={() => actions.getPostsApi({ limit: 5 })}>
+        <button onClick={() => dispatch(getPostsApi({ limit: 5 }))}>
           Load 5 posts
         </button>
-        <button onClick={() => actions.getPostsApi({ limit: 10 })}>
+        <button onClick={() => dispatch(getPostsApi({ limit: 10 }))}>
           Load 10 posts
         </button>
-        <button onClick={() => actions.clearStore()}>Clear all posts</button>
+        <button onClick={() => dispatch(clearStore())}>Clear all posts</button>
       </div>
     </div>
   );

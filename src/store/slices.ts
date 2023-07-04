@@ -3,7 +3,7 @@ import { clearStore } from "./actions";
 import { PostType } from "./types";
 
 
-const posts = createSlice({
+export const postSlice = createSlice({
     name: 'posts',
     initialState: [] as Array<PostType>,
     reducers: {
@@ -16,7 +16,7 @@ const posts = createSlice({
     },
   })
 
-const isLoading = createSlice({
+export const isLoadingSlice = createSlice({
     name: "isLoading",
     initialState: false,
     reducers: {
@@ -27,11 +27,6 @@ const isLoading = createSlice({
     },
 })
 
-export const { setPosts, removePost } = posts.actions;
+export const { setPosts, removePost } = postSlice.actions;
 
-export const { setIsLoading } = isLoading.actions;
-
-export default combineReducers({
-    posts: posts.reducer,
-    isLoading: isLoading.reducer
-})
+export const { setIsLoading } = isLoadingSlice.actions;

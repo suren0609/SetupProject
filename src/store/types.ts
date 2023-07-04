@@ -8,3 +8,8 @@ export type GetPostsApiPayload = {
     title: string
     body: string
   }
+
+  export interface IState {
+    posts: PostType[],
+    isLoading: boolean
+  }
