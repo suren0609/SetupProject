@@ -7,6 +7,11 @@ import { clearStore, getPostsApi } from './store/actions';
 import { removePost } from './store/slices';
 
 import { stateSelector } from './store/selectors';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage/HomePage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
+import Header from './components/Header/Header';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,39 +26,13 @@ function App() {
 
 
   return (
-    <div className={styles.wrapper}>
-      {state.isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <div className={styles.postsLists}>
-          {state.posts.length
-            ? state.posts.map(item => (
-                <div key={item.id} className={styles.postWrapper}>
-                  {item.title}{' '}
-                  <span
-                    onClick={() => dispatch(removePost(item.id))}
-                    className={styles.deleteButton}
-                  >
-                    <i className='bx bxs-trash'></i>
-                  </span>
-                </div>
-              ))
-            : 'No posts'}
-        </div>
-      )}
-
-      <div className={styles.buttonsWrapper}>
-        <button onClick={() => dispatch(getPostsApi({ limit: 1 }))}>
-          Load 1 post
-        </button>
-        <button onClick={() => dispatch(getPostsApi({ limit: 5 }))}>
-          Load 5 posts
-        </button>
-        <button onClick={() => dispatch(getPostsApi({ limit: 10 }))}>
-          Load 10 posts
-        </button>
-        <button onClick={() => dispatch(clearStore())}>Clear all posts</button>
-      </div>
+    <div className="App">
+     <Header />
+     <Routes>
+      <Route path='/' element={<HomePage />} />
+      <Route path='/login' element={<LoginPage />} />
+      <Route path='/register' element={<RegisterPage />} />
+     </Routes>
     </div>
   );
 }
