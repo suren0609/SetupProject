@@ -1,11 +1,17 @@
 body {
   margin: 0;
-  
+  padding: 0;
   height: 100vh;
-  background-color: #4a5c6a;
+  width: 100vw;
+  /* background-color: #4a5c6a; */
+  /* background: url("https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg") no-repeat;
+  background-position: center;
+  background-size: cover; */
 
 }
-
+*{
+  box-sizing: border-box;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

@@ -1,9 +1,527 @@
 $headerBg: #1d2125;
 $txtColor: #9eacba;
+$btnColor: #579dff;
 
 .Header {
-    width: 100%;
-    height: 5%;
-    background-color: $headerBg;
+  width: 100vw;
+  padding: 15px 10px;
+  height: 50px;
+  background-color: $headerBg;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #32383d;
+  z-index: 100;
+  .burgerAndSearch {
+    display: none;
+  }
 
+  .logoResp {
+    display: none;
+  }
+  .tasks{
+    display: none;
+  }
+
+  .headerLeft {
+    display: flex;
+    align-items: center;
+    .gridMenu {
+      font-size: 22px;
+      color: $txtColor;
+      margin-right: 10px;
+      padding: 9px;
+      border-radius: 3px;
+    }
+    .gridMenu:hover {
+      background-color: #3a4149;
+    }
+    .logo {
+      padding: 0 5px;
+      border-radius: 3px;
+      svg {
+        width: 70px;
+        path {
+          fill: $txtColor;
+        }
+      }
+    }
+    .logo:hover {
+      background-color: #3a4149;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      ul {
+        text-decoration: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        li {
+          text-decoration: none;
+          list-style: none;
+          margin: 0 10px;
+          color: $txtColor;
+          cursor: pointer;
+          padding: 5px 10px;
+          border-radius: 3px;
+          display: flex;
+          align-items: center;
+          span {
+            i {
+              font-size: 25px;
+            }
+          }
+        }
+        li:hover {
+          background: #3a4149;
+        }
+      }
+      button {
+        margin: 0 10px;
+        color: $headerBg;
+        background: $btnColor;
+        outline: none;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #79acf4;
+      }
+    }
+  }
+  .headerRight {
+    display: flex;
+    align-items: center;
+    .controls2 {
+      display: flex;
+      align-items: center;
+
+      .search {
+        position: relative;
+        input {
+          outline: none;
+          background: #22272b;
+          border: 1px solid #3a4149;
+          border-radius: 5px;
+          padding: 10px;
+          padding-left: 35px;
+          width: 250px;
+          color: $txtColor;
+          font-size: 16px;
+        }
+
+        input:focus {
+          width: 350px;
+          border-color: $txtColor;
+        }
+      }
+      .search::before {
+        font-family: "Font Awesome 5 Free";
+        content: "\f002";
+        display: inline-block;
+        // padding-right: 3px;
+        // vertical-align: middle;
+        font-weight: 900;
+        color: #727272;
+        position: absolute;
+        left: 10px;
+        top: 13px;
+      }
+
+      i {
+        color: $txtColor;
+        margin: 0 10px;
+        font-size: 18px;
+      }
+      i:nth-child(2) {
+        transform: rotate(45deg);
+        font-size: 20px;
+      }
+      i {
+        border-radius: 50%;
+        border: 10px solid $headerBg;
+        cursor: pointer;
+      }
+      i:hover {
+        border-color: #3a4149;
+      }
+      .userAva {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: $btnColor;
+        margin: 10px;
+        color: white;
+        font-weight: 500;
+        border: 4px solid $headerBg;
+        cursor: pointer;
+      }
+      .userAva:hover {
+        border-color: #3a4149;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .Header {
+    padding: 15px 5px;
+
+    .headerLeft {
+      .gridMenu {
+        font-size: 18px;
+      }
+      .logo {
+        svg {
+          width: 50px;
+        }
+      }
+      .controls {
+        ul {
+          li {
+            margin: 0 5px;
+            padding: 5px;
+            span {
+              i {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+        button {
+          margin: 0 5px;
+          padding: 7px 10px;
+        }
+      }
+    }
+    .headerRight {
+      .controls2 {
+        .search {
+          input {
+            padding: 10px;
+            width: 180px;
+            padding-left: 35px;
+            font-size: 13px;
+          }
+
+          input:focus {
+            width: 250px;
+          }
+        }
+        .search::before {
+          font-family: "Font Awesome 5 Free";
+          content: "\f002";
+          display: inline-block;
+          // padding-right: 3px;
+          // vertical-align: middle;
+          font-size: 13px;
+          font-weight: 900;
+          color: #727272;
+          position: absolute;
+          left: 10px;
+          top: 13px;
+        }
+
+        i {
+          color: $txtColor;
+          margin: 0 10px;
+          font-size: 18px;
+        }
+        i:nth-child(2) {
+          transform: rotate(45deg);
+          font-size: 20px;
+        }
+        i {
+          border-radius: 50%;
+          border: 10px solid $headerBg;
+          cursor: pointer;
+        }
+        i:hover {
+          border-color: #3a4149;
+        }
+        .userAva {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background-color: $btnColor;
+          margin: 10px;
+          color: white;
+          font-weight: 500;
+          border: 4px solid $headerBg;
+          cursor: pointer;
+        }
+        .userAva:hover {
+          border-color: #3a4149;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .Header {
+    .headerRight {
+      .controls2 {
+        .search {
+          input:focus {
+            width: 180px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 982px) {
+  .Header {
+    padding: 10px 5px;
+
+    .headerLeft {
+      .gridMenu {
+        font-size: 14px;
+        margin: 0;
+      }
+      .logo {
+        svg {
+          width: 35px;
+        }
+      }
+      .controls {
+        ul {
+          li {
+            margin: 0 3px;
+            padding: 3px;
+            font-size: 12px;
+            span {
+              i {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+        button {
+          margin: 0 3px;
+          padding: 5px 7px;
+          font-size: 12px;
+        }
+      }
+    }
+    .headerRight {
+      .controls2 {
+        .search {
+          input {
+            padding: 5px;
+            width: 180px;
+            padding-left: 25px;
+            font-size: 10px;
+          }
+        }
+        .search::before {
+          font-family: "Font Awesome 5 Free";
+          content: "\f002";
+          display: inline-block;
+          // padding-right: 3px;
+          // vertical-align: middle;
+          font-size: 10px;
+          font-weight: 900;
+          color: #727272;
+          position: absolute;
+          left: 7px;
+          top: 7px;
+        }
+
+        i {
+          color: $txtColor;
+          margin: 0 5px;
+          font-size: 14px;
+        }
+        i:nth-child(2) {
+          transform: rotate(45deg);
+          font-size: 15px;
+        }
+        i {
+          border-radius: 50%;
+          border: 3px solid $headerBg;
+          cursor: pointer;
+        }
+        i:hover {
+          border-color: #3a4149;
+        }
+        .userAva {
+          width: 25px;
+          height: 25px;
+          margin: 5px;
+          border: 4px solid $headerBg;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 833px) {
+  .Header {
+    justify-content: space-between;
+    padding: 10px;
+    .headerLeft {
+      display: none;
+    }
+    .headerRight {
+      display: none;
+    }
+    .tasks {
+      display: flex;
+      align-items: center;
+      .close {
+        color: $txtColor;
+        border-radius: 3px;
+        padding: 3px;
+        i {
+        }
+      }
+      .close:hover {
+        background: #3a4149;
+      }
+      .tasksAndCount {
+        padding: 0 10px;
+        h4 {
+          font-size: 16px;
+          margin: 0;
+          color: $txtColor;
+        }
+        p {
+          margin: 0;
+          color: #9eacba;
+          font-size: 10px;
+        }
+      }
+    }
+    .logoResp {
+      display: block;
+      padding: 0 3px;
+      border-radius: 3px;
+      cursor: pointer;
+      svg {
+        width: 70px;
+
+        path {
+          fill: $txtColor;
+        }
+      }
+    }
+  }
+  .logoResp:hover {
+    background-color: #3a4149;
+  }
+  .burgerAndSearch {
+    display: flex !important;
+    align-items: center;
+    color: $txtColor;
+    .searchResp {
+      position: relative;
+      input {
+        outline: none;
+        background: transparent;
+        border: none;
+        //   border: 1px solid #3a4149;
+        border-radius: 5px;
+        padding: 5px;
+        padding-left: 0px;
+        width: 25px;
+        color: $txtColor;
+        font-size: 12px;
+        margin: 0 5px;
+      }
+      input:focus {
+        padding-left: 30px;
+        width: 150px;
+        border-color: $txtColor;
+        border-bottom: 0.2px solid $txtColor;
+      }
+    }
+
+    .searchResp::before {
+      font-family: "Font Awesome 5 Free";
+      content: "\f002";
+      display: inline-block;
+      // padding-right: 3px;
+      // vertical-align: middle;
+      font-weight: 700;
+      color: $txtColor;
+      position: absolute;
+      left: 15px;
+      top: 4.5px;
+    }
+    .notifi {
+      margin: 0 10px;
+      padding: 3px;
+      border-radius: 3px;
+      i {
+      }
+    }
+    .notifi:hover {
+      background: #3a4149;
+    }
+    .burgerResp {
+      padding: 3px;
+      border-radius: 3px;
+      position: relative;
+      i {
+      }
+      .controlsResp{
+        display: none;
+        position: absolute;
+        right: -9px;
+        top: 37px;
+        box-shadow: 0 0 10px $headerBg;
+        background: $headerBg;
+        padding: 0;
+        border-radius: 5px;
+        ul{
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            list-style: none;
+            padding: 0;
+            li{
+                width: 250px;
+                padding: 10px 20px;
+                margin: 2px 0;
+            }
+            li:hover{
+                background: #3a4149;
+                
+            }
+        }
+        button{
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            background: #22272b;
+            color: $txtColor;
+            letter-spacing: 1.5px;
+
+        }
+        button:hover{
+            background: #3a4149;
+        }
+      }
+
+    }
+    .burgerResp:hover {
+      background: #3a4149;
+    }
+  }
 }
