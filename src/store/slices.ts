@@ -26,19 +26,10 @@ export const isLoadingSlice = createSlice({
   },
 });
 
-export const isMenuActiveSlice = createSlice({
-  name: "isMenuActive",
-  initialState: false,
-  reducers: {
-    setIsMenuActive: (state, { payload }: PayloadAction<boolean>) => payload,
-  },
-  extraReducers: {
-    [clearStore.type]: () => false,
-  },
-});
+
 
 export const { setPosts, removePost } = postSlice.actions;
 
 export const { setIsLoading } = isLoadingSlice.actions;
 
-export const { setIsMenuActive } = isMenuActiveSlice.actions;
+

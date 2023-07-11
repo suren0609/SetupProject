@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./HomeBody.module.scss";
-import LittleHeader from "../LittleHeader/LittleHeader";
-import HomeDetails from "../HomeDetails/HomeDetails";
+import { LittleHeader } from "components/LittleHeader";
+import { HomeDetails } from "../HomeDetails";
 
 const HomeBody = () => {
   return (

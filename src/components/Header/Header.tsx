@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { FC } from "react";
 import styles from "./Header.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch, useSelector } from "react-redux";
-import { IState } from "../../store/types";
-import { setIsMenuActive } from "../../store/slices";
 
-const Header = () => {
-  const isMenuActive = useSelector((state: IState) => state.isMenuActive);
-  const dispatch = useDispatch();
+interface IHeaderProps {
+  isMenuActive: {
+    leftMenu: boolean;
+    rightMenu: boolean;
+  };
+  changeMenuState: (leftOrRight: string) => void;
+}
+
+const Header: FC<IHeaderProps> = ({ isMenuActive, changeMenuState }) => {
+  const menuActiveHandler = (
+    e: React.MouseEvent<HTMLElement>,
+    side: string
+  ) => {
+    e.stopPropagation();
+    changeMenuState(side);
+  };
 
   return (
     <div className={styles.Header}>
@@ -91,8 +100,46 @@ const Header = () => {
         </div>
       </div>
       <div className={styles.tasks}>
-        <div className={styles.close}>
-          <i className="fa-solid fa-xmark"></i>
+        <div className={styles.burger1}>
+          <i
+            className="fa-solid fa-bars"
+            onClick={(e) => menuActiveHandler(e, "left")}
+          ></i>
+          <div
+            className={styles.controlsResp}
+            style={{ display: isMenuActive.leftMenu ? "block" : "none" }}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <ul>
+              <li>
+                Workspases{" "}
+                <span>
+                  <i className="bx bx-chevron-down"></i>
+                </span>
+              </li>
+              <li>
+                Recent{" "}
+                <span>
+                  <i className="bx bx-chevron-down"></i>
+                </span>
+              </li>
+              <li>
+                Starred{" "}
+                <span>
+                  <i className="bx bx-chevron-down"></i>
+                </span>
+              </li>
+              <li>
+                Templates{" "}
+                <span>
+                  <i className="bx bx-chevron-down"></i>
+                </span>
+              </li>
+            </ul>
+            <button>Create</button>
+          </div>
         </div>
         <div className={styles.tasksAndCount}>
           <h4>Tasks</h4>
@@ -141,46 +188,48 @@ const Header = () => {
         <div className={styles.notifi}>
           <i className="fa-regular fa-bell"></i>
         </div>
+        <div className={styles.userAva}>SB</div>
 
         <div className={styles.burgerResp}>
           <i
             className="fa-solid fa-ellipsis"
-            onClick={(e) => {
-              e.stopPropagation();
-              dispatch(setIsMenuActive(!isMenuActive))
-            }}
+            onClick={(e) => menuActiveHandler(e, "right")}
           ></i>
           <div
-            className={styles.controlsResp}
-            style={{ display: isMenuActive ? "block" : "none" }}
+            className={styles.controlsResp2}
+            style={{ display: isMenuActive.rightMenu ? "block" : "none" }}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
-            <ul>
-              <li>
-                Workspases{" "}
-                <span>
-                  <i className="bx bx-chevron-down"></i>
-                </span>
-              </li>
-              <li>
-                Recent{" "}
-                <span>
-                  <i className="bx bx-chevron-down"></i>
-                </span>
-              </li>
-              <li>
-                Starred{" "}
-                <span>
-                  <i className="bx bx-chevron-down"></i>
-                </span>
-              </li>
-              <li>
-                Templates{" "}
-                <span>
-                  <i className="bx bx-chevron-down"></i>
-                </span>
-              </li>
-            </ul>
-            <button>Create</button>
+            <div className={styles.workspaceVisible}>
+              <i className="fa-solid fa-user-group"></i>
+              <p>Workspace visible</p>
+            </div>
+            <div className={styles.rightControls}>
+              <div className={styles.sections}>
+                <i className="fa-solid fa-rocket"></i>
+                <p>Power-Ups</p>
+              </div>
+              <div className={styles.sections}>
+                <i className="fa-solid fa-bolt-lightning"></i>
+                <p>Automation</p>
+              </div>
+              <div className={styles.sections}>
+                <i className="fa-solid fa-filter"></i>
+                <p>Filter</p>
+              </div>
+            </div>
+
+            <div className={styles.boardAndViews}>
+              <button>
+                <i className="fa-solid fa-chart-simple fa-rotate-180"></i>{" "}
+                <span>Board</span>
+              </button>
+              <button>
+                <i className="fa-solid fa-user-plus"></i> <span>Share</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

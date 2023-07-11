@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import styles from "./App.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { clearStore, getPostsApi } from "./store/actions";
+import { useDispatch } from "react-redux";
+import { getPostsApi } from "../../store/actions";
 
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage/HomePage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import { setIsMenuActive } from "./store/slices";
+import { HomePage } from "../../pages/HomePage";
+import { LoginPage } from "../../pages/LoginPage";
+import { RegisterPage } from "../../pages/RegisterPage";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -17,10 +17,7 @@ function App() {
   }, []);
 
   return (
-    <div
-      className={styles.leyout_content}
-      onClick={() => dispatch(setIsMenuActive(false))}
-    >
+    <div className={styles.leyout_content}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
