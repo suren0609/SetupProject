@@ -4,6 +4,7 @@ import { put, takeLatest } from "redux-saga/effects";
 import * as actions from "./actions";
 import * as sliceActions from "./slices";
 import { IUserData, PostType } from "./types";
+import Cookies from "js-cookie";
 
 function* getPostsApi(action: ReturnType<typeof actions.getPostsApi>) {
   yield put(sliceActions.setIsLoading(true));
@@ -27,18 +28,16 @@ function* getPostsApi(action: ReturnType<typeof actions.getPostsApi>) {
 
 function* getUser(action: ReturnType<typeof actions.getUser>) {
   try {
+    console.log("token -> ", Cookies.get("token"));
     const { data }: AxiosResponse<IUserData> = yield axios.get(
       "https://young-citadel-44598.herokuapp.com/user",
-      {
-        Cookie:
-          "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY4OTE1NjAzMzI0NywiYWdlIjoiMjAyMy0wNy0yOCIsImVtYWlsIjoidmFoZUBtYWlsLnl1IiwiZ2VuZGVyIjoiTWFsZSIsImlhdCI6MTY4OTE2OTUyMywiZXhwIjoxNjg5MTczMTIzfQ.MgW51_yVozfqo4p_KKrZ7lFBj88tdpla2BlHEe89PQI",
-      } as any,
+      { withCredentials: true },
     );
     console.log("data -> ", data);
 
     yield put(sliceActions.setUser(data));
   } catch (err) {
-    console.log(err);
+    console.log("error ->", err);
   }
 }
 

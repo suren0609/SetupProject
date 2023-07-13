@@ -11,27 +11,32 @@ import { ToastContainer } from "react-toastify";
 import { ProtectedAuth } from "hoc/ProtectedAuth";
 
 function App() {
-  const dispatch = useDispatch();
-
-
-
-  useEffect(() => {
-    dispatch(getUser());
-  }, []);
-
   // ProtectedAuth(<HomePage /> ReactNode);
 
   const user = useSelector((state: any) => state.user);
   console.log(user);
-  
 
   return (
     <div className={styles.leyout_content}>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedAuth path="/login">
+              <HomePage />
+            </ProtectedAuth>
+          }
+        />
 
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/login"
+          element={
+            <ProtectedAuth path="/">
+              <LoginPage />
+            </ProtectedAuth>
+          }
+        />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </div>

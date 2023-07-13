@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./HomePage.module.scss";
 import { Sidebar } from "components/Sidebar";
 import { HomeBody } from "components/HomeBody";
 import { Header } from "../../components/Header";
-import { Navigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import { getUser } from "store/actions";
+import { useDispatch } from "react-redux";
 
 const HomePage = () => {
   const [isMenuActive, setIsMenuActive] = useState({
@@ -26,10 +26,16 @@ const HomePage = () => {
     setIsMenuActive({ rightMenu: false, leftMenu: false });
   };
 
-  const cookie = Cookies.get("token");
-  if (!cookie) {
-    return <Navigate to="/login" />;
-  }
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
+  // const cookie = Cookies.get("token");
+  // if (!cookie) {
+  //   return <Navigate to="/login" />;
+  // }
   return (
     <div className={styles.HomePage} onClick={(e) => menuCloseHandler(e)}>
       <Header isMenuActive={isMenuActive} changeMenuState={changeMenuState} />

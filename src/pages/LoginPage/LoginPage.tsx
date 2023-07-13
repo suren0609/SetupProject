@@ -7,7 +7,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ILogin } from "store/types";
 import { loginUser } from "services/login";
 
-
 import Cookies from "js-cookie";
 import { errorAlert, successAlert } from "helpers/toastAlert";
 
@@ -37,7 +36,7 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     const res = await loginUser(data);
     console.log(res);
-    Cookies.set("token", res.data.token);
+    Cookies.set("token", res?.data?.token);
     if (res.statusText === "OK") {
       successAlert(res.data.message);
       navigate("/");
