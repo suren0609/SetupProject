@@ -1,25 +1,36 @@
 import React, { useEffect } from "react";
 import styles from "./App.module.scss";
-import { useDispatch } from "react-redux";
-import { getPostsApi } from "../../store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getPostsApi, getUser } from "../../store/actions";
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { HomePage } from "../../pages/HomePage";
 import { LoginPage } from "../../pages/LoginPage";
 import { RegisterPage } from "../../pages/RegisterPage";
-
+import { ToastContainer } from "react-toastify";
+import { ProtectedAuth } from "hoc/ProtectedAuth";
 
 function App() {
   const dispatch = useDispatch();
 
+
+
   useEffect(() => {
-    dispatch(getPostsApi({ limit: 10 }));
+    dispatch(getUser());
   }, []);
+
+  // ProtectedAuth(<HomePage /> ReactNode);
+
+  const user = useSelector((state: any) => state.user);
+  console.log(user);
+  
 
   return (
     <div className={styles.leyout_content}>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<HomePage />} />
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>

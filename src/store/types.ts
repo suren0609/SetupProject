@@ -14,3 +14,26 @@ export interface IState {
   isLoading: boolean;
   isMenuActive: boolean;
 }
+
+export interface IRegister {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  age: string;
+  gender: string;
+}
+
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
+export interface IUserData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  age: string;
+  gender: string;
+}

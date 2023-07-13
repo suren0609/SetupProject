@@ -1,10 +1,8 @@
-import React from 'react'
-import styles from "./HomeDetails.module.scss"
+import React from "react";
+import styles from "./HomeDetails.module.scss";
 
 const HomeDetails = () => {
-  return (
-    <div className={styles.HomeDetails}></div>
-  )
-}
+  return <div className={styles.HomeDetails}></div>;
+};
 
-export default HomeDetails
+export default HomeDetails;

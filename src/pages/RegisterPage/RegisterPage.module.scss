@@ -35,6 +35,11 @@
         background: #22272b;
         padding: 10px 30px;
         border-radius: 10px;
+        p{
+          color: rgb(255, 30, 30);
+          margin: 0;
+        }
+        
         input {
           width: 100%;
           padding: 10px;
@@ -67,6 +72,9 @@
           display: flex;
           align-items: center;
           color: #9eacba;
+          p{
+            color: #9eacba;
+          }
           a {
             margin-left: 4px;
             text-decoration: none;

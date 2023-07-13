@@ -1,6 +1,6 @@
 import { PayloadAction, combineReducers, createSlice } from "@reduxjs/toolkit";
 import { clearStore } from "./actions";
-import { PostType } from "./types";
+import { IUserData, PostType } from "./types";
 
 export const postSlice = createSlice({
   name: "posts",
@@ -26,10 +26,17 @@ export const isLoadingSlice = createSlice({
   },
 });
 
-
+export const userSlice = createSlice({
+  name: "user",
+  initialState: {},
+  reducers: {
+    setUser: (state, { payload }: PayloadAction<IUserData>) => {
+      state = payload;
+    },
+  },
+});
 
 export const { setPosts, removePost } = postSlice.actions;
 
 export const { setIsLoading } = isLoadingSlice.actions;
-
-
+export const { setUser } = userSlice.actions;
