@@ -43,6 +43,14 @@
           border: none;
           outline: none;
         }
+        p {
+          width: 100%;
+          text-align: left;
+          color: rgb(250, 39, 39);
+          font-size: 13px;
+          margin: 0;
+          height: 10px;
+        }
         .regBtn {
           width: 100px;
           border-radius: 5px;
@@ -63,6 +71,11 @@
             margin-left: 4px;
             text-decoration: none;
             color: #579dff;
+          }
+          p{
+            color: #9eacba;
+            font-size: 15px;
+            height: unset;
           }
         }
       }

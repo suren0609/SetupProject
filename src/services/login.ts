@@ -6,6 +6,7 @@ export const loginUser = async (userData: ILogin) => {
     const response = await axios.post(
       "https://young-citadel-44598.herokuapp.com/login",
       userData,
+      { withCredentials: true },
     );
     return response;
   } catch (err: any) {

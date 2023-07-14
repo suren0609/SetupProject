@@ -6,6 +6,6 @@ export const logoutUser = async () => {
     await axios.post("https://young-citadel-44598.herokuapp.com/logout");
     Cookies.remove("token");
   } catch (err) {
-    
+    return err;
   }
 };

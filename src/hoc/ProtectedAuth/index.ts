@@ -1,1 +1,1 @@
-export {default as ProtectedAuth} from "./ProtectedAuth"
+export { default as ProtectedAuth } from "./ProtectedAuth";

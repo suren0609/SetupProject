@@ -8,7 +8,8 @@ import { ILogin } from "store/types";
 import { loginUser } from "services/login";
 
 import Cookies from "js-cookie";
-import { errorAlert, successAlert } from "helpers/toastAlert";
+import { toast } from "react-toastify";
+import { toastParameters } from "helpers/toastAlertParams";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -38,10 +39,10 @@ const LoginPage = () => {
     console.log(res);
     Cookies.set("token", res?.data?.token);
     if (res.statusText === "OK") {
-      successAlert(res.data.message);
+      toast.success(res.data.message, toastParameters);
       navigate("/");
     } else {
-      errorAlert(res);
+      toast.error(res, toastParameters);
     }
   };
 
@@ -58,16 +59,28 @@ const LoginPage = () => {
               name="email"
               type="email"
               placeholder="Email"
+              style={{
+                border: errors.email?.message
+                  ? ".5px solid red"
+                  : ".5px solid transparent",
+              }}
             />
+            <p>{errors.email?.message}</p>
             <input
               {...register("password")}
               name="password"
               type="password"
               placeholder="Password"
+              style={{
+                border: errors.password?.message
+                  ? ".5px solid red"
+                  : ".5px solid transparent",
+              }}
             />
+            <p>{errors.password?.message}</p>
             <input className={styles.regBtn} type="submit" value="Login" />
             <div className={styles.loginRoute}>
-              <p>Don't have an accaunt?</p>
+              <p>Don`t have an accaunt?</p>
               <Link to="/Register">Register</Link>
             </div>
           </form>

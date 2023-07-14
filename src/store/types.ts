@@ -16,8 +16,8 @@ export interface IState {
 }
 
 export interface IRegister {
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -30,9 +30,13 @@ export interface ILogin {
   password: string;
 }
 
+export interface IUserInitialState {
+  user: IUserData;
+}
+
 export interface IUserData {
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   age: string;
   gender: string;

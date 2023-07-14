@@ -1,1 +1,1 @@
-export {default as HomeBody} from "./HomeBody";
+export { default as HomeBody } from "./HomeBody";

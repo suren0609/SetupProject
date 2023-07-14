@@ -6,21 +6,24 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IRegister } from "store/types";
 import { registerUser } from "services/register";
-import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import { errorAlert, successAlert } from "helpers/toastAlert";
+import { toastParameters } from "helpers/toastAlertParams";
+import { toast } from "react-toastify";
 
 const schema = yup.object().shape({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
+  firstname: yup.string().required(),
+  lastname: yup.string().required(),
   email: yup.string().email().required(),
   password: yup
     .string()
     .min(8)
     .max(38)
     .required()
-    .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})\S+$/),
+    .matches(
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})\S+$/,
+      "Is not in correct format",
+    ),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password"), null as any], "Passwords must match")
@@ -46,10 +49,10 @@ const RegisterPage = () => {
     const res = await registerUser(data);
 
     if (res.statusText === "OK") {
-      successAlert(res.data);
+      toast.success(res.data, toastParameters);
       navigate("/login");
     } else {
-      errorAlert(res);
+      toast.error(res, toastParameters);
     }
   };
 
@@ -66,24 +69,39 @@ const RegisterPage = () => {
             })}
           >
             <input
-              {...register("firstName")}
+              {...register("firstname")}
               type="text"
-              name="firstName"
+              name="firstname"
               placeholder="First Name"
+              style={{
+                border: errors.firstname?.message
+                  ? ".5px solid red"
+                  : ".5px solid transparent",
+              }}
             />
-            <p>{errors.firstName?.message}</p>
+            <p>{errors.firstname?.message}</p>
             <input
-              {...register("lastName")}
+              {...register("lastname")}
               type="text"
-              name="lastName"
+              name="lastname"
               placeholder="Last Name"
+              style={{
+                border: errors.lastname?.message
+                  ? ".5px solid red"
+                  : ".5px solid transparent",
+              }}
             />
-            <p>{errors.lastName?.message}</p>
+            <p>{errors.lastname?.message}</p>
             <input
               {...register("email")}
               type="email"
               name="email"
               placeholder="Email"
+              style={{
+                border: errors.email?.message
+                  ? ".5px solid red"
+                  : ".5px solid transparent",
+              }}
             />
             <p>{errors.email?.message}</p>
             <input
@@ -91,6 +109,11 @@ const RegisterPage = () => {
               type="password"
               name="password"
               placeholder="Password"
+              style={{
+                border: errors.password?.message
+                  ? ".5px solid red"
+                  : ".5px solid transparent",
+              }}
             />
             <p>{errors.password?.message}</p>
             <input
@@ -98,14 +121,23 @@ const RegisterPage = () => {
               type="password"
               name="confirmPassword"
               placeholder="Confirm Password"
+              style={{
+                border: errors.confirmPassword?.message
+                  ? ".5px solid red"
+                  : ".5px solid transparent",
+              }}
             />
             <p>{errors.confirmPassword?.message as string}</p>
-            <p>{}</p>
             <input
               {...register("age")}
               type="date"
               name="age"
               placeholder="Age"
+              style={{
+                border: errors.age?.message
+                  ? ".5px solid red"
+                  : ".5px solid transparent",
+              }}
             />
             <p>{errors.age?.message}</p>
             <div className={styles.gender}>

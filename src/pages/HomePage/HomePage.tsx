@@ -12,7 +12,15 @@ const HomePage = () => {
     rightMenu: false,
   });
 
+  const [isProfilePopupActive, setIsPopupActive] = useState(false);
+
+  const ChangeprofilePopupState = () => {
+    setIsPopupActive(!isProfilePopupActive);
+    setIsMenuActive({ rightMenu: false, leftMenu: false });
+  };
+
   const changeMenuState = (leftOrRight: string) => {
+    setIsPopupActive(false);
     leftOrRight === "left"
       ? setIsMenuActive({ rightMenu: false, leftMenu: !isMenuActive.leftMenu })
       : setIsMenuActive({
@@ -24,6 +32,7 @@ const HomePage = () => {
   const menuCloseHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     setIsMenuActive({ rightMenu: false, leftMenu: false });
+    setIsPopupActive(false);
   };
 
   const dispatch = useDispatch();
@@ -32,13 +41,14 @@ const HomePage = () => {
     dispatch(getUser());
   }, []);
 
-  // const cookie = Cookies.get("token");
-  // if (!cookie) {
-  //   return <Navigate to="/login" />;
-  // }
   return (
     <div className={styles.HomePage} onClick={(e) => menuCloseHandler(e)}>
-      <Header isMenuActive={isMenuActive} changeMenuState={changeMenuState} />
+      <Header
+        isMenuActive={isMenuActive}
+        changeMenuState={changeMenuState}
+        ChangeprofilePopupState={ChangeprofilePopupState}
+        isProfilePopupActive={isProfilePopupActive}
+      />
       <div className={styles.HomeBodyContainer}>
         <Sidebar />
         <HomeBody />

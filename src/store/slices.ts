@@ -1,19 +1,6 @@
-import { PayloadAction, combineReducers, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { clearStore } from "./actions";
-import { IUserData, PostType } from "./types";
-
-export const postSlice = createSlice({
-  name: "posts",
-  initialState: [] as Array<PostType>,
-  reducers: {
-    setPosts: (state, { payload }: PayloadAction<Array<PostType>>) => payload,
-    removePost: (state, { payload }: PayloadAction<number>) =>
-      state.filter((item) => item.id !== payload),
-  },
-  extraReducers: {
-    [clearStore.type]: () => [],
-  },
-});
+import { IUserData } from "./types";
 
 export const isLoadingSlice = createSlice({
   name: "isLoading",
@@ -28,15 +15,21 @@ export const isLoadingSlice = createSlice({
 
 export const userSlice = createSlice({
   name: "user",
-  initialState: {},
+  initialState: {
+    user: {
+      firstname: "",
+      lastname: "",
+      email: "",
+      age: "",
+      gender: "",
+    },
+  },
   reducers: {
-    setUser: (state, { payload }: PayloadAction<IUserData>) => {
-      state = payload;
+    setUser: (state, { payload }: PayloadAction<{ data: IUserData }>) => {
+      state.user = { ...payload.data };
     },
   },
 });
-
-export const { setPosts, removePost } = postSlice.actions;
 
 export const { setIsLoading } = isLoadingSlice.actions;
 export const { setUser } = userSlice.actions;
