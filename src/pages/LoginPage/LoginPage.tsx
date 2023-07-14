@@ -13,12 +13,7 @@ import { toastParameters } from "helpers/toastAlertParams";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
-  password: yup
-    .string()
-    .min(8)
-    .max(38)
-    .required()
-    .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})\S+$/),
+  password: yup.string().required(),
 });
 
 const LoginPage = () => {
