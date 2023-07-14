@@ -7,11 +7,10 @@ export const registerUser = async (userData: IRegister) => {
       " https://young-citadel-44598.herokuapp.com/register",
       userData,
     );
-    console.log(data);
+
     return data;
   } catch (err: any) {
     const { data } = err.response;
-    console.log(err.response);
 
     return data;
   }

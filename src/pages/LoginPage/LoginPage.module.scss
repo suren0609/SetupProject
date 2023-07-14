@@ -72,12 +72,16 @@
             text-decoration: none;
             color: #579dff;
           }
-          p{
+          p {
             color: #9eacba;
             font-size: 15px;
             height: unset;
           }
         }
+      }
+
+      .errBorder {
+        border: 0.5px solid red;
       }
     }
   }

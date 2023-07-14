@@ -1,9 +1,8 @@
 import React, { FC } from "react";
-import styles from "./Header.module.scss";
 import { logoutUser } from "services/logout";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { IUserData, IUserInitialState } from "store/types";
+import styles from "./Header.module.scss";
 
 interface IHeaderProps {
   isMenuActive: {
@@ -126,7 +125,7 @@ const Header: FC<IHeaderProps> = ({
             onClick={(e) => profilePopupHandler(e)}
           >
             <div className={styles.userAva}>
-              {user.firstname[0] + "" + user.lastname[0]}
+              {`${user.firstname[0]}${user.lastname[0]}`}
             </div>
             <div
               className={styles.profilePopup}
@@ -137,7 +136,7 @@ const Header: FC<IHeaderProps> = ({
             >
               <div className={styles.profileData}>
                 <div className={styles.userAvatar}>
-                  {user.firstname[0] + "" + user.lastname[0]}
+                  {`${user.firstname[0]}${user.lastname[0]}`}
                 </div>
                 <div className={styles.userNameEmail}>
                   <p>{user.firstname + " " + user.lastname}</p>

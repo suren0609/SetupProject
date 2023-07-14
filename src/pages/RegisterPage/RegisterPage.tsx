@@ -1,36 +1,14 @@
 import React from "react";
-import styles from "./RegisterPage.module.scss";
 import { NavLink as Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IRegister } from "store/types";
 import { registerUser } from "services/register";
-
 import "react-toastify/dist/ReactToastify.css";
 import { toastParameters } from "helpers/toastAlertParams";
 import { toast } from "react-toastify";
-
-const schema = yup.object().shape({
-  firstname: yup.string().required(),
-  lastname: yup.string().required(),
-  email: yup.string().email().required(),
-  password: yup
-    .string()
-    .min(8)
-    .max(38)
-    .required()
-    .matches(
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})\S+$/,
-      "Is not in correct format",
-    ),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password"), null as any], "Passwords must match")
-    .required(),
-  age: yup.string().required(),
-  gender: yup.string().required(),
-});
+import styles from "./RegisterPage.module.scss";
+import { registerSchema } from "./registerSchema";
 
 const RegisterPage = () => {
   const {
@@ -40,14 +18,13 @@ const RegisterPage = () => {
     reset,
     watch,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(registerSchema),
   });
 
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<IRegister> = async (data) => {
     const res = await registerUser(data);
-
     if (res.statusText === "OK") {
       toast.success(res.data, toastParameters);
       navigate("/login");
@@ -65,7 +42,22 @@ const RegisterPage = () => {
           </div>
           <form
             onSubmit={handleSubmit(onSubmit, (errors) => {
-              console.log("errors -> ", errors);
+              toast.error(
+                `${errors.age?.message ? errors.age?.message + "," : ""}
+              ${
+                errors.firstname?.message ? errors.firstname?.message + "," : ""
+              }
+              ${errors.lastname?.message ? errors.lastname?.message + "," : ""}
+              ${errors.email?.message ? errors.email?.message + "," : ""}
+              ${errors.gender?.message ? errors.gender?.message + "," : ""}
+              ${errors.password?.message ? errors.password?.message + "," : ""}
+              ${
+                errors.confirmPassword?.message
+                  ? errors.confirmPassword?.message + ","
+                  : ""
+              }`,
+                toastParameters,
+              );
             })}
           >
             <input
@@ -73,11 +65,7 @@ const RegisterPage = () => {
               type="text"
               name="firstname"
               placeholder="First Name"
-              style={{
-                border: errors.firstname?.message
-                  ? ".5px solid red"
-                  : ".5px solid transparent",
-              }}
+              className={errors.email?.message ? styles.errBorder : ""}
             />
             <p>{errors.firstname?.message}</p>
             <input
@@ -85,11 +73,7 @@ const RegisterPage = () => {
               type="text"
               name="lastname"
               placeholder="Last Name"
-              style={{
-                border: errors.lastname?.message
-                  ? ".5px solid red"
-                  : ".5px solid transparent",
-              }}
+              className={errors.email?.message ? styles.errBorder : ""}
             />
             <p>{errors.lastname?.message}</p>
             <input
@@ -97,11 +81,7 @@ const RegisterPage = () => {
               type="email"
               name="email"
               placeholder="Email"
-              style={{
-                border: errors.email?.message
-                  ? ".5px solid red"
-                  : ".5px solid transparent",
-              }}
+              className={errors.email?.message ? styles.errBorder : ""}
             />
             <p>{errors.email?.message}</p>
             <input
@@ -109,11 +89,7 @@ const RegisterPage = () => {
               type="password"
               name="password"
               placeholder="Password"
-              style={{
-                border: errors.password?.message
-                  ? ".5px solid red"
-                  : ".5px solid transparent",
-              }}
+              className={errors.email?.message ? styles.errBorder : ""}
             />
             <p>{errors.password?.message}</p>
             <input
@@ -121,11 +97,7 @@ const RegisterPage = () => {
               type="password"
               name="confirmPassword"
               placeholder="Confirm Password"
-              style={{
-                border: errors.confirmPassword?.message
-                  ? ".5px solid red"
-                  : ".5px solid transparent",
-              }}
+              className={errors.email?.message ? styles.errBorder : ""}
             />
             <p>{errors.confirmPassword?.message as string}</p>
             <input
@@ -133,11 +105,7 @@ const RegisterPage = () => {
               type="date"
               name="age"
               placeholder="Age"
-              style={{
-                border: errors.age?.message
-                  ? ".5px solid red"
-                  : ".5px solid transparent",
-              }}
+              className={errors.email?.message ? styles.errBorder : ""}
             />
             <p>{errors.age?.message}</p>
             <div className={styles.gender}>

@@ -1,12 +1,11 @@
-import styles from "./App.module.scss";
 import { useSelector } from "react-redux";
-
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "../../pages/HomePage";
 import { LoginPage } from "../../pages/LoginPage";
 import { RegisterPage } from "../../pages/RegisterPage";
 import { ToastContainer } from "react-toastify";
 import { ProtectedAuth } from "hoc/ProtectedAuth";
+import styles from "./App.module.scss";
 
 function App() {
   return (

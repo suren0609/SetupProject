@@ -41,3 +41,7 @@ export interface IUserData {
   age: string;
   gender: string;
 }
+
+export enum statusText {
+  ok = "OK",
+}

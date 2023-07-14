@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import styles from "./HomePage.module.scss";
 import { Sidebar } from "components/Sidebar";
 import { HomeBody } from "components/HomeBody";
 import { Header } from "../../components/Header";
 import { getUser } from "store/actions";
 import { useDispatch } from "react-redux";
+import styles from "./HomePage.module.scss";
 
 const HomePage = () => {
   const [isMenuActive, setIsMenuActive] = useState({
     leftMenu: false,
     rightMenu: false,
   });
+  const dispatch = useDispatch();
 
   const [isProfilePopupActive, setIsPopupActive] = useState(false);
 
@@ -34,8 +35,6 @@ const HomePage = () => {
     setIsMenuActive({ rightMenu: false, leftMenu: false });
     setIsPopupActive(false);
   };
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUser());

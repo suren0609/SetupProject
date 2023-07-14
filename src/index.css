@@ -7,12 +7,16 @@ body {
   /* background: url("https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg") no-repeat;
   background-position: center;
   background-size: cover; */
-
 }
-*{
+* {
   box-sizing: border-box;
 }
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.displayNone {
+  display: none;
+}
+
