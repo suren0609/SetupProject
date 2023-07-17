@@ -15,17 +15,19 @@ const HomeDetails: FC<IHomeDetailsProps> = ({
 }) => {
   return (
     <div className={styles.HomeDetails}>
-      <TaskList />
-      <TaskList />
-      <TaskList />
-      <TaskList />
-      <TaskList />
-      <TaskList />
-      <TaskList />
-      <AddList
-        isAddActive={isAddActive}
-        changeAddIsActive={changeAddIsActive}
-      />
+      <div className={styles.scrollContainer}>
+        <TaskList />
+        <TaskList />
+        <TaskList />
+        <TaskList />
+        <TaskList />
+        <TaskList />
+        <TaskList />
+        <AddList
+          isAddActive={isAddActive}
+          changeAddIsActive={changeAddIsActive}
+        />
+      </div>
     </div>
   );
 };

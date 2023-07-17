@@ -1,23 +1,69 @@
-.TaskList{
-    width: 280px;
-    border-radius: 10px;
-    background: #101204;
+.TaskList {
+  width: 280px;
+  min-width: 280px;
+  border-radius: 10px;
+  background: #101204;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 10px;
+
+  .listHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 20px;
+    color: #b6c2cf;
+
+    h5 {
+      margin: 0;
+    }
+  }
+
+  .listBody {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-right: 10px;
-    
+    padding: 10px;
+    width: 100%;
 
-    .listHeader{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        padding: 15px 20px;
-        color: #b6c2cf;
-        
-        h5{
-            margin: 0;
-        }
+    .taskCard {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 10px;
+      background: #22272b;
+      border-radius: 10px;
     }
+  }
+
+  .addCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 20px;
+    color: #b6c2cf;
+
+    div:first-child {
+      width: 230px;
+      border-radius: 5px;
+      text-align: left;
+      padding: 5px;
+    }
+
+    div:last-child {
+      width: 30px;
+      border-radius: 5px;
+      text-align: left;
+      padding: 5px;
+    }
+
+    div:hover {
+      background: #5c5f61;
+      cursor: pointer;
+    }
+  }
 }
