@@ -26,6 +26,7 @@
     "prettier/prettier": "error",
     "no-unused-vars": "off",
     "no-undef": "off",
-    "react/no-unknown-property": "off"
+    "react/no-unknown-property": "off",
+    "react/display-name": "off"
   }
 }

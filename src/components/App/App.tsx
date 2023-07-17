@@ -8,35 +8,17 @@ import { ProtectedAuth } from "hoc/ProtectedAuth";
 import styles from "./App.module.scss";
 
 function App() {
+  const Home = ProtectedAuth(HomePage, "/login");
+  const Login = ProtectedAuth(LoginPage, "/");
+  const Register = ProtectedAuth(RegisterPage, "/");
+
   return (
     <div className={styles.leyout_content}>
       <ToastContainer />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedAuth path="/login">
-              <HomePage />
-            </ProtectedAuth>
-          }
-        />
-
-        <Route
-          path="/login"
-          element={
-            <ProtectedAuth path="/">
-              <LoginPage />
-            </ProtectedAuth>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <ProtectedAuth path="/">
-              <RegisterPage />
-            </ProtectedAuth>
-          }
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

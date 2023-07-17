@@ -1,20 +1,18 @@
 import axios, { AxiosResponse } from "axios";
-import { put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 
 import * as actions from "./actions";
 import * as sliceActions from "./slices";
 import { IUserData } from "./types";
+import { getUserService } from "services/getUserService";
 
 function* getUser(action: ReturnType<typeof actions.getUser>) {
   try {
-    const { data }: AxiosResponse<IUserData> = yield axios.get(
-      "https://young-citadel-44598.herokuapp.com/user",
-      { withCredentials: true },
-    );
+    const { data }: AxiosResponse<IUserData> = yield call(getUserService);
 
     yield put(sliceActions.setUser({ data }));
   } catch (err) {
-    console.log("error ->", err);
+    return err;
   }
 }
 
