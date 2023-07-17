@@ -1,0 +1,23 @@
+.TaskList{
+    width: 280px;
+    border-radius: 10px;
+    background: #101204;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 10px;
+    
+
+    .listHeader{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 15px 20px;
+        color: #b6c2cf;
+        
+        h5{
+            margin: 0;
+        }
+    }
+}

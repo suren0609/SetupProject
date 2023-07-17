@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, MouseEvent } from "react";
 import { Sidebar } from "components/Sidebar";
 import { HomeBody } from "components/HomeBody";
 import { Header } from "../../components/Header";
@@ -14,6 +14,13 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   const [isProfilePopupActive, setIsPopupActive] = useState(false);
+
+  const [isAddActive, setAddActive] = useState(false);
+
+  const changeAddIsActive = (e: MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    setAddActive((prev) => !prev);
+  };
 
   const ChangeprofilePopupState = () => {
     setIsPopupActive(!isProfilePopupActive);
@@ -34,6 +41,7 @@ const HomePage = () => {
     e.stopPropagation();
     setIsMenuActive({ rightMenu: false, leftMenu: false });
     setIsPopupActive(false);
+    setAddActive(false);
   };
 
   useEffect(() => {
@@ -50,7 +58,10 @@ const HomePage = () => {
       />
       <div className={styles.HomeBodyContainer}>
         <Sidebar />
-        <HomeBody />
+        <HomeBody
+          isAddActive={isAddActive}
+          changeAddIsActive={changeAddIsActive}
+        />
       </div>
     </div>
   );

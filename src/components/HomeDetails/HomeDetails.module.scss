@@ -1,4 +1,17 @@
-.HomeDetails{
+.HomeDetails {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+//   overflow-x: scroll;
+//   overflow-y: hidden;
+//   overscroll-behavior-inline: contain;
+
+  //   white-space: nowrap;
+  padding: 10px;
+
+  .scrollContainer {
+    width: 300%;
     display: flex;
-    flex: 1;
+    align-items: center;
+  }
 }
