@@ -5,6 +5,7 @@ import { Header } from "../../components/Header";
 import { getUser } from "store/actions";
 import { useDispatch } from "react-redux";
 import styles from "./HomePage.module.scss";
+import { TaskDescription } from "components/TaskDescription";
 
 const HomePage = () => {
   const [isMenuActive, setIsMenuActive] = useState({
@@ -63,6 +64,7 @@ const HomePage = () => {
           changeAddIsActive={changeAddIsActive}
         />
       </div>
+      <TaskDescription />
     </div>
   );
 };

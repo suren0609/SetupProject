@@ -1,0 +1,88 @@
+.TaskDescription {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.494);
+  display: flex;
+  padding: 30px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 101;
+  left: 0;
+  top: 0;
+  overflow-x: hidden;
+
+  .container {
+    width: 800px;
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    background: #31393f;
+    border-radius: 10px;
+    margin-top: 100px;
+    color: #b5c2cf;
+    padding: 15px;
+
+    .winHeader {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 100%;
+
+      .titleAndPlace {
+        display: flex;
+        align-items: flex-start;
+
+        i {
+          margin-right: 10px;
+        }
+
+        .title {
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+
+          h4 {
+            margin: 0;
+            margin-bottom: 10px;
+          }
+
+          p {
+            margin: 0;
+            font-size: 14px;
+          }
+        }
+      }
+
+      .close {
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+
+    .winBody {
+      display: flex;
+      align-items: flex-start;
+      flex: 1;
+      width: 100%;
+      margin-top: 10px;
+      
+
+      .mainSection{
+        width: 570px;
+        background-color: red;
+        height: 500px;
+        
+      }
+
+      .descriptionSidebar{
+        display: flex;
+        flex: 1;
+        background-color: aqua;
+        height: 500px;
+      }
+    }
+  }
+}

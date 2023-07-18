@@ -7,6 +7,8 @@ body {
   /* background: url("https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg") no-repeat;
   background-position: center;
   background-size: cover; */
+
+  background: #1d2125;
 }
 * {
   box-sizing: border-box;
