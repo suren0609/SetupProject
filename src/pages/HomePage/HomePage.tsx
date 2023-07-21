@@ -3,9 +3,10 @@ import { Sidebar } from "components/Sidebar";
 import { HomeBody } from "components/HomeBody";
 import { Header } from "../../components/Header";
 import { getUser } from "store/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./HomePage.module.scss";
 import { TaskDescription } from "components/TaskDescription";
+import { EditCard } from "components/EditCard";
 
 const HomePage = () => {
   const [isMenuActive, setIsMenuActive] = useState({
@@ -17,6 +18,14 @@ const HomePage = () => {
   const [isProfilePopupActive, setIsPopupActive] = useState(false);
 
   const [isAddActive, setAddActive] = useState(false);
+
+  const isTaskDeskActive = useSelector(
+    (state: any) => state.tasks.isTaskDetailsActive,
+  );
+
+  const isTaskCardActive = useSelector(
+    (state: any) => state.tasks.isTaskCardActive,
+  );
 
   const changeAddIsActive = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -64,7 +73,8 @@ const HomePage = () => {
           changeAddIsActive={changeAddIsActive}
         />
       </div>
-      <TaskDescription />
+      {isTaskDeskActive && <TaskDescription />}
+      {isTaskCardActive && <EditCard />}
     </div>
   );
 };

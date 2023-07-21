@@ -1,0 +1,65 @@
+.Members {
+  width: 280px;
+  background: #282e33;
+  position: absolute;
+  border-radius: 10px;
+  border: 0.5px solid #343b42;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #94a1af;
+
+  h4 {
+    margin: 10px 10px 15px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #343b42;
+    color: #94a1af;
+    border-radius: 2px;
+    background: #22272b;
+  }
+
+  .boardMembers {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+
+    .member{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 5px;
+        border-radius: 3px;
+        padding: 0 5px;
+        cursor: pointer;
+
+        p{
+            margin-left: 10px;
+        }
+    }
+
+    .member:hover{
+        background: #3d474f;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    background: #323940;
+    border: none;
+    outline: none;
+    color: #94a1af;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #4d545c;
+  }
+}

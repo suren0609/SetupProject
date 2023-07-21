@@ -25,8 +25,8 @@ const LoginPage = () => {
 
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     const res = await loginUser(data);
-    Cookies.set("token", res?.data?.token);
     if (res.statusText === statusText.ok) {
+      Cookies.set("token", res?.data?.token);
       toast.success(res.data.message, toastParameters);
       navigate("/");
     } else {
