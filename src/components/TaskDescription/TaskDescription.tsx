@@ -5,11 +5,24 @@ import { Members } from "components/Members";
 import { UserAvatar } from "components/UserAvatar";
 import { useDispatch } from "react-redux";
 import { setTaskDetailsActive } from "store/slices";
+import { Labels } from "components/Labels";
+import { Checklist } from "components/Checklist";
+import { Dates } from "components/Dates";
+import { Attachment } from "components/Attachment";
+import { Cover } from "components/Cover";
+import { Move } from "components/Move";
+import { Copy } from "components/Copy";
 
 const TaskDescription = () => {
   const [isTitleInput, setTitleInput] = useState(false);
-  const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
   const [isMembersPopup, setMembersPopup] = useState(false);
+  const [isLabelsActive, setLabelsActive] = useState(false);
+  const [isChecklistActive, setChecklistActive] = useState(false);
+  const [isDatesActive, setDatesActive] = useState(false);
+  const [isAttachActive, setAttachActive] = useState(false);
+  const [isCoverActive, setCoverActive] = useState(false);
+  const [isMoveActive, setMoveActive] = useState(false);
+  const [isCopyActive, setCopyActive] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -25,9 +38,63 @@ const TaskDescription = () => {
   const divRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
-    const { top, left } = divRef.current!.getBoundingClientRect();
     setMembersPopup((prev) => !prev);
-    setPopupPosition({ top, left });
+  };
+
+  const handleCopy = () => {
+    setCopyActive((prev) => !prev);
+  };
+
+  const closeCopy = () => {
+    setCopyActive(false);
+  };
+
+  const handleMove = () => {
+    setMoveActive((prev) => !prev);
+  };
+
+  const closeMove = () => {
+    setMoveActive(false);
+  };
+
+  const handleDates = () => {
+    setDatesActive((prev) => !prev);
+  };
+
+  const closeDates = () => {
+    setDatesActive(false);
+  };
+
+  const handleCover = () => {
+    setCoverActive((prev) => !prev);
+  };
+
+  const closeCover = () => {
+    setCoverActive(false);
+  };
+
+  const handleAttach = () => {
+    setAttachActive((prev) => !prev);
+  };
+
+  const closeAttach = () => {
+    setAttachActive(false);
+  };
+
+  const handleLabelsActive = () => {
+    setLabelsActive((prev) => !prev);
+  };
+
+  const handleChecklist = () => {
+    setChecklistActive((prev) => !prev);
+  };
+
+  const closeLabels = () => {
+    setLabelsActive(false);
+  };
+
+  const closeChecklist = () => {
+    setChecklistActive(false);
   };
 
   const onBlurMembers = (e: any) => {
@@ -125,27 +192,56 @@ const TaskDescription = () => {
               <div
                 onClick={handleClick}
                 className={styles.sideSettings}
-                ref={divRef}
                 tabIndex={0}
                 onBlur={onBlurMembers}
               >
                 <i className="fa-regular fa-user"></i> Members
-                {isMembersPopup && <Members popupPosition={popupPosition} />}
+                {isMembersPopup && <Members />}
               </div>
-              <div className={styles.sideSettings}>
+              <div
+                onClick={handleChecklist}
+                onBlur={closeChecklist}
+                tabIndex={0}
+                className={styles.sideSettings}
+              >
                 <i className="fa-regular fa-square-check"></i> Checklist
+                {isChecklistActive && <Checklist />}
               </div>
-              <div className={styles.sideSettings}>
+              <div
+                onClick={handleLabelsActive}
+                onBlur={closeLabels}
+                tabIndex={0}
+                className={styles.sideSettings}
+              >
                 <i className="fa-solid fa-tag"></i> Labels
+                {isLabelsActive && <Labels />}
               </div>
-              <div className={styles.sideSettings}>
+              <div
+                onClick={handleDates}
+                onBlur={closeDates}
+                tabIndex={0}
+                className={styles.sideSettings}
+              >
                 <i className="fa-regular fa-clock"></i> Dates
+                {isDatesActive && <Dates />}
               </div>
-              <div className={styles.sideSettings}>
+              <div
+                onClick={handleAttach}
+                onBlur={closeAttach}
+                tabIndex={0}
+                className={styles.sideSettings}
+              >
                 <i className="fa-solid fa-paperclip"></i> Attachment
+                {isAttachActive && <Attachment />}
               </div>
-              <div className={styles.sideSettings}>
+              <div
+                onClick={handleCover}
+                onBlur={closeCover}
+                tabIndex={0}
+                className={styles.sideSettings}
+              >
                 <i className="fa-solid fa-credit-card"></i> Cover
+                {isCoverActive && <Cover />}
               </div>
               <div className={styles.sideSettings}>
                 <i className="fa-solid fa-kaaba"></i> Custom Fields
@@ -165,11 +261,23 @@ const TaskDescription = () => {
             </div>
             <div className={styles.sidebarSections}>
               <h5>Actions</h5>
-              <div className={styles.sideSettings}>
+              <div
+                onClick={handleMove}
+                onBlur={closeMove}
+                tabIndex={0}
+                className={styles.sideSettings}
+              >
                 <i className="fa-solid fa-arrow-right"></i> Move
+                {isMoveActive && <Move />}
               </div>
-              <div className={styles.sideSettings}>
+              <div
+                onClick={handleCopy}
+                onBlur={closeCopy}
+                tabIndex={0}
+                className={styles.sideSettings}
+              >
                 <i className="fa-solid fa-copy"></i> Copy
+                {isCopyActive && <Copy />}
               </div>
               <div className={styles.sideSettings}>
                 <i className="fa-regular fa-images"></i> Make template

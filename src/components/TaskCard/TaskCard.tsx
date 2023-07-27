@@ -1,14 +1,21 @@
-import React, { useRef, useState, MouseEvent } from "react";
+import React, { useRef, useState, MouseEvent, FC } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setIsUserProfileActive,
+  setProfilePosition,
   setTaskCardActive,
   setTaskCardPosition,
   setTaskDetailsActive,
 } from "store/slices";
 import styles from "./TaskCard.module.scss";
+import { UserProfile } from "components/UserProfile";
 
-const TaskCard = () => {
+interface ICardProps {
+  changeUserProfileActive: () => void;
+}
+
+const TaskCard = ({ changeUserProfileActive }: ICardProps) => {
   const user = useSelector((state: any) => state.user.user);
 
   const dispatch = useDispatch();
@@ -17,12 +24,26 @@ const TaskCard = () => {
     dispatch(setTaskDetailsActive(true));
   };
 
+  const closeUserProfilePopup = (e: any) => {
+    if (e.relatedTarget?.dataset?.name === "userProfile") {
+      return;
+    }
+    dispatch(setIsUserProfileActive(false));
+  };
+
   const divRef = useRef<HTMLDivElement>(null);
   const handleCardActive = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     const { top, left } = divRef.current!.getBoundingClientRect();
     dispatch(setTaskCardActive(true));
     dispatch(setTaskCardPosition({ top, left }));
+  };
+
+  const handleUserProfileActive = (e: MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    const { top, left } = divRef.current!.getBoundingClientRect();
+    dispatch(setProfilePosition({ top: top + 65, left: left + 220 }));
+    changeUserProfileActive();
   };
 
   return (
@@ -41,7 +62,12 @@ const TaskCard = () => {
           </div>
         </div>
         <div className={styles.profile}>
-          <div className={styles.userAva}>
+          <div
+            onClick={handleUserProfileActive}
+            onBlur={closeUserProfilePopup}
+            className={styles.userAva}
+            tabIndex={0}
+          >
             {`${user.firstname[0]}${user.lastname[0]}`}
           </div>
         </div>

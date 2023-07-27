@@ -1,0 +1,79 @@
+.UserProfile {
+  width: 280px;
+  border: 0.5px solid #373e46;
+  border-radius: 10px;
+  background: #282e33;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 40px;
+  z-index: 120;
+
+  .header {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    background: #67a4e8;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 30px;
+
+    .close {
+      display: flex;
+      align-items: flex-start;
+      height: 100%;
+      margin-left: 20px;
+
+      i {
+        cursor: pointer;
+      }
+    }
+
+    .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      background: #0052cc;
+      font-size: 35px;
+      border-radius: 50%;
+      font-weight: 900;
+      color: #c5cbd2;
+      margin-bottom: -40px;
+    }
+
+    .userData {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      margin-left: 10px;
+      color: #282e33;
+
+      h4 {
+        margin: 10px 0 5px;
+        font-size: 16px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .infoAndRemove {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .infoAndRemove {
+    border-bottom: 0.5px solid #373e46;
+    color: #c5cbd2;
+  }
+}

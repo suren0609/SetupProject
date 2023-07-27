@@ -1,0 +1,149 @@
+.Copy {
+  width: 280px;
+  border: 0.5px solid #373e46;
+  border-radius: 10px;
+  background: #282e33;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: 40px;
+  z-index: 120;
+
+  h5 {
+    margin: 10px 0;
+  }
+
+  .title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h4 {
+      margin: 10px 0;
+    }
+  }
+
+  .titleArea {
+    width: 100%;
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #384148;
+      font-size: 14px;
+      color: #b2becb;
+      background: #22272b;
+      margin-bottom: 10px;
+    }
+  }
+
+  .checkboxes {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    font-size: 14px;
+  }
+
+  .copyTo {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    .BoardBtn {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      width: 100%;
+      padding: 7px;
+      border-radius: 3px;
+      background: #323940;
+      margin-bottom: 10px;
+
+      p {
+        margin: 0;
+        margin-bottom: 3px;
+        font-size: 12px;
+        font-weight: 100;
+      }
+      span {
+        font-size: 12px;
+        font-weight: 900;
+      }
+    }
+
+    .BoardBtn:hover {
+      background: #4b545c;
+    }
+
+    .listPosition {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 10px;
+
+      .list {
+        background: #323940;
+        padding: 7px;
+        width: 180px;
+        border-radius: 3px;
+
+        p {
+          margin: 0;
+          font-size: 12px;
+          font-weight: 100;
+        }
+
+        span {
+          font-size: 12px;
+          font-weight: 900;
+        }
+      }
+
+      .list:hover {
+        background: #4b545c;
+      }
+
+      .position {
+        background: #323940;
+        padding: 7px;
+        width: 70px;
+        border-radius: 3px;
+
+        p {
+          margin: 0;
+          font-size: 12px;
+          font-weight: 100;
+        }
+
+        span {
+          font-size: 12px;
+          font-weight: 900;
+        }
+      }
+
+      .position:hover {
+        background: #4b545c;
+      }
+    }
+  }
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    background: #579dff;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #6daaff;
+  }
+}

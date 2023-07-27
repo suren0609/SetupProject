@@ -2,6 +2,9 @@
   width: 280px;
   background: #282e33;
   position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 120;
   border-radius: 10px;
   border: 0.5px solid #343b42;
   padding: 10px;
@@ -29,22 +32,22 @@
     flex-direction: column;
     width: 100%;
 
-    .member{
-        display: flex;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 5px;
-        border-radius: 3px;
-        padding: 0 5px;
-        cursor: pointer;
+    .member {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 5px;
+      border-radius: 3px;
+      padding: 0 5px;
+      cursor: pointer;
 
-        p{
-            margin-left: 10px;
-        }
+      p {
+        margin-left: 10px;
+      }
     }
 
-    .member:hover{
-        background: #3d474f;
+    .member:hover {
+      background: #3d474f;
     }
   }
 

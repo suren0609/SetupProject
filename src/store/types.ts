@@ -45,3 +45,7 @@ export interface IUserData {
 export enum statusText {
   ok = "OK",
 }
+
+export interface IProp {
+  popupRef: any;
+}

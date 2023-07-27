@@ -78,7 +78,7 @@
 
       .transitionPopup {
         position: absolute;
-        right: -140px;
+        right: -155px;
         top: -15px;
 
         animation: translateRight 0.3s ease-in-out;
@@ -98,6 +98,7 @@
             color: #c7d1db;
             transition: 0.1s ease-in-out;
             cursor: pointer;
+            position: relative;
 
             i {
               font-size: 11px;
@@ -106,13 +107,14 @@
           }
 
           li:hover {
-            transform: translateX(5px);
+            // transform: translateX(5px);
+            right: -5px;
           }
         }
       }
     }
 
-    button {
+    .save {
       padding: 10px 20px;
       border: none;
       border-radius: 5px;
@@ -121,7 +123,7 @@
       cursor: pointer;
     }
 
-    button:hover {
+    .save:hover {
       background: #69a7ff;
     }
   }
@@ -130,12 +132,12 @@
 @keyframes translateRight {
   0% {
     display: none;
-    right: 0;
+    right: -100px;
     opacity: 0;
   }
   100% {
     display: block;
-    right: -140px;
+    right: -155px;
     opacity: 1;
   }
 }

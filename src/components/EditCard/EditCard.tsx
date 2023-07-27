@@ -1,10 +1,30 @@
-import React from "react";
-
-import styles from "./EditCard.module.scss";
+import React, {
+  RefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+  forwardRef,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setTaskCardActive } from "store/slices";
+import { setTaskCardActive, setTaskDetailsActive } from "store/slices";
+import styles from "./EditCard.module.scss";
+import { Labels } from "components/Labels";
+import { Members } from "components/Members";
+import { Cover } from "components/Cover";
+import { Move } from "components/Move";
+import { Copy } from "components/Copy";
+import { Dates } from "components/Dates";
+import { ref } from "yup";
 
 const EditCard = () => {
+  const [isLabelActive, setLabelActive] = useState(false);
+  const [isMembersActive, setMembersActive] = useState(false);
+  const [isCoverActive, setCoverActive] = useState(false);
+  const [isMoveActive, setMoveActive] = useState(false);
+  const [isCopyActive, setCopyActive] = useState(false);
+  const [isDatesActive, setDatesActive] = useState(false);
+
   const user = useSelector((state: any) => state.user.user);
   const dispatch = useDispatch();
 
@@ -12,7 +32,27 @@ const EditCard = () => {
     (state: any) => state.tasks.taskCardPosition,
   );
 
+  const popupRef = useRef<HTMLLIElement>(null);
+  const labelsRef = useRef<HTMLLIElement>(null);
+  const membersRef = useRef<HTMLLIElement>(null);
+  const coverRef = useRef<HTMLLIElement>(null);
+  const moveRef = useRef<HTMLLIElement>(null);
+  const copyRef = useRef<HTMLLIElement>(null);
+
+  const handleClick = (cb: React.Dispatch<React.SetStateAction<boolean>>) => {
+    cb((prev: boolean) => !prev);
+  };
+
+  const closePopup = (cb: React.Dispatch<React.SetStateAction<boolean>>) => {
+    cb(false);
+  };
+
   const hidePopup = () => {
+    dispatch(setTaskCardActive(false));
+  };
+
+  const handleTaskDetails = () => {
+    dispatch(setTaskDetailsActive(true));
     dispatch(setTaskCardActive(false));
   };
 
@@ -40,26 +80,62 @@ const EditCard = () => {
           </div>
           <div className={styles.transitionPopup}>
             <ul>
-              <li>
+              <li onClick={handleTaskDetails}>
                 <i className="fa-solid fa-credit-card"></i> Open card
               </li>
-              <li>
+              <li
+                onClick={() => handleClick(setLabelActive)}
+                onBlur={() => closePopup(setLabelActive)}
+                tabIndex={0}
+                ref={labelsRef}
+              >
                 <i className="fa-solid fa-tag"></i> Edit lables
+                {isLabelActive && <Labels popupRef={labelsRef} />}
               </li>
-              <li>
+              <li
+                onClick={() => handleClick(setMembersActive)}
+                onBlur={() => closePopup(setMembersActive)}
+                tabIndex={0}
+                ref={membersRef}
+              >
                 <i className="fa-regular fa-user"></i> Change members
+                {isMembersActive && <Members popupRef={membersRef} />}
               </li>
-              <li>
+              <li
+                onClick={() => handleClick(setCoverActive)}
+                onBlur={() => closePopup(setCoverActive)}
+                tabIndex={0}
+                ref={coverRef}
+              >
                 <i className="fa-solid fa-credit-card"></i> Change cover
+                {isCoverActive && <Cover popupRef={coverRef} />}
               </li>
-              <li>
+              <li
+                onClick={() => handleClick(setMoveActive)}
+                onBlur={() => closePopup(setMoveActive)}
+                tabIndex={0}
+                ref={moveRef}
+              >
                 <i className="fa-solid fa-arrow-right"></i> Move
+                {isMoveActive && <Move popupRef={moveRef} />}
               </li>
-              <li>
+              <li
+                onClick={() => handleClick(setCopyActive)}
+                onBlur={() => closePopup(setCopyActive)}
+                tabIndex={0}
+                ref={copyRef}
+              >
                 <i className="fa-solid fa-credit-card"></i> Copy
+                {isCopyActive && <Copy popupRef={copyRef} />}
               </li>
-              <li>
+              <li
+                onClick={() => handleClick(setDatesActive)}
+                onBlur={() => closePopup(setDatesActive)}
+                tabIndex={0}
+                ref={popupRef}
+              >
                 <i className="fa-regular fa-clock"></i> Edit dates
+                {isDatesActive && <Dates popupRef={popupRef} />}
               </li>
               <li>
                 <i className="fa-solid fa-box-archive"></i> Archive
@@ -67,7 +143,7 @@ const EditCard = () => {
             </ul>
           </div>
         </div>
-        <button>Save</button>
+        <button className={styles.save}>Save</button>
       </div>
     </div>
   );

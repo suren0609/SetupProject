@@ -1,27 +1,36 @@
-import React from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 
 import styles from "./Members.module.scss";
 import { UserAvatar } from "components/UserAvatar";
 import { useSelector } from "react-redux";
+import { IProp } from "store/types";
+import { getPosition } from "helpers/getPosition";
 
-interface IPopupPos {
-  popupPosition: {
-    top: number;
-    left: number;
-  };
-}
-
-const Members = ({ popupPosition }: IPopupPos) => {
+const Members: FC<any> = ({ popupRef }: IProp) => {
   const user = useSelector((state: any) => state.user.user);
+  const [pos, setPos] = useState({ currentTop: 40, currentLeft: 0 });
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (popupRef) {
+      const { top, left } = popupRef.current!.getBoundingClientRect();
+      const { height, width } = divRef.current!.getBoundingClientRect();
+
+      setPos((prevState) => {
+        return {
+          ...prevState,
+          ...getPosition(width, height, top, left),
+        };
+      });
+    }
+  }, []);
 
   return (
     <div
       className={styles.Members}
-      style={{
-        left: popupPosition.left,
-        top: popupPosition.top + 40,
-      }}
       onClick={(e) => e.stopPropagation()}
+      ref={divRef}
+      style={{ top: pos.currentTop, left: pos.currentLeft }}
     >
       <h4>Members</h4>
       <input

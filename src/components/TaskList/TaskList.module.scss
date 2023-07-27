@@ -19,6 +19,15 @@
     h5 {
       margin: 0;
     }
+
+    i {
+      padding: 5px;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    i:hover {
+      background: #5d5e60;
+    }
   }
 
   .listBody {
@@ -27,6 +36,12 @@
     flex-direction: column;
     padding: 10px;
     width: 100%;
+    max-height: 600px;
+    overflow-x: hidden;
+  }
+
+  .listBody::-webkit-scrollbar {
+    width: 0;
   }
 
   .addCard {
@@ -36,6 +51,7 @@
     width: 100%;
     padding: 15px 20px;
     color: #b6c2cf;
+    position: relative;
 
     div:first-child {
       width: 230px;
@@ -44,14 +60,19 @@
       padding: 5px;
     }
 
-    div:last-child {
-      width: 30px;
+    .taskListTamplates {
+      // width: 30px;
       border-radius: 5px;
       text-align: left;
       padding: 5px;
     }
 
-    div:hover {
+    .addACard:hover {
+      background: #5c5f61;
+      cursor: pointer;
+    }
+
+    .taskListTamplates:hover {
       background: #5c5f61;
       cursor: pointer;
     }
@@ -100,11 +121,11 @@
           margin: 10px 0;
         }
 
-        .createTemplate:hover{
+        .createTemplate:hover {
           background: #3b434c;
         }
 
-        button{
+        button {
           width: 100%;
           padding: 10px;
           border-radius: 5px;
@@ -115,10 +136,61 @@
           font-size: 15px;
         }
 
-        button:hover{
+        button:hover {
           background: #3b434c;
         }
       }
+    }
+  }
+}
+
+.AddCardActive {
+  width: 280px !important;
+  border-radius: 10px;
+  background: #101204;
+  padding: 10px !important;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #22272b;
+    color: #aeb9c6;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+
+  .buttonAndClose {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .add {
+      padding: 10px;
+      color: #22272b;
+      background: #579dff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add:hover {
+      background: #80aef0;
+    }
+
+    .close {
+      background: transparent;
+      font-size: 25px;
+      border: none;
+      color: #aeb9c6;
+      cursor: pointer;
     }
   }
 }
