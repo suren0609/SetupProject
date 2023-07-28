@@ -7,6 +7,7 @@
   align-items: center;
   flex-direction: column;
   margin-right: 10px;
+  max-height: calc(100vh - 140px);
 
   .listHeader {
     display: flex;
@@ -15,6 +16,7 @@
     width: 100%;
     padding: 15px 20px;
     color: #b6c2cf;
+    position: relative;
 
     h5 {
       margin: 0;
@@ -41,7 +43,7 @@
   }
 
   .listBody::-webkit-scrollbar {
-    width: 0;
+    width: 7px;
   }
 
   .addCard {
@@ -156,7 +158,7 @@
   left: 0;
   top: 0;
 
-  input {
+  textarea {
     width: 100%;
     padding: 10px;
     border: none;

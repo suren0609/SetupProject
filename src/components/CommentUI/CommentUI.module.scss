@@ -1,0 +1,17 @@
+.CommentUI{
+    width: 100%;
+
+    .user{
+        display: flex;
+        align-items: center;
+        h5{
+            margin-left: 10px;
+            margin: 10px 0;
+        }
+    }
+
+    p{
+        font-size: 10px;
+        margin: 10px 0;
+    }
+}

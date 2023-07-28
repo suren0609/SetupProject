@@ -3,6 +3,7 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import styles from "./Move.module.scss";
 import { IProp } from "store/types";
 import { getPosition } from "helpers/getPosition";
+import { getParameters } from "helpers/parametersForPosition";
 
 const Move: FC<any> = ({ popupRef }: IProp) => {
   const [pos, setPos] = useState({ currentTop: -350, currentLeft: 0 });
@@ -10,8 +11,7 @@ const Move: FC<any> = ({ popupRef }: IProp) => {
 
   useEffect(() => {
     if (popupRef) {
-      const { top, left } = popupRef.current!.getBoundingClientRect();
-      const { height, width } = divRef.current!.getBoundingClientRect();
+      const { top, left, height, width } = getParameters(popupRef, divRef);
 
       setPos((prevState) => {
         return {
@@ -27,6 +27,7 @@ const Move: FC<any> = ({ popupRef }: IProp) => {
       className={styles.Move}
       ref={divRef}
       style={{ top: pos.currentTop, left: pos.currentLeft }}
+      data-name="inputOrButton"
     >
       <div className={styles.title}>
         <h4>Move card</h4>
@@ -58,7 +59,7 @@ const Move: FC<any> = ({ popupRef }: IProp) => {
           </div>
         </div>
       </div>
-      <button>Move</button>
+      <button data-name="inputOrButton">Move</button>
     </div>
   );
 };

@@ -1,5 +1,7 @@
 .Dates {
   width: 280px;
+  max-height: calc(100vh - 10px);
+  overflow-x: hidden;
   border: 0.5px solid #373e46;
   border-radius: 10px;
   background: #282e33;
@@ -9,12 +11,12 @@
   padding: 10px;
   position: absolute;
   left: 0;
-  top: 40px;
+  top: -200px;
   z-index: 120;
 
-  .calendar{
+  .calendar {
     background: transparent;
-    button{
+    button {
       color: #b2becb;
     }
   }
@@ -70,7 +72,7 @@
     }
   }
 
-  .saveBtn{
+  .saveBtn {
     width: 100%;
     padding: 10px;
     border: none;
@@ -81,11 +83,11 @@
     margin-bottom: 5px;
   }
 
-  .saveBtn:hover{
+  .saveBtn:hover {
     background: #6ba9ff;
   }
 
-  .removeBtn{
+  .removeBtn {
     width: 100%;
     padding: 10px;
     border: none;
@@ -96,8 +98,7 @@
     border-radius: 3px;
   }
 
-  .removeBtn:hover{
+  .removeBtn:hover {
     background: #434b53;
   }
-
 }

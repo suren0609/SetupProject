@@ -12,6 +12,7 @@ import { Attachment } from "components/Attachment";
 import { Cover } from "components/Cover";
 import { Move } from "components/Move";
 import { Copy } from "components/Copy";
+import { CommentUI } from "components/CommentUI";
 
 const TaskDescription = () => {
   const [isTitleInput, setTitleInput] = useState(false);
@@ -31,7 +32,10 @@ const TaskDescription = () => {
     setTitleInput(true);
   };
 
-  const closeTaskDesk = () => {
+  const closeTaskDesk = (e: any) => {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+      return;
+    }
     dispatch(setTaskDetailsActive(false));
   };
 
@@ -45,7 +49,10 @@ const TaskDescription = () => {
     setCopyActive((prev) => !prev);
   };
 
-  const closeCopy = () => {
+  const closeCopy = (e: any) => {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+      return;
+    }
     setCopyActive(false);
   };
 
@@ -53,7 +60,10 @@ const TaskDescription = () => {
     setMoveActive((prev) => !prev);
   };
 
-  const closeMove = () => {
+  const closeMove = (e: any) => {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+      return;
+    }
     setMoveActive(false);
   };
 
@@ -61,7 +71,10 @@ const TaskDescription = () => {
     setDatesActive((prev) => !prev);
   };
 
-  const closeDates = () => {
+  const closeDates = (e: any) => {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+      return;
+    }
     setDatesActive(false);
   };
 
@@ -69,7 +82,10 @@ const TaskDescription = () => {
     setCoverActive((prev) => !prev);
   };
 
-  const closeCover = () => {
+  const closeCover = (e: any) => {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+      return;
+    }
     setCoverActive(false);
   };
 
@@ -77,7 +93,10 @@ const TaskDescription = () => {
     setAttachActive((prev) => !prev);
   };
 
-  const closeAttach = () => {
+  const closeAttach = (e: any) => {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+      return;
+    }
     setAttachActive(false);
   };
 
@@ -89,19 +108,22 @@ const TaskDescription = () => {
     setChecklistActive((prev) => !prev);
   };
 
-  const closeLabels = () => {
+  const closeLabels = (e: any) => {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+      return;
+    }
     setLabelsActive(false);
   };
 
-  const closeChecklist = () => {
+  const closeChecklist = (e: any) => {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+      return;
+    }
     setChecklistActive(false);
   };
 
   const onBlurMembers = (e: any) => {
-    if (
-      e.relatedTarget?.dataset?.name === "search-members" ||
-      e.relatedTarget?.dataset?.name === "show-workspace"
-    ) {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
       return;
     }
     setMembersPopup(false);
@@ -183,6 +205,9 @@ const TaskDescription = () => {
                   name="comment"
                   placeholder="Write a comment..."
                 ></textarea>
+              </div>
+              <div className={styles.comments}>
+                <CommentUI />
               </div>
             </div>
           </div>

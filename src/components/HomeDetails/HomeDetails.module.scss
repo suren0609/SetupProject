@@ -2,15 +2,8 @@
   display: flex;
   align-items: flex-start;
   flex: 1;
-  //   width: calc(100vw - 260px);
-  //   height: 100%;
-  //   width: 100%;
-  //   overflow-x: scroll;
-  //   overflow-y: hidden;
-  //   overscroll-behavior-inline: contain;
-
-  //   white-space: nowrap;
   height: 100%;
+  max-height: 100%;
   width: 100%;
   overflow-y: hidden;
 
@@ -19,7 +12,3 @@
     display: flex;
   }
 }
-
-// .HomeDetails::-webkit-scrollbar {
-//   display: none;
-// }

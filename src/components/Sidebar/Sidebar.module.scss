@@ -2,6 +2,7 @@
   width: 260px;
   background: #1d2125;
   height: 100%;
+  max-height: 100%;
   border-right: 1px solid #32383d;
   transition: all 0.2s ease;
   .sidebarHeader {
@@ -108,8 +109,6 @@
     display: none;
   }
 }
-
-
 
 @media (max-width: 833px) {
   .Sidebar {

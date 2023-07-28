@@ -2,6 +2,11 @@
   display: none;
 }
 
+.comments{
+  padding: 10px;
+  margin-top: 15px;
+}
+
 .TaskDescription {
   width: 100vw;
   height: 100vh;
@@ -24,7 +29,8 @@
     flex-direction: column;
     background: #31393f;
     border-radius: 10px;
-    margin-top: 100px;
+    position: absolute;
+    top: 48px;
     color: #b5c2cf;
     padding: 15px;
 

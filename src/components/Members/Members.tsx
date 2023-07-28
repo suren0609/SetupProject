@@ -5,6 +5,7 @@ import { UserAvatar } from "components/UserAvatar";
 import { useSelector } from "react-redux";
 import { IProp } from "store/types";
 import { getPosition } from "helpers/getPosition";
+import { getParameters } from "helpers/parametersForPosition";
 
 const Members: FC<any> = ({ popupRef }: IProp) => {
   const user = useSelector((state: any) => state.user.user);
@@ -13,8 +14,7 @@ const Members: FC<any> = ({ popupRef }: IProp) => {
 
   useEffect(() => {
     if (popupRef) {
-      const { top, left } = popupRef.current!.getBoundingClientRect();
-      const { height, width } = divRef.current!.getBoundingClientRect();
+      const { top, left, height, width } = getParameters(popupRef, divRef);
 
       setPos((prevState) => {
         return {
@@ -31,11 +31,12 @@ const Members: FC<any> = ({ popupRef }: IProp) => {
       onClick={(e) => e.stopPropagation()}
       ref={divRef}
       style={{ top: pos.currentTop, left: pos.currentLeft }}
+      data-name="inputOrButton"
     >
       <h4>Members</h4>
       <input
         type="text"
-        data-name="search-members"
+        data-name="inputOrButton"
         placeholder="Search members"
       />
       <div className={styles.boardMembers}>
@@ -45,7 +46,7 @@ const Members: FC<any> = ({ popupRef }: IProp) => {
           <p>{`${user.firstname} ${user.lastname}`}</p>
         </div>
       </div>
-      <button data-name="show-workspace">Show other Workspace members</button>
+      <button data-name="inputOrButton">Show other Workspace members</button>
     </div>
   );
 };

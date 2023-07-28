@@ -43,7 +43,13 @@ const EditCard = () => {
     cb((prev: boolean) => !prev);
   };
 
-  const closePopup = (cb: React.Dispatch<React.SetStateAction<boolean>>) => {
+  const closePopup = (
+    cb: React.Dispatch<React.SetStateAction<boolean>>,
+    e: any,
+  ) => {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+      return;
+    }
     cb(false);
   };
 
@@ -85,7 +91,7 @@ const EditCard = () => {
               </li>
               <li
                 onClick={() => handleClick(setLabelActive)}
-                onBlur={() => closePopup(setLabelActive)}
+                onBlur={(e) => closePopup(setLabelActive, e)}
                 tabIndex={0}
                 ref={labelsRef}
               >
@@ -94,7 +100,7 @@ const EditCard = () => {
               </li>
               <li
                 onClick={() => handleClick(setMembersActive)}
-                onBlur={() => closePopup(setMembersActive)}
+                onBlur={(e) => closePopup(setMembersActive, e)}
                 tabIndex={0}
                 ref={membersRef}
               >
@@ -103,7 +109,7 @@ const EditCard = () => {
               </li>
               <li
                 onClick={() => handleClick(setCoverActive)}
-                onBlur={() => closePopup(setCoverActive)}
+                onBlur={(e) => closePopup(setCoverActive, e)}
                 tabIndex={0}
                 ref={coverRef}
               >
@@ -112,7 +118,7 @@ const EditCard = () => {
               </li>
               <li
                 onClick={() => handleClick(setMoveActive)}
-                onBlur={() => closePopup(setMoveActive)}
+                onBlur={(e) => closePopup(setMoveActive, e)}
                 tabIndex={0}
                 ref={moveRef}
               >
@@ -121,7 +127,7 @@ const EditCard = () => {
               </li>
               <li
                 onClick={() => handleClick(setCopyActive)}
-                onBlur={() => closePopup(setCopyActive)}
+                onBlur={(e) => closePopup(setCopyActive, e)}
                 tabIndex={0}
                 ref={copyRef}
               >
@@ -130,7 +136,7 @@ const EditCard = () => {
               </li>
               <li
                 onClick={() => handleClick(setDatesActive)}
-                onBlur={() => closePopup(setDatesActive)}
+                onBlur={(e) => closePopup(setDatesActive, e)}
                 tabIndex={0}
                 ref={popupRef}
               >

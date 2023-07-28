@@ -5,15 +5,15 @@ import styles from "./Dates.module.scss";
 import { IProp } from "store/types";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { getParameters } from "helpers/parametersForPosition";
 
 const Dates: FC<any> = ({ popupRef }: IProp) => {
-  const [pos, setPos] = useState({ currentTop: 40, currentLeft: 0 });
+  const [pos, setPos] = useState({ currentTop: -200, currentLeft: 0 });
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (popupRef) {
-      const { top, left } = popupRef.current!.getBoundingClientRect();
-      const { height, width } = divRef.current!.getBoundingClientRect();
+      const { top, left, height, width } = getParameters(popupRef, divRef);
 
       setPos((prevState) => {
         return {
@@ -30,6 +30,7 @@ const Dates: FC<any> = ({ popupRef }: IProp) => {
       className={styles.Dates}
       style={{ top: pos.currentTop, left: pos.currentLeft }}
       ref={divRef}
+      data-name="inputOrButton"
     >
       <div className={styles.title}>
         <h4>Dates</h4>
@@ -38,21 +39,21 @@ const Dates: FC<any> = ({ popupRef }: IProp) => {
       <div className={styles.startDate}>
         <h5>Start date</h5>
         <div className={styles.checkInput}>
-          <input type="checkbox" />
-          <input type="date" />
+          <input data-name="inputOrButton" type="checkbox" />
+          <input data-name="inputOrButton" type="date" />
         </div>
       </div>
       <div className={styles.dueDate}>
         <h5>Due date</h5>
         <div className={styles.checkInput}>
-          <input type="checkbox" />
-          <input type="date" />
-          <input type="time" />
+          <input data-name="inputOrButton" type="checkbox" />
+          <input data-name="inputOrButton" type="date" />
+          <input data-name="inputOrButton" type="time" />
         </div>
       </div>
       <div className={styles.dateReminder}>
         <h5>Set due date reminder</h5>
-        <select name="" id="">
+        <select data-name="inputOrButton" name="" id="">
           <option value="None">None</option>
           <option value="At time of due date">At time of due date</option>
           <option value="5 Minutes before">5 Minutes before</option>
@@ -64,8 +65,12 @@ const Dates: FC<any> = ({ popupRef }: IProp) => {
           <option value="2 Days before">2 Days before</option>
         </select>
       </div>
-      <button className={styles.saveBtn}>Save</button>
-      <button className={styles.removeBtn}>Remove</button>
+      <button data-name="inputOrButton" className={styles.saveBtn}>
+        Save
+      </button>
+      <button data-name="inputOrButton" className={styles.removeBtn}>
+        Remove
+      </button>
     </div>
   );
 };
