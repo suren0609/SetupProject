@@ -24,6 +24,7 @@ const Copy: FC<any> = ({ popupRef }: IProp) => {
 
   return (
     <div
+      onClick={(e) => e.stopPropagation()}
       className={styles.Copy}
       ref={divRef}
       style={{ top: pos.currentTop, left: pos.currentLeft }}

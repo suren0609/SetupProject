@@ -6,6 +6,7 @@ import { TaskCard } from "components/TaskCard";
 import { UserProfile } from "components/UserProfile";
 import { ListActions } from "components/ListActions";
 import { getPosition } from "helpers/getPosition";
+import { CardTemplate } from "components/CardTemplate";
 
 const TaskList = () => {
   const user = useSelector((state: any) => state.user.user);
@@ -13,7 +14,7 @@ const TaskList = () => {
   const [isTemplateActive, setTemplateActive] = useState(false);
   const [isAddCardActive, setAddCardActive] = useState(false);
   const [isListActionActive, setListActionActive] = useState(false);
-  const [pos, setPos] = useState({ currentTop: 40, currentLeft: 0 });
+  const [pos, setPos] = useState({ currentTop: 0, currentLeft: 0 });
 
   const isUserProfileActive = useSelector(
     (state: any) => state.userPopup.isUserProfileActive,
@@ -44,12 +45,32 @@ const TaskList = () => {
     if (popupRef?.current) {
       const { top, left } = templateRef.current?.getBoundingClientRect();
       const { height, width } = popupRef.current?.getBoundingClientRect();
-      setPos((prevState) => {
-        return {
-          ...prevState,
-          ...getPosition(width, height, top, left),
-        };
-      });
+
+      if (top + height > window.innerHeight) {
+        if (left + width > window.innerWidth) {
+          setPos({
+            currentTop: top - height,
+            currentLeft: left - width,
+          });
+        }
+
+        setPos({
+          ...pos,
+          currentTop: top - height,
+        });
+      } else {
+        if (left + width > window.innerWidth) {
+          setPos({
+            ...pos,
+            currentLeft: left - width,
+          });
+        } else {
+          setPos({
+            currentTop: top + 30,
+            currentLeft: left,
+          });
+        }
+      }
     }
   }, [isTemplateActive]);
 
@@ -97,68 +118,53 @@ const TaskList = () => {
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
+        {/* <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-      </div>
-      <div className={styles.addCard}>
-        {!isAddCardActive && (
-          <div className={styles.addACard} onClick={handleAddCardActive}>
-            + Add a card
-          </div>
-        )}
-
-        {isAddCardActive ? (
-          <div
-            className={styles.AddCardActive}
-            onClick={(e) => e.stopPropagation()}
-            onBlur={closeAddCard}
-            tabIndex={0}
-            data-name="addCardActive"
-          >
-            <textarea
-              name=""
-              placeholder="Enter a title for this card..."
-              autoFocus
-            ></textarea>
-            <div className={styles.buttonAndClose}>
-              <button className={styles.add}>Add a card</button>
-              <button onClick={closeAddCard} className={styles.close}>
-                <i className="fa-solid fa-xmark"></i>
-              </button>
+        <TaskCard changeUserProfileActive={changeUserProfileActive} /> */}
+        <div className={styles.addCard}>
+          {!isAddCardActive && (
+            <div className={styles.addACardBtn} onClick={handleAddCardActive}>
+              + Add a card
             </div>
-          </div>
-        ) : (
-          <div
-            onBlur={hideTemplate}
-            tabIndex={0}
-            className={styles.taskListTamplates}
-            ref={templateRef}
-          >
-            <i
-              onClick={(e) => showTemplate(e)}
-              className="fa-solid fa-newspaper"
-            ></i>
-            {isTemplateActive && (
-              <div
-                ref={popupRef}
-                style={{ top: pos.currentTop, left: pos.currentLeft }}
-                className={styles.cardTemplates}
-              >
-                <div className={styles.title}>
-                  <h4>Card templates</h4>
-                </div>
-                <div className={styles.templatesBody}></div>
-                <div className={styles.createTemplate}>
-                  + Create a new template
-                </div>
-                <button data-name="editButton">Edit templates</button>
+          )}
+
+          {isAddCardActive ? (
+            <div
+              className={styles.AddCardActive}
+              onClick={(e) => e.stopPropagation()}
+              onBlur={closeAddCard}
+              tabIndex={0}
+              data-name="addCardActive"
+            >
+              <textarea
+                name=""
+                placeholder="Enter a title for this card..."
+                autoFocus
+              ></textarea>
+              <div className={styles.buttonAndClose}>
+                <button className={styles.add}>Add a card</button>
+                <button onClick={closeAddCard} className={styles.close}>
+                  <i className="fa-solid fa-xmark"></i>
+                </button>
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          ) : (
+            <div
+              onBlur={hideTemplate}
+              tabIndex={0}
+              className={styles.taskListTamplates}
+              ref={templateRef}
+            >
+              <i
+                onClick={(e) => showTemplate(e)}
+                className="fa-solid fa-newspaper"
+              ></i>
+            </div>
+          )}
+        </div>
       </div>
+      {isTemplateActive && <CardTemplate pos={pos} popupRef={popupRef} />}
       {isUserProfileActive && <UserProfile />}
     </div>
   );

@@ -8,6 +8,7 @@
   flex-direction: column;
   margin-right: 10px;
   max-height: calc(100vh - 140px);
+  // position: relative;
 
   .listHeader {
     display: flex;
@@ -51,11 +52,11 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 15px 20px;
     color: #b6c2cf;
     position: relative;
+    cursor: pointer;
 
-    div:first-child {
+    .addACardBtn {
       width: 230px;
       border-radius: 5px;
       text-align: left;
@@ -63,13 +64,12 @@
     }
 
     .taskListTamplates {
-      // width: 30px;
       border-radius: 5px;
       text-align: left;
       padding: 5px;
     }
 
-    .addACard:hover {
+    .addACardBtn:hover {
       background: #5c5f61;
       cursor: pointer;
     }
@@ -94,6 +94,7 @@
         align-items: center;
         flex-direction: column;
         color: #b6c2cf;
+        z-index: 120;
 
         .title {
           width: 100%;
@@ -147,16 +148,15 @@
 }
 
 .AddCardActive {
-  width: 280px !important;
+  width: 100%;
   border-radius: 10px;
   background: #101204;
-  padding: 10px !important;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  position: absolute;
-  left: 0;
-  top: 0;
+  // position: absolute;
+  // left: 0;
+  // top: 0;
 
   textarea {
     width: 100%;
@@ -166,6 +166,22 @@
     color: #aeb9c6;
     margin-bottom: 5px;
     border-radius: 5px;
+    outline: none;
+    height: 70px;
+    resize: none;
+    // width: 100%;
+    // height: 70px;
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
+    // flex-direction: column;
+    // padding: 10px;
+    // background: #22272b;
+    // border-radius: 10px;
+    // color: #b5c2cf;
+    // cursor: pointer;
+    // font-size: 14px;
+    // margin-bottom: 5px;
   }
 
   .buttonAndClose {

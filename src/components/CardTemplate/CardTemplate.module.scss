@@ -1,0 +1,62 @@
+.cardTemplates {
+  position: absolute;
+//   top: 540px !important;
+//   left: 240px !important;
+  width: 290px;
+  background: #2c333a;
+  border: 0.5px solid #3b434c;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #b6c2cf;
+  z-index: 120;
+
+  .title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h4 {
+      margin: 0;
+    }
+  }
+
+  .templatesBody {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .createTemplate {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin: 10px 0;
+  }
+
+  .createTemplate:hover {
+    background: #3b434c;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background: #333a41;
+    border: none;
+    outline: none;
+    color: #b6c2cf;
+    font-size: 15px;
+  }
+
+  button:hover {
+    background: #3b434c;
+  }
+}
