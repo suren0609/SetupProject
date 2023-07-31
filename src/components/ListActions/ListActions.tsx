@@ -14,21 +14,45 @@ const ListActions = ({ closeListAction }: IProp) => {
         <i onClick={closeListAction} className="fa-solid fa-xmark"></i>
       </div>
       <ul>
-        <li>Add card...</li>
-        <li>Copy list...</li>
-        <li>Move list...</li>
-        <li>watch</li>
-        <li>Sort by...</li>
+        <li>
+          <a href="">Add card...</a>
+        </li>
+        <li>
+          <a href="">Copy list...</a>
+        </li>
+        <li>
+          <a href="">Move list...</a>
+        </li>
+        <li>
+          <a href="">watch</a>
+        </li>
+        <li>
+          <a href="">Sort by...</a>
+        </li>
       </ul>
       <h5>Automation</h5>
       <ul>
-        <li>Whrn a card is added to the list...</li>
-        <li>Every day, sort list by...</li>
-        <li>Every Monday, sort list by...</li>
-        <li>Create a rule</li>
-        <li>Move all cards in this list...</li>
-        <li>Archive all cards in this list</li>
-        <li>Archive this list</li>
+        <li>
+          <a href="">Whrn a card is added to the list...</a>
+        </li>
+        <li>
+          <a href="">Every day, sort list by...</a>
+        </li>
+        <li>
+          <a href="">Every Monday, sort list by...</a>
+        </li>
+        <li>
+          <a href="">Create a rule</a>
+        </li>
+        <li>
+          <a href="">Move all cards in this list...</a>
+        </li>
+        <li>
+          <a href="">Archive all cards in this list</a>
+        </li>
+        <li>
+          <a href="">Archive this list</a>
+        </li>
       </ul>
     </div>
   );

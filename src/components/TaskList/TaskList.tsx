@@ -46,22 +46,22 @@ const TaskList = () => {
       const { top, left } = templateRef.current?.getBoundingClientRect();
       const { height, width } = popupRef.current?.getBoundingClientRect();
 
-      if (top + height > window.innerHeight) {
+      if (top + height > window.innerHeight - 50) {
         if (left + width > window.innerWidth) {
           setPos({
             currentTop: top - height,
             currentLeft: left - width,
           });
+        } else {
+          setPos({
+            currentLeft: left,
+            currentTop: top - height,
+          });
         }
-
-        setPos({
-          ...pos,
-          currentTop: top - height,
-        });
       } else {
         if (left + width > window.innerWidth) {
           setPos({
-            ...pos,
+            currentTop: top,
             currentLeft: left - width,
           });
         } else {
