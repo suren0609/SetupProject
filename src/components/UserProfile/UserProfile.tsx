@@ -3,18 +3,17 @@ import React from "react";
 import styles from "./UserProfile.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsUserProfileActive } from "store/slices";
+import { userProfilePosSelector, userSelector } from "store/selectors";
 
 const UserProfile = () => {
-  const user = useSelector((state: any) => state.user.user);
+  const user = useSelector(userSelector);
 
   const dispatch = useDispatch();
 
   const closePopup = () => {
     dispatch(setIsUserProfileActive(false));
   };
-  const userProfilePos = useSelector(
-    (state: any) => state.userPopup.userProfilePos,
-  );
+  const userProfilePos = useSelector(userProfilePosSelector);
 
   return (
     <div

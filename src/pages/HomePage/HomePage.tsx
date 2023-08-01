@@ -7,6 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./HomePage.module.scss";
 import { TaskDescription } from "components/TaskDescription";
 import { EditCard } from "components/EditCard";
+import {
+  taskCardActiveSelector,
+  taskDetailsActiveSelector,
+} from "store/selectors";
 
 const HomePage = () => {
   const [isMenuActive, setIsMenuActive] = useState({
@@ -19,13 +23,9 @@ const HomePage = () => {
 
   const [isAddActive, setAddActive] = useState(false);
 
-  const isTaskDeskActive = useSelector(
-    (state: any) => state.tasks.isTaskDetailsActive,
-  );
+  const isTaskDeskActive = useSelector(taskDetailsActiveSelector);
 
-  const isTaskCardActive = useSelector(
-    (state: any) => state.tasks.isTaskCardActive,
-  );
+  const isTaskCardActive = useSelector(taskCardActiveSelector);
 
   const changeAddIsActive = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();

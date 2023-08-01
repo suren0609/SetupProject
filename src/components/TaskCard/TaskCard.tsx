@@ -10,13 +10,14 @@ import {
 } from "store/slices";
 import styles from "./TaskCard.module.scss";
 import { UserProfile } from "components/UserProfile";
+import { userSelector } from "store/selectors";
 
 interface ICardProps {
   changeUserProfileActive: () => void;
 }
 
 const TaskCard = ({ changeUserProfileActive }: ICardProps) => {
-  const user = useSelector((state: any) => state.user.user);
+  const user = useSelector(userSelector);
 
   const dispatch = useDispatch();
 

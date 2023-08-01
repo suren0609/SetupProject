@@ -26,3 +26,36 @@ export const getPosition = (
     };
   }
 };
+
+export const getTemplatePos = (
+  width: number,
+  height: number,
+  top: number,
+  left: number,
+) => {
+  if (top + height > window.innerHeight - 50) {
+    if (left + width > window.innerWidth) {
+      return {
+        currentTop: top - height,
+        currentLeft: left - width,
+      };
+    } else {
+      return {
+        currentLeft: left,
+        currentTop: top - height,
+      };
+    }
+  } else {
+    if (left + width > window.innerWidth) {
+      return {
+        currentTop: top,
+        currentLeft: left - width,
+      };
+    } else {
+      return {
+        currentTop: top + 30,
+        currentLeft: left,
+      };
+    }
+  }
+};

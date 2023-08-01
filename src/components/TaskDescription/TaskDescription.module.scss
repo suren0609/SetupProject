@@ -2,8 +2,7 @@
   display: none;
 }
 
-.comments{
-  padding: 10px;
+.comments {
   margin-top: 15px;
 }
 
@@ -218,7 +217,7 @@
 
           .commentinput {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
 
             .user {
               display: flex;
@@ -239,6 +238,7 @@
               border: none;
               width: 500px;
               border-radius: 10px;
+              height: 40px;
               padding: 10px;
               max-height: 400px;
               color: #b5c2cf;

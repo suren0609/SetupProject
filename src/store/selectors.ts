@@ -1,4 +1,19 @@
-
 import { IState } from "./types";
 
 export const stateSelector = (state: IState) => state;
+
+export const userSelector = (state: any) => state.user.user;
+
+export const taskCardPosSelector = (state: any) => state.tasks.taskCardPosition;
+
+export const userProfileActiveSelector = (state: any) =>
+  state.userPopup.isUserProfileActive;
+
+export const userProfilePosSelector = (state: any) =>
+  state.userPopup.userProfilePos;
+
+export const taskDetailsActiveSelector = (state: any) =>
+  state.tasks.isTaskDetailsActive;
+
+export const taskCardActiveSelector = (state: any) =>
+  state.tasks.isTaskCardActive;

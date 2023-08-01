@@ -6,9 +6,10 @@ import { useSelector } from "react-redux";
 import { IProp } from "store/types";
 import { getPosition } from "helpers/getPosition";
 import { getParameters } from "helpers/parametersForPosition";
+import { userSelector } from "store/selectors";
 
 const Members: FC<any> = ({ popupRef }: IProp) => {
-  const user = useSelector((state: any) => state.user.user);
+  const user = useSelector(userSelector);
   const [pos, setPos] = useState({ currentTop: 40, currentLeft: 0 });
   const divRef = useRef<HTMLDivElement>(null);
 

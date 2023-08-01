@@ -16,6 +16,7 @@ import { Move } from "components/Move";
 import { Copy } from "components/Copy";
 import { Dates } from "components/Dates";
 import { ref } from "yup";
+import { taskCardPosSelector, userSelector } from "store/selectors";
 
 const EditCard = () => {
   const [isLabelActive, setLabelActive] = useState(false);
@@ -25,12 +26,10 @@ const EditCard = () => {
   const [isCopyActive, setCopyActive] = useState(false);
   const [isDatesActive, setDatesActive] = useState(false);
 
-  const user = useSelector((state: any) => state.user.user);
+  const user = useSelector(userSelector);
   const dispatch = useDispatch();
 
-  const { top, left } = useSelector(
-    (state: any) => state.tasks.taskCardPosition,
-  );
+  const { top, left } = useSelector(taskCardPosSelector);
 
   const popupRef = useRef<HTMLLIElement>(null);
   const labelsRef = useRef<HTMLLIElement>(null);

@@ -5,8 +5,10 @@ import { setIsUserProfileActive, setTaskDetailsActive } from "store/slices";
 import { TaskCard } from "components/TaskCard";
 import { UserProfile } from "components/UserProfile";
 import { ListActions } from "components/ListActions";
-import { getPosition } from "helpers/getPosition";
+import { getPosition, getTemplatePos } from "helpers/getPosition";
 import { CardTemplate } from "components/CardTemplate";
+import { getParameters } from "helpers/parametersForPosition";
+import { userProfileActiveSelector } from "store/selectors";
 
 const TaskList = () => {
   const user = useSelector((state: any) => state.user.user);
@@ -16,9 +18,18 @@ const TaskList = () => {
   const [isListActionActive, setListActionActive] = useState(false);
   const [pos, setPos] = useState({ currentTop: 0, currentLeft: 0 });
 
-  const isUserProfileActive = useSelector(
-    (state: any) => state.userPopup.isUserProfileActive,
-  );
+  const listRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isAddCardActive) {
+      listRef.current!.scrollTo({
+        top: listRef.current!.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [isAddCardActive]);
+
+  const isUserProfileActive = useSelector(userProfileActiveSelector);
 
   const dispatch = useDispatch();
 
@@ -41,36 +52,10 @@ const TaskList = () => {
   const popupRef = useRef<any>(null);
 
   useEffect(() => {
-    console.log("popupRef -> ", popupRef);
     if (popupRef?.current) {
-      const { top, left } = templateRef.current?.getBoundingClientRect();
-      const { height, width } = popupRef.current?.getBoundingClientRect();
+      const { top, left, height, width } = getParameters(templateRef, popupRef);
 
-      if (top + height > window.innerHeight - 50) {
-        if (left + width > window.innerWidth) {
-          setPos({
-            currentTop: top - height,
-            currentLeft: left - width,
-          });
-        } else {
-          setPos({
-            currentLeft: left,
-            currentTop: top - height,
-          });
-        }
-      } else {
-        if (left + width > window.innerWidth) {
-          setPos({
-            currentTop: top,
-            currentLeft: left - width,
-          });
-        } else {
-          setPos({
-            currentTop: top + 30,
-            currentLeft: left,
-          });
-        }
-      }
+      setPos(getTemplatePos(width, height, top, left));
     }
   }, [isTemplateActive]);
 
@@ -111,59 +96,55 @@ const TaskList = () => {
           <ListActions closeListAction={closeListAction} />
         )}
       </div>
-      <div className={styles.listBody}>
+      <div ref={listRef} className={styles.listBody}>
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        {/* <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} /> */}
-        <div className={styles.addCard}>
-          {!isAddCardActive && (
-            <div className={styles.addACardBtn} onClick={handleAddCardActive}>
-              + Add a card
-            </div>
-          )}
 
-          {isAddCardActive ? (
-            <div
-              className={styles.AddCardActive}
-              onClick={(e) => e.stopPropagation()}
-              onBlur={closeAddCard}
-              tabIndex={0}
-              data-name="addCardActive"
-            >
-              <textarea
-                name=""
-                placeholder="Enter a title for this card..."
-                autoFocus
-              ></textarea>
-              <div className={styles.buttonAndClose}>
-                <button className={styles.add}>Add a card</button>
-                <button onClick={closeAddCard} className={styles.close}>
-                  <i className="fa-solid fa-xmark"></i>
-                </button>
-              </div>
+        {isAddCardActive && (
+          <div
+            className={styles.AddCardActive}
+            onClick={(e) => e.stopPropagation()}
+            onBlur={closeAddCard}
+            tabIndex={0}
+            data-name="addCardActive"
+          >
+            <textarea
+              placeholder="Enter a title for this card..."
+              autoFocus
+            ></textarea>
+            <div className={styles.buttonAndClose}>
+              <button className={styles.add}>Add a card</button>
+              <button onClick={closeAddCard} className={styles.close}>
+                <i className="fa-solid fa-xmark"></i>
+              </button>
             </div>
-          ) : (
-            <div
-              onBlur={hideTemplate}
-              tabIndex={0}
-              className={styles.taskListTamplates}
-              ref={templateRef}
-            >
-              <i
-                onClick={(e) => showTemplate(e)}
-                className="fa-solid fa-newspaper"
-              ></i>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
+      {!isAddCardActive && (
+        <div className={styles.addCard}>
+          <div className={styles.addACardBtn} onClick={handleAddCardActive}>
+            + Add a card
+          </div>
+          <div
+            onBlur={hideTemplate}
+            tabIndex={0}
+            className={styles.taskListTamplates}
+            ref={templateRef}
+          >
+            <i
+              onClick={(e) => showTemplate(e)}
+              className="fa-solid fa-newspaper"
+            ></i>
+          </div>
+        </div>
+      )}
+
       {isTemplateActive && <CardTemplate pos={pos} popupRef={popupRef} />}
       {isUserProfileActive && <UserProfile />}
     </div>

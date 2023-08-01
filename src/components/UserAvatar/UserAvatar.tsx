@@ -2,9 +2,10 @@ import React from "react";
 
 import styles from "./UserAvatar.module.scss";
 import { useSelector } from "react-redux";
+import { userSelector } from "store/selectors";
 
 const UserAvatar = () => {
-  const user = useSelector((state: any) => state.user.user);
+  const user = useSelector(userSelector);
   return (
     <div
       className={styles.UserAvatar}

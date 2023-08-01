@@ -35,6 +35,29 @@ const Attachment = () => {
       </div>
       <div className={styles.recentlyViewed}>
         <h5>RECENTLY VIEWED</h5>
+        <div className={styles.viewed}>
+          <div className={styles.task}>
+            <i className="fa-solid fa-credit-card"></i>
+            <div className={styles.taskInfo}>
+              <h4>Create Lists Functionality</h4>
+              <p>Tasks Viewed 4 hours ago</p>
+            </div>
+          </div>
+          <div className={styles.task}>
+            <i className="fa-solid fa-credit-card"></i>
+            <div className={styles.taskInfo}>
+              <h4>Create Lists Functionality</h4>
+              <p>Tasks Viewed 4 hours ago</p>
+            </div>
+          </div>
+          <div className={styles.task}>
+            <i className="fa-solid fa-credit-card"></i>
+            <div className={styles.taskInfo}>
+              <h4>Create Lists Functionality</h4>
+              <p>Tasks Viewed 4 hours ago</p>
+            </div>
+          </div>
+        </div>
       </div>
       <div className={styles.btns}>
         <button data-name="inputOrButton" className={styles.cancel}>
