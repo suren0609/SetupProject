@@ -1,0 +1,75 @@
+.ListActions {
+  width: 280px;
+  border: 0.5px solid #373e46;
+  border-radius: 10px;
+  background: #282e33;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  position: absolute;
+  padding: 10px;
+  left: 240px;
+  top: 40px;
+  z-index: 120;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+    position: relative;
+
+    h4 {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    i {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  ul {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    border-bottom: 1px solid #505861;
+
+    li {
+      width: 100%;
+      font-size: 14px;
+      cursor: pointer;
+
+      a {
+        display: block;
+        text-decoration: none;
+        color: #a7b3bf;
+        height: 100%;
+        margin: 0 -10px;
+        padding: 10px 15px;
+      }
+      a:hover {
+        background: #505861;
+      }
+    }
+
+    li:nth-child(5) {
+      border-top: 1px solid #505861;
+      padding: 5px 0;
+    }
+
+    li:nth-child(7) {
+      border-top: 1px solid #505861;
+      padding: 5px 0;
+    }
+  }
+  h5 {
+    padding: 15px;
+  }
+}

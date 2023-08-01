@@ -1,0 +1,50 @@
+.Checklist {
+  width: 280px;
+  border: 0.5px solid #373e46;
+  border-radius: 10px;
+  background: #282e33;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: 40px;
+  z-index: 120;
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    h4 {
+      margin: 10px 0;
+      text-align: center;
+    }
+  }
+
+  .titleInput {
+    width: 100%;
+    margin: 10px 0;
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #384148;
+      font-size: 14px;
+      color: #b2becb;
+      background: #22272b;
+      margin-bottom: 10px;
+    }
+  }
+
+  button {
+    padding: 7px 20px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    background: #579dff;
+  }
+}

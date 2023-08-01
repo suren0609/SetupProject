@@ -1,0 +1,166 @@
+.Attachment {
+  width: 280px;
+  border: 0.5px solid #373e46;
+  border-radius: 10px;
+  background: #282e33;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: 40px;
+  z-index: 120;
+
+  .title {
+    h4 {
+      margin: 10px 0;
+    }
+  }
+
+  .attachFile {
+    width: 100%;
+    border-bottom: 0.5px solid #373e46;
+    padding-bottom: 10px;
+
+    h6 {
+      margin: 10px 0;
+    }
+    p {
+      margin: 10px 0;
+      font-size: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 3px;
+      color: #b2becb;
+      background: #323940;
+      border: none;
+    }
+  }
+
+  .recentlyViewed {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+
+    h5 {
+      font-size: 10px;
+    }
+
+    .viewed {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .task{
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        font-size: 12px;
+        width: 100%;
+        margin: 0 -10px;
+        padding: 10px 0;
+
+
+
+        i{
+          color: #579dff;
+        }
+
+        .taskInfo{
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+          margin-left: 15px;
+
+
+          h4{
+          margin: 0 0 5px 0;
+          
+        }
+
+        p{
+          margin: 0;
+          font-size: 10px;
+          color:#7e8285;
+        }
+        }
+
+        
+      }
+
+      .task:hover{
+        background-color: #444647;
+      }
+    }
+  }
+
+  .searchOrPaste {
+    width: 100%;
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 3px;
+      border: 1px solid #384148;
+      font-size: 14px;
+      color: #b2becb;
+      background: #22272b;
+      margin-bottom: 10px;
+    }
+  }
+
+  .displayText {
+    width: 100%;
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 3px;
+      border: 1px solid #384148;
+      font-size: 14px;
+      color: #b2becb;
+      background: #22272b;
+      margin-bottom: 10px;
+    }
+  }
+
+  .btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .cancel {
+      padding: 10px 15px;
+      border: none;
+      outline: none;
+      background: transparent;
+      border-radius: 5px;
+      color: #b2becb;
+      cursor: pointer;
+    }
+
+    .cancel:hover {
+      background: #495158;
+    }
+
+    .insert {
+      padding: 10px 15px;
+      border: none;
+      outline: none;
+      background: #579dff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .insert:hover {
+      background: #72acfd;
+    }
+  }
+}

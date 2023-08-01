@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styles from "./Header.module.scss";
 import LogoSvg from "components/LogoSvg/LogoSvg";
+import { userSelector } from "store/selectors";
 
 interface IHeaderProps {
   isMenuActive: {
@@ -41,7 +42,7 @@ const Header: FC<IHeaderProps> = ({
     navigate("login");
   };
 
-  const user = useSelector((state: any) => state.user.user);
+  const user = useSelector(userSelector);
 
   return (
     <div className={styles.Header}>

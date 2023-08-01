@@ -1,0 +1,104 @@
+.Dates {
+  width: 280px;
+  max-height: calc(100vh - 10px);
+  overflow-x: hidden;
+  border: 0.5px solid #373e46;
+  border-radius: 10px;
+  background: #282e33;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: -200px;
+  z-index: 120;
+
+  .calendar {
+    background: transparent;
+    button {
+      color: #b2becb;
+    }
+  }
+
+  .title {
+    h4 {
+      margin: 10px 0;
+    }
+  }
+
+  .startDate {
+    width: 100%;
+
+    .checkInput {
+      input {
+        background: #22272b;
+        border: 1px solid #384148;
+        padding: 5px;
+        color: #b2becb;
+        margin: 0 5px;
+      }
+    }
+  }
+
+  .dueDate {
+    width: 100%;
+
+    .checkInput {
+      display: flex;
+      align-items: center;
+
+      input {
+        background: #22272b;
+        border: 1px solid #384148;
+        padding: 5px;
+        color: #b2becb;
+        margin: 0 5px;
+      }
+    }
+  }
+
+  .dateReminder {
+    width: 100%;
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #384148;
+      font-size: 14px;
+      color: #b2becb;
+      background: #22272b;
+      margin-bottom: 10px;
+    }
+  }
+
+  .saveBtn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: #579dff;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-bottom: 5px;
+  }
+
+  .saveBtn:hover {
+    background: #6ba9ff;
+  }
+
+  .removeBtn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: #323940;
+    color: #b2becb;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+
+  .removeBtn:hover {
+    background: #434b53;
+  }
+}

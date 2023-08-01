@@ -7,7 +7,11 @@ body {
   /* background: url("https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg") no-repeat;
   background-position: center;
   background-size: cover; */
+
+  background: #1d2125;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
 * {
   box-sizing: border-box;
 }
@@ -20,3 +24,19 @@ code {
   display: none;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(36, 36, 36, 0.26);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #88888893;
+  border-radius: 10px;
+}
+
+/* Handle on hover */

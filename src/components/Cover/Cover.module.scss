@@ -1,0 +1,163 @@
+.Cover {
+  width: 280px;
+  border: 0.5px solid #373e46;
+  border-radius: 10px;
+  background: #282e33;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: 40px;
+  z-index: 120;
+
+  h5 {
+    margin: 10px 0;
+  }
+
+  .title {
+    h4 {
+      margin: 10px 0;
+    }
+  }
+
+  .colors {
+    width: 100%;
+
+    .colorList {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      .color {
+        width: 42px;
+        height: 30px;
+        border-radius: 5px;
+        margin: 5px;
+      }
+
+      .color1 {
+        width: 41px;
+        height: 30px;
+        background: #216e4e;
+        border-radius: 3px;
+        margin: 5px;
+      }
+      .color2 {
+        width: 41px;
+        height: 30px;
+        background: #7f5f01;
+        border-radius: 3px;
+        margin: 5px;
+      }
+      .color3 {
+        width: 41px;
+        height: 30px;
+        background: #974f0c;
+        border-radius: 3px;
+        margin: 5px;
+      }
+      .color4 {
+        width: 41px;
+        height: 30px;
+        background: #ae2a19;
+        border-radius: 3px;
+        margin: 5px;
+      }
+      .color5 {
+        width: 41px;
+        height: 30px;
+        background: #5e4db2;
+        border-radius: 3px;
+        margin: 5px;
+      }
+      .color6 {
+        width: 41px;
+        height: 30px;
+        background: #0055cc;
+        border-radius: 3px;
+        margin: 5px;
+      }
+      .color7 {
+        width: 41px;
+        height: 30px;
+        background: #206b74;
+        border-radius: 3px;
+        margin: 5px;
+      }
+      .color8 {
+        width: 41px;
+        height: 30px;
+        background: #4c6b1f;
+        border-radius: 3px;
+        margin: 5px;
+      }
+      .color9 {
+        width: 41px;
+        height: 30px;
+        background: #943d73;
+        border-radius: 3px;
+        margin: 5px;
+      }
+      .color10 {
+        width: 41px;
+        height: 30px;
+        background: #596773;
+        border-radius: 3px;
+        margin: 5px;
+      }
+    }
+  }
+
+  .attachments {
+    width: 100%;
+
+    button {
+      padding: 10px;
+      width: 100%;
+      border: none;
+      outline: none;
+      background: #323940;
+      border-radius: 3px;
+      color: #b2becb;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #49515a;
+    }
+  }
+
+  .photos {
+    width: 100%;
+
+
+    .images{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+
+
+
+        img{
+            width: 80px;
+            border-radius: 5px;
+        }
+    }
+
+    button {
+      padding: 10px;
+      width: 100%;
+      border: none;
+      outline: none;
+      background: #323940;
+      border-radius: 3px;
+      color: #b2becb;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #49515a;
+    }
+  }
+}

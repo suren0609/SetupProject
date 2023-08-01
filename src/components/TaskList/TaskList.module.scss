@@ -1,0 +1,198 @@
+.TaskList {
+  width: 280px;
+  min-width: 280px;
+  border-radius: 10px;
+  background: #101204;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 10px;
+  max-height: calc(100vh - 200px);
+
+  .listHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 20px;
+    color: #b6c2cf;
+    position: relative;
+
+    h5 {
+      margin: 0;
+    }
+
+    i {
+      padding: 5px;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    i:hover {
+      background: #5d5e60;
+    }
+  }
+
+  .listBody {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+
+    overflow-x: hidden;
+  }
+
+  .listBody::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .addCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: #b6c2cf;
+    padding: 10px;
+    position: relative;
+    cursor: pointer;
+
+    .addACardBtn {
+      width: 230px;
+      border-radius: 5px;
+      text-align: left;
+      padding: 5px;
+    }
+
+    .taskListTamplates {
+      border-radius: 5px;
+      text-align: left;
+      padding: 5px;
+    }
+
+    .addACardBtn:hover {
+      background: #5c5f61;
+      cursor: pointer;
+    }
+
+    .taskListTamplates:hover {
+      background: #5c5f61;
+      cursor: pointer;
+    }
+
+    .taskListTamplates {
+      position: relative;
+
+      .cardTemplates {
+        position: absolute;
+        top: 43px;
+        width: 290px;
+        background: #2c333a;
+        border: 0.5px solid #3b434c;
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        color: #b6c2cf;
+        z-index: 120;
+
+        .title {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          h4 {
+            margin: 0;
+          }
+        }
+
+        .templatesBody {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .createTemplate {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          width: 100%;
+          padding: 5px 10px;
+          border-radius: 3px;
+          margin: 10px 0;
+        }
+
+        .createTemplate:hover {
+          background: #3b434c;
+        }
+
+        button {
+          width: 100%;
+          padding: 10px;
+          border-radius: 5px;
+          background: #333a41;
+          border: none;
+          outline: none;
+          color: #b6c2cf;
+          font-size: 15px;
+        }
+
+        button:hover {
+          background: #3b434c;
+        }
+      }
+    }
+  }
+}
+
+.AddCardActive {
+  width: 100%;
+  border-radius: 10px;
+  background: #101204;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #22272b;
+    color: #aeb9c6;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    outline: none;
+    height: 70px;
+    resize: none;
+  }
+
+  .buttonAndClose {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .add {
+      padding: 10px;
+      color: #22272b;
+      background: #579dff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add:hover {
+      background: #80aef0;
+    }
+
+    .close {
+      background: transparent;
+      font-size: 25px;
+      border: none;
+      color: #aeb9c6;
+      cursor: pointer;
+    }
+  }
+}

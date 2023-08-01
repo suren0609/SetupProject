@@ -1,0 +1,67 @@
+.AddList {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 280px;
+  height: 50px;
+  padding: 10px;
+  color: white;
+  background: rgba(175, 175, 175, 0.397);
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.AddList:hover {
+  background-color: rgba(117, 117, 117, 0.397);
+}
+
+.AddListActive {
+  width: 280px;
+  border-radius: 10px;
+  background: #101204;
+  padding: 5px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-height: 90px;
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #22272b;
+    color: #aeb9c6;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+
+  .buttonAndClose {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .add {
+      width: 80px;
+      padding: 10px;
+      color: #22272b;
+      background: #579dff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add:hover{
+        background: #80aef0;
+    }
+
+    .close {
+      background: transparent;
+      font-size: 25px;
+      border: none;
+      color: #aeb9c6;
+      cursor: pointer;
+    }
+  }
+}

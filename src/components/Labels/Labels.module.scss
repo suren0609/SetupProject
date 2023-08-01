@@ -1,0 +1,118 @@
+.Labels {
+  width: 280px;
+  border: 0.5px solid #373e46;
+  border-radius: 10px;
+  background: #282e33;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: 40px;
+  z-index: 120;
+
+  .title {
+    h4 {
+      margin: 10px 0;
+    }
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #384148;
+    font-size: 14px;
+    color: #b2becb;
+    background: #22272b;
+    margin-bottom: 10px;
+  }
+
+  .colors {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #373e46;
+    margin-bottom: 10px;
+
+    h5 {
+      width: 100%;
+      text-align: start;
+      margin: 10px 0;
+    }
+
+    .color {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 3px 0;
+
+      input {
+        width: unset;
+        background-color: #22272b;
+      }
+
+      div {
+        width: 100%;
+        height: 30px;
+        border-radius: 3px;
+        margin: 0 10px;
+      }
+
+      .color1 {
+        background-color: #216e4e;
+      }
+      .color2 {
+        background-color: #7f5f01;
+      }
+      .color3 {
+        background-color: #974f0c;
+      }
+      .color4 {
+        background-color: #ae2a19;
+      }
+      .color5 {
+        background-color: #5e4db2;
+      }
+      .color6 {
+        background-color: #0055cc;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      background: #373e46;
+      border: none;
+      outline: none;
+      color: #b2becb;
+      font-size: 14px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #434b53;
+    }
+  }
+  button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background: #373e46;
+    border: none;
+    outline: none;
+    color: #b2becb;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #434b53;
+  }
+}
