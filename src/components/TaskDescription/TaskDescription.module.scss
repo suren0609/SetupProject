@@ -12,7 +12,7 @@
   background: rgba(0, 0, 0, 0.494);
   display: flex;
   padding: 30px;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: absolute;
   z-index: 101;
@@ -28,10 +28,11 @@
     flex-direction: column;
     background: #31393f;
     border-radius: 10px;
-    position: absolute;
+    // position: absolute;
     top: 48px;
     color: #b5c2cf;
     padding: 15px;
+    margin-bottom: 50px;
 
     .winHeader {
       display: flex;
