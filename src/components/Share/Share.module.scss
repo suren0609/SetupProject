@@ -1,0 +1,100 @@
+.Share {
+  width: 280px;
+  border: 0.5px solid #373e46;
+  border-radius: 10px;
+  background: #282e33;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: -500px;
+  z-index: 120;
+
+  .title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    h4 {
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    i {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    i:hover {
+      background: #4c555c;
+    }
+  }
+
+  ul {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+
+    li {
+      width: 100%;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    li:hover {
+      background: #4c555c;
+    }
+  }
+
+  .shareBody {
+    width: 100%;
+    padding: 10px;
+
+    hr {
+      width: 100%;
+      border: none;
+      border-bottom: 0.51px solid #4c555c;
+    }
+
+    h6 {
+      font-size: 12px;
+      margin: 5px 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #343b42;
+      color: #94a1af;
+      border-radius: 4px;
+      background: #22272b;
+    }
+  }
+
+  a {
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-block;
+    margin: 10px 0;
+    text-decoration: none;
+    color: #579dff;
+  }
+
+  a:hover{
+    text-decoration:underline;
+  }
+
+  p{
+    font-size: 14px;
+  }
+}

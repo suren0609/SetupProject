@@ -38,6 +38,7 @@ export const tasksSlice = createSlice({
     isTaskDetailsActive: false,
     isTaskCardActive: false,
     taskCardPosition: { top: 0, left: 0 },
+    isTaskTemplate: false,
   },
   reducers: {
     setTaskDetailsActive: (state, { payload }: PayloadAction<boolean>) => {
@@ -51,6 +52,9 @@ export const tasksSlice = createSlice({
       { payload }: PayloadAction<{ top: number; left: number }>,
     ) => {
       state.taskCardPosition = payload;
+    },
+    setTaskTemplate: (state, { payload }: PayloadAction<boolean>) => {
+      state.isTaskTemplate = payload;
     },
   },
 });
@@ -79,7 +83,11 @@ export const userPopupSlice = createSlice({
 
 export const { setIsLoading } = isLoadingSlice.actions;
 export const { setUser } = userSlice.actions;
-export const { setTaskDetailsActive, setTaskCardActive, setTaskCardPosition } =
-  tasksSlice.actions;
+export const {
+  setTaskDetailsActive,
+  setTaskCardActive,
+  setTaskCardPosition,
+  setTaskTemplate,
+} = tasksSlice.actions;
 export const { setProfilePosition, setIsUserProfileActive } =
   userPopupSlice.actions;

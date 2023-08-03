@@ -17,3 +17,6 @@ export const taskDetailsActiveSelector = (state: any) =>
 
 export const taskCardActiveSelector = (state: any) =>
   state.tasks.isTaskCardActive;
+
+export const isTaskTemplateSelector = (state: any) =>
+  state.tasks.isTaskTemplate;
