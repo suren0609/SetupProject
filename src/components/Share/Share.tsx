@@ -14,10 +14,7 @@ const Share: FC<IProp> = ({ closeShare }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    console.dir(inputRef.current);
     inputRef.current?.select();
-
-    // return () => inputRef.current?.select();
   }, []);
 
   const handleDeleteActive = () => {

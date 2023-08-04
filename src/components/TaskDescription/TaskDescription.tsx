@@ -61,11 +61,11 @@ const TaskDescription = () => {
 
   const handleShare = (event: any) => {
     event.stopPropagation();
-    // setShareActive((prev) => !prev);
+
+    setShareActive((prev) => !prev);
   };
 
   const closeShare = (e: any) => {
-    console.log("closeShare ->", e.relatedTarget?.dataset?.name);
     if (e.relatedTarget?.dataset?.name === "inputOrButton") {
       return;
     }
@@ -472,6 +472,7 @@ const TaskDescription = () => {
                 onClick={handleShare}
                 onBlur={closeShare}
                 tabIndex={0}
+                data-name="inputOrButton"
                 className={styles.sideSettings}
               >
                 <i className="fa-solid fa-share-nodes"></i> Share
