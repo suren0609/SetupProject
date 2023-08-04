@@ -59,11 +59,13 @@ const TaskDescription = () => {
     dispatch(setTaskDetailsActive(false));
   };
 
-  const handleShare = () => {
-    setShareActive((prev) => !prev);
+  const handleShare = (event: any) => {
+    event.stopPropagation();
+    // setShareActive((prev) => !prev);
   };
 
   const closeShare = (e: any) => {
+    console.log("closeShare ->", e.relatedTarget?.dataset?.name);
     if (e.relatedTarget?.dataset?.name === "inputOrButton") {
       return;
     }

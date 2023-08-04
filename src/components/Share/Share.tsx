@@ -14,7 +14,10 @@ const Share: FC<IProp> = ({ closeShare }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    console.dir(inputRef.current);
     inputRef.current?.select();
+
+    // return () => inputRef.current?.select();
   }, []);
 
   const handleDeleteActive = () => {
@@ -28,14 +31,15 @@ const Share: FC<IProp> = ({ closeShare }) => {
     setDeleteActive(false);
   };
 
-  const handleFocus = (e: FocusEvent<HTMLInputElement>) =>
+  const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     e.currentTarget.select();
+  };
 
   return (
     <div
-      data-name="inputOrButton"
       onClick={(e) => e.stopPropagation()}
       className={styles.Share}
+      data-name="inputOrButton"
     >
       <div className={styles.title}>
         <h4>Share and more...</h4>
@@ -54,7 +58,8 @@ const Share: FC<IProp> = ({ closeShare }) => {
           value={window.location.href}
           type="text"
           readOnly={true}
-          onFocus={handleFocus}
+          // onFocus={handleFocus}
+          // autoFocus
         />
         <button className={styles.btn} data-name="inputOrButton">
           Show QR Code
