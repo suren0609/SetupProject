@@ -10,7 +10,7 @@ import {
 } from "store/slices";
 import styles from "./TaskCard.module.scss";
 import { UserProfile } from "components/UserProfile";
-import { userSelector } from "store/selectors";
+import { isTaskTemplateSelector, userSelector } from "store/selectors";
 
 interface ICardProps {
   changeUserProfileActive: () => void;
@@ -20,6 +20,8 @@ const TaskCard = ({ changeUserProfileActive }: ICardProps) => {
   const user = useSelector(userSelector);
 
   const dispatch = useDispatch();
+
+  const isTemplate = useSelector(isTaskTemplateSelector);
 
   const handleTaskDetails = () => {
     dispatch(setTaskDetailsActive(true));
@@ -57,10 +59,21 @@ const TaskCard = ({ changeUserProfileActive }: ICardProps) => {
       </div>
       <div className={styles.cardBottom}>
         <div className={styles.cardBottomControls}>
-          <i className="fa-solid fa-bars"></i>
-          <div>
-            <i className="fa-regular fa-comment"></i> 1
-          </div>
+          {isTemplate ? (
+            <>
+              <div className={styles.thisCardIs}>
+                <i className="fa-regular fa-images"></i> This card is template.
+              </div>
+              <i className="fa-solid fa-bars"></i>
+            </>
+          ) : (
+            <>
+              <i className="fa-solid fa-bars"></i>
+              <div>
+                <i className="fa-regular fa-comment"></i> 1
+              </div>
+            </>
+          )}
         </div>
         <div className={styles.profile}>
           <div
