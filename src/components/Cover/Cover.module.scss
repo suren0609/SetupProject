@@ -11,6 +11,7 @@
   left: 0;
   top: 40px;
   z-index: 120;
+  box-shadow: 5px 0px 20px black;
 
   h5 {
     margin: 10px 0;
@@ -131,19 +132,16 @@
   .photos {
     width: 100%;
 
+    .images {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
 
-    .images{
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-
-
-
-        img{
-            width: 80px;
-            border-radius: 5px;
-        }
+      img {
+        width: 80px;
+        border-radius: 5px;
+      }
     }
 
     button {

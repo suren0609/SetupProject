@@ -1,0 +1,40 @@
+.CreateBoard {
+  width: 304px;
+  border: 0.5px solid #373e46;
+  border-radius: 10px;
+  background: #282e33;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 0;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  z-index: 120;
+  box-shadow: 5px 0px 20px black;
+
+  .sections {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    cursor: pointer;
+    color: #9aa7b6;
+    padding: 5px 10px;
+
+    h6 {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+
+    p {
+      margin: 5px 0;
+      font-size: 12px;
+      text-align: start;
+    }
+  }
+
+  .sections:hover {
+    background: #4a5157ad;
+  }
+}

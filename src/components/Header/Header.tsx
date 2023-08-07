@@ -1,10 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { logoutUser } from "services/logout";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styles from "./Header.module.scss";
 import LogoSvg from "components/LogoSvg/LogoSvg";
 import { userSelector } from "store/selectors";
+import { CreateBoard } from "components/CreateBoard";
 
 interface IHeaderProps {
   isMenuActive: {
@@ -22,6 +23,16 @@ const Header: FC<IHeaderProps> = ({
   ChangeprofilePopupState,
   isProfilePopupActive,
 }) => {
+  const [isCreateBoardActive, setCreateBoardActive] = useState(false);
+
+  const createBoardPopupHandler = () => {
+    setCreateBoardActive((prev) => !prev);
+  };
+
+  const closeCreatePopup = (e: any) => {
+    // setCreateBoardActive(false);
+  };
+
   const menuActiveHandler = (
     e: React.MouseEvent<HTMLElement>,
     side: string,
@@ -78,7 +89,14 @@ const Header: FC<IHeaderProps> = ({
               </span>
             </li>
           </ul>
-          <button>Create</button>
+          <button
+            onClick={createBoardPopupHandler}
+            onBlur={closeCreatePopup}
+            tabIndex={0}
+          >
+            Create
+            {isCreateBoardActive && <CreateBoard />}
+          </button>
         </div>
       </div>
       <div className={styles.headerRight}>
