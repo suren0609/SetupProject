@@ -4,15 +4,7 @@ import { AddList } from "components/AddList";
 import { TaskList } from "components/TaskList";
 import styles from "./HomeDetails.module.scss";
 
-interface IHomeDetailsProps {
-  isAddActive: boolean;
-  changeAddIsActive: (e: MouseEvent<HTMLElement>) => void;
-}
-
-const HomeDetails: FC<IHomeDetailsProps> = ({
-  isAddActive,
-  changeAddIsActive,
-}) => {
+const HomeDetails: FC = () => {
   return (
     <div className={styles.HomeDetails}>
       <div className={styles.scrollContainer}>
@@ -23,10 +15,7 @@ const HomeDetails: FC<IHomeDetailsProps> = ({
         <TaskList />
         <TaskList />
         <TaskList />
-        <AddList
-          isAddActive={isAddActive}
-          changeAddIsActive={changeAddIsActive}
-        />
+        <AddList />
       </div>
     </div>
   );

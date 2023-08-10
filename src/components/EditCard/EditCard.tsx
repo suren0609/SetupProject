@@ -7,7 +7,6 @@ import React, {
   forwardRef,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setTaskCardActive, setTaskDetailsActive } from "store/slices";
 import styles from "./EditCard.module.scss";
 import { Labels } from "components/Labels";
 import { Members } from "components/Members";
@@ -17,6 +16,10 @@ import { Copy } from "components/Copy";
 import { Dates } from "components/Dates";
 import { ref } from "yup";
 import { taskCardPosSelector, userSelector } from "store/selectors";
+import {
+  setTaskCardActive,
+  setTaskDetailsActive,
+} from "store/slices/taskSlice";
 
 const EditCard = () => {
   const [isLabelActive, setLabelActive] = useState(false);

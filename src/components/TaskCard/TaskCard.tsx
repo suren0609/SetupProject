@@ -1,16 +1,17 @@
-import React, { useRef, useState, MouseEvent, FC } from "react";
+import { MouseEvent, useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+import { isTaskTemplateSelector, userSelector } from "store/selectors";
 import {
-  setIsUserProfileActive,
-  setProfilePosition,
   setTaskCardActive,
   setTaskCardPosition,
   setTaskDetailsActive,
-} from "store/slices";
+} from "store/slices/taskSlice";
+import {
+  setIsUserProfileActive,
+  setProfilePosition,
+} from "store/slices/userPopupSlice";
 import styles from "./TaskCard.module.scss";
-import { UserProfile } from "components/UserProfile";
-import { isTaskTemplateSelector, userSelector } from "store/selectors";
 
 interface ICardProps {
   changeUserProfileActive: () => void;

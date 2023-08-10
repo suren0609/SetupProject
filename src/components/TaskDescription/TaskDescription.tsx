@@ -1,21 +1,21 @@
-import React, { useState, MouseEvent, useRef } from "react";
+import { MouseEvent, useRef, useState } from "react";
 
-import styles from "./TaskDescription.module.scss";
+import { Attachment } from "components/Attachment";
+import { Checklist } from "components/Checklist";
+import { CommentUI } from "components/CommentUI";
+import { Copy } from "components/Copy";
+import { Cover } from "components/Cover";
+import { Dates } from "components/Dates";
+import { DeleteCard } from "components/DeleteCard";
+import { Labels } from "components/Labels";
 import { Members } from "components/Members";
+import { Move } from "components/Move";
+import { Share } from "components/Share";
 import { UserAvatar } from "components/UserAvatar";
 import { useDispatch, useSelector } from "react-redux";
-import { setTaskDetailsActive, setTaskTemplate } from "store/slices";
-import { Labels } from "components/Labels";
-import { Checklist } from "components/Checklist";
-import { Dates } from "components/Dates";
-import { Attachment } from "components/Attachment";
-import { Cover } from "components/Cover";
-import { Move } from "components/Move";
-import { Copy } from "components/Copy";
-import { CommentUI } from "components/CommentUI";
 import { isTaskTemplateSelector } from "store/selectors";
-import { Share } from "components/Share";
-import { DeleteCard } from "components/DeleteCard";
+import { setTaskDetailsActive, setTaskTemplate } from "store/slices/taskSlice";
+import styles from "./TaskDescription.module.scss";
 
 const TaskDescription = () => {
   const [isTitleInput, setTitleInput] = useState(false);

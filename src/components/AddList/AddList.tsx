@@ -1,12 +1,16 @@
 import React, { FC, MouseEvent } from "react";
 import styles from "./AddList.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { setAddActive } from "store/slices/popupSlice";
 
-interface IAddListProps {
-  isAddActive: boolean;
-  changeAddIsActive: (e: MouseEvent<HTMLElement>) => void;
-}
+const AddList: FC = () => {
+  const dispatch = useDispatch();
+  const isAddActive = useSelector((state: any) => state.popup.isAddActive);
+  const changeAddIsActive = (e: MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    dispatch(setAddActive(!isAddActive));
+  };
 
-const AddList: FC<IAddListProps> = ({ isAddActive, changeAddIsActive }) => {
   return !isAddActive ? (
     <div className={styles.AddList} onClick={(e) => changeAddIsActive(e)}>
       + Add another list

@@ -6,12 +6,13 @@
   border-right: 1px solid #32383d;
   transition: all 0.2s ease;
   .sidebarHeader {
-    height: 10%;
+    height: 70px;
     border-bottom: 1px solid #32383d;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
+    margin-bottom: 10px;
 
     @media (max-width: 1047px) {
       padding: 5px;
@@ -63,6 +64,34 @@
     }
     button:hover {
       background-color: #32383d;
+    }
+  }
+
+  .sidebarBody {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+
+    .boardName {
+      width: 100%;
+      padding: 10px;
+      background: #282c30;
+      margin-bottom: 3px;
+      cursor: pointer;
+
+      a {
+        text-decoration: none;
+        color: #9eacba;
+      }
+    }
+
+    .boardName:hover {
+      background: #40474d;
     }
   }
 }

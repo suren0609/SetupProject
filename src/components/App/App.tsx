@@ -5,6 +5,7 @@ import { RegisterPage } from "../../pages/RegisterPage";
 import { ToastContainer } from "react-toastify";
 import { ProtectedAuth } from "hoc/ProtectedAuth";
 import styles from "./App.module.scss";
+import { Board } from "components/Board";
 
 function App() {
   const Home = ProtectedAuth(HomePage, "/login");
@@ -15,7 +16,9 @@ function App() {
     <div className={styles.leyout_content}>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />}>
+          <Route path="/:id" element={<Board />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

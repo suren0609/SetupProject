@@ -1,36 +1,58 @@
-import React, { FC, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import { logoutUser } from "services/logout";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Header.module.scss";
 import LogoSvg from "components/LogoSvg/LogoSvg";
 import { userSelector } from "store/selectors";
 import { CreateBoard } from "components/CreateBoard";
+import {
+  setCreateBoardActive,
+  setCreateBoardPopupPos,
+  setIsMenuActive,
+  setIsPopupActive,
+} from "store/slices/popupSlice";
 
-interface IHeaderProps {
-  isMenuActive: {
-    leftMenu: boolean;
-    rightMenu: boolean;
+const Header: FC = () => {
+  const dispatch = useDispatch();
+
+  const isMenuActive = useSelector((state: any) => state.popup.isMenuActive);
+  const isProfilePopupActive = useSelector(
+    (state: any) => state.popup.isProfilePopupActive,
+  );
+
+  const isCreateBoardActive = useSelector(
+    (state: any) => state.popup.isCreateBoardActive,
+  );
+
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  const changeMenuState = (leftOrRight: string) => {
+    setIsPopupActive(false);
+    leftOrRight === "left"
+      ? dispatch(
+          setIsMenuActive({
+            rightMenu: false,
+            leftMenu: !isMenuActive.leftMenu,
+          }),
+        )
+      : dispatch(
+          setIsMenuActive({
+            leftMenu: false,
+            rightMenu: !isMenuActive.rightMenu,
+          }),
+        );
   };
-  changeMenuState: (leftOrRight: string) => void;
-  ChangeprofilePopupState: () => void;
-  isProfilePopupActive: boolean;
-}
 
-const Header: FC<IHeaderProps> = ({
-  isMenuActive,
-  changeMenuState,
-  ChangeprofilePopupState,
-  isProfilePopupActive,
-}) => {
-  const [isCreateBoardActive, setCreateBoardActive] = useState(false);
+  const ChangeprofilePopupState = () => {
+    dispatch(setIsPopupActive(!isProfilePopupActive));
+    dispatch(setIsMenuActive({ rightMenu: false, leftMenu: false }));
+  };
 
   const createBoardPopupHandler = () => {
-    setCreateBoardActive((prev) => !prev);
-  };
-
-  const closeCreatePopup = (e: any) => {
-    // setCreateBoardActive(false);
+    const { top, left } = btnRef.current!.getBoundingClientRect();
+    dispatch(setCreateBoardPopupPos({ top: top, left: left }));
+    dispatch(setCreateBoardActive(!isCreateBoardActive));
   };
 
   const menuActiveHandler = (
@@ -91,11 +113,10 @@ const Header: FC<IHeaderProps> = ({
           </ul>
           <button
             onClick={createBoardPopupHandler}
-            onBlur={closeCreatePopup}
-            tabIndex={0}
+            data-name="inputOrButton"
+            ref={btnRef}
           >
             Create
-            {isCreateBoardActive && <CreateBoard />}
           </button>
         </div>
       </div>

@@ -2,6 +2,12 @@ export type GetPostsApiPayload = {
   limit: number;
 };
 
+export interface IBoardSliceInititalState {
+  boardData: IBoardData[];
+  createBoardSelect: string;
+  currentBg: string;
+}
+
 export type PostType = {
   userId: number;
   id: number;
@@ -48,4 +54,27 @@ export enum statusText {
 
 export interface IProp {
   popupRef: any;
+}
+
+export enum CREATE_BOARD {
+  CREATEBOARD = "createBoard",
+  BOARDFORM = "boardForm",
+}
+
+export interface IBoardData {
+  name: string;
+  background: string;
+}
+
+export interface IBoardResponse {
+  name: string;
+  background: string;
+  userId: number;
+  sortId: number;
+  id: number;
+}
+
+export interface IBoardDataAction {
+  board_data: IBoardData;
+  navigate: (to: string, options?: object) => void;
 }

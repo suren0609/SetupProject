@@ -1,16 +1,16 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { call, put, takeLatest } from "redux-saga/effects";
 
-import * as actions from "./actions";
-import * as sliceActions from "./slices";
-import { IUserData } from "./types";
 import { getUserService } from "services/getUserService";
+import * as actions from "../actions";
+import { IUserData } from "../types";
+import { setUser } from "../slices/userSlice";
 
 function* getUser(action: ReturnType<typeof actions.getUser>) {
   try {
     const { data }: AxiosResponse<IUserData> = yield call(getUserService);
 
-    yield put(sliceActions.setUser({ data }));
+    yield put(setUser({ data }));
   } catch (err) {
     return err;
   }

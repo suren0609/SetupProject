@@ -1,14 +1,14 @@
-import React, { useState, MouseEvent, useRef, useEffect } from "react";
-import styles from "./TaskList.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsUserProfileActive, setTaskDetailsActive } from "store/slices";
+import { CardTemplate } from "components/CardTemplate";
+import { ListActions } from "components/ListActions";
 import { TaskCard } from "components/TaskCard";
 import { UserProfile } from "components/UserProfile";
-import { ListActions } from "components/ListActions";
-import { getPosition, getTemplatePos } from "helpers/getPosition";
-import { CardTemplate } from "components/CardTemplate";
+import { getTemplatePos } from "helpers/getPosition";
 import { getParameters } from "helpers/parametersForPosition";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { userProfileActiveSelector } from "store/selectors";
+import { setIsUserProfileActive } from "store/slices/userPopupSlice";
+import styles from "./TaskList.module.scss";
 
 const TaskList = () => {
   const user = useSelector((state: any) => state.user.user);
@@ -45,7 +45,7 @@ const TaskList = () => {
   };
 
   const changeUserProfileActive = () => {
-    dispatch(setIsUserProfileActive(true));
+    dispatch(setIsUserProfileActive(!isUserProfileActive));
   };
 
   const templateRef = useRef<any>(null);
