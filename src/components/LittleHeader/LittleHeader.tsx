@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "./LittleHeader.module.scss";
+import { useSelector } from "react-redux";
 
 const LittleHeader = () => {
+  const currentBoard = useSelector((state: any) => state.board.currentBoard);
   return (
     <div className={styles.LittleHeader}>
       <div className={styles.littleHeadLeft}>
-        <h4>Tasks</h4>
+        <h4>{currentBoard.name}</h4>
         <i id={styles.star} className="fa-regular fa-star"></i>
         <div className={styles.workspaceVisible}>
           <i className="fa-solid fa-user-group"></i>

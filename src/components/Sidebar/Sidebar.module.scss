@@ -77,16 +77,32 @@
     overflow-y: auto;
     max-height: calc(100vh - 200px);
 
+    h4 {
+      color: #9eacba;
+      padding: 10px;
+      margin: 0;
+    }
+
     .boardName {
       width: 100%;
       padding: 10px;
       background: #282c30;
       margin-bottom: 3px;
       cursor: pointer;
+      text-decoration: none;
+      color: #9eacba;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: 14px;
 
-      a {
-        text-decoration: none;
-        color: #9eacba;
+      .boardNameImg {
+        width: 24px;
+        height: 20px;
+        background-size: cover;
+        background-position: center;
+        margin-right: 10px;
+        border-radius: 3px;
       }
     }
 

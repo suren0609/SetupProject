@@ -8,3 +8,7 @@ export const clearStore = createAction("clearStore");
 export const setBoardAction = createAction<IBoardDataAction>("setBoardAction");
 
 export const getBoardsAction = createAction("getBoardsAction");
+
+export const getOneBoardAction = createAction<{ id: string }>(
+  "getOneBoardAction",
+);

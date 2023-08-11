@@ -6,6 +6,7 @@ export interface IBoardSliceInititalState {
   boardData: IBoardData[];
   createBoardSelect: string;
   currentBg: string;
+  currentBoard: IBoardResponse;
 }
 
 export type PostType = {

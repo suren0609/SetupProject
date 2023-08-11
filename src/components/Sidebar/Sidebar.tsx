@@ -11,16 +11,21 @@ const Sidebar = () => {
   const sidebarActiveHandler = () => {
     setIsActive((prev) => !prev);
   };
-
+  const boards = useSelector((state: any) => state.board.boardData);
   const dispatch = useDispatch();
 
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getBoardsAction());
-  }, []);
+  }, [boards]);
 
-  const boards = useSelector((state: any) => state.board.boardData);
+  // const handleClick = (boardId: number) => {
+  //   boardData.find((board: any) => {
+  //     board.id === boardId;
+  //   })
+  // };
+
   return (
     <div className={isActive ? styles.Sidebar : styles.sideBarNoActive}>
       <div className={styles.sidebarHeader}>
@@ -33,10 +38,15 @@ const Sidebar = () => {
         </button>
       </div>
       <div className={styles.sidebarBody}>
+        <h4>Your boards</h4>
         {boards.map((board: IBoardResponse) => (
-          <div className={styles.boardName} key={board.id}>
-            <Link to={`/${board.id}`}>{board.name}</Link>
-          </div>
+          <Link className={styles.boardName} to={`/${board.id}`} key={board.id}>
+            <div
+              className={styles.boardNameImg}
+              style={{ backgroundImage: `url(${board.background})` }}
+            ></div>
+            <div>{board.name}</div>
+          </Link>
         ))}
       </div>
     </div>

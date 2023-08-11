@@ -54,8 +54,9 @@ const BoardForm = () => {
     dispatch(setBoardPopupRender(CREATE_BOARD.CREATEBOARD));
   };
 
-  const changeBackground = (cn: string) => {
-    dispatch(setCurrentBg(cn));
+  const changeBackground = (bg: string) => {
+    dispatch(setCurrentBg(bg));
+    setFormData({ ...formData, background: bg });
   };
 
   const {
@@ -94,8 +95,8 @@ const BoardForm = () => {
   const navigate = useNavigate();
   const submitForm = (e: any) => {
     e.preventDefault();
-    console.log("submitForm ->", e);
     dispatch(setBoardAction({ board_data: formData, navigate }));
+    dispatch(setCreateBoardActive(false));
   };
 
   return (
