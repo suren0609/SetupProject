@@ -7,6 +7,7 @@ export interface IBoardSliceInititalState {
   createBoardSelect: string;
   currentBg: string;
   currentBoard: IBoardResponse;
+  editableBoard: Partial<IBoardResponse>;
 }
 
 export type PostType = {
@@ -77,5 +78,10 @@ export interface IBoardResponse {
 
 export interface IBoardDataAction {
   board_data: IBoardData;
+  navigate: (to: string, options?: object) => void;
+}
+
+export interface IDeleteBoardAction {
+  id: number;
   navigate: (to: string, options?: object) => void;
 }

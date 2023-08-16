@@ -20,3 +20,5 @@ export const taskCardActiveSelector = (state: any) =>
 
 export const isTaskTemplateSelector = (state: any) =>
   state.tasks.isTaskTemplate;
+export const popupState = (state: any) => state.popup;
+export const boardState = (state: any) => state.board;

@@ -11,6 +11,7 @@ const initialState: IBoardSliceInititalState = {
   createBoardSelect: "Workspace",
   currentBg: bg6,
   currentBoard: { name: "", background: bg1, userId: 0, sortId: 0, id: 0 },
+  editableBoard: {},
 };
 
 export const boardSlice = createSlice({
@@ -29,12 +30,19 @@ export const boardSlice = createSlice({
       state.boardData = [...payload];
     },
     setBoardToBoards: (state, { payload }: PayloadAction<IBoardResponse>) => {
-      state.boardData.push(payload);
+      state.boardData = [...state.boardData, payload];
     },
     setCurrentBoard: (state, { payload }: PayloadAction<IBoardResponse>) => {
-      console.log(payload);
-
       state.currentBoard = payload;
+    },
+    updateBoards: (
+      state,
+      { payload }: PayloadAction<{ index: number; board: IBoardResponse }>,
+    ) => {
+      state.boardData[payload.index] = payload.board;
+    },
+    setEditableBoard: (state, { payload }: PayloadAction<IBoardResponse>) => {
+      state.editableBoard = payload;
     },
   },
 });
@@ -45,4 +53,6 @@ export const {
   setBoard,
   setBoardToBoards,
   setCurrentBoard,
+  updateBoards,
+  setEditableBoard,
 } = boardSlice.actions;

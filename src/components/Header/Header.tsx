@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Header.module.scss";
 import LogoSvg from "components/LogoSvg/LogoSvg";
-import { userSelector } from "store/selectors";
+import { popupState, userSelector } from "store/selectors";
 import { CreateBoard } from "components/CreateBoard";
 import {
   setCreateBoardActive,
@@ -16,14 +16,10 @@ import {
 const Header: FC = () => {
   const dispatch = useDispatch();
 
-  const isMenuActive = useSelector((state: any) => state.popup.isMenuActive);
-  const isProfilePopupActive = useSelector(
-    (state: any) => state.popup.isProfilePopupActive,
-  );
+  const { isMenuActive } = useSelector(popupState);
+  const { isProfilePopupActive } = useSelector(popupState);
 
-  const isCreateBoardActive = useSelector(
-    (state: any) => state.popup.isCreateBoardActive,
-  );
+  const { isCreateBoardActive } = useSelector(popupState);
 
   const btnRef = useRef<HTMLButtonElement>(null);
 

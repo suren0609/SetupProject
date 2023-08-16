@@ -25,22 +25,10 @@ const HomePage = () => {
     dispatch(setAddActive(false));
   };
 
-  const boards = useSelector((state: any) => state.board.boardData);
-  const currentBoard = useSelector((state: any) => state.board.currentBoard);
-
-  // useEffect(() => {
-  //   const curBoard = boards.find(
-  //     (board: IBoardResponse) => board.id === Number(id),
-  //   );
-  //   if (boards.length) {
-  //     dispatch(setCurrentBoard(curBoard));
-  //   }
-  // }, [id, boards]);
-
   return (
     <div className={styles.HomePage} onClick={(e) => menuCloseHandler(e)}>
       <Layout>
-        <HomeBody />
+        <h2>hellooo</h2>
       </Layout>
     </div>
   );

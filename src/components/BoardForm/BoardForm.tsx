@@ -18,27 +18,29 @@ import { CREATE_BOARD } from "store/types";
 import { setCurrentBg } from "store/slices/boardSlice";
 import { createBoardService } from "services/createBoardService";
 import { useNavigate } from "react-router-dom";
-import { setBoardAction } from "store/actions";
+import { changeBoardAction, setBoardAction } from "store/actions";
+import { popupState } from "store/selectors";
 
 const BoardForm = () => {
   const currentBg = useSelector((state: any) => state.board.currentBg);
 
+  const { isEditActive } = useSelector(popupState);
+
+  const { editableBoard } = useSelector((state: any) => state.board);
+
   const [formData, setFormData] = useState({
-    name: "",
-    background: currentBg,
+    name: isEditActive ? editableBoard.name : "",
+    background: isEditActive ? editableBoard.background : currentBg,
+    id: editableBoard.id,
   });
 
-  const isAccessModifierActive = useSelector(
-    (state: any) => state.popup.isAccessModifierPopupActive,
-  );
+  const { isAccessModifierPopupActive } = useSelector(popupState);
 
   const selectedValue = useSelector(
     (state: any) => state.board.createBoardSelect,
   );
 
-  const isBoardBackgroundActive = useSelector(
-    (state: any) => state.popup.isBoardBackgroundActive,
-  );
+  const { isBoardBackgroundActive } = useSelector(popupState);
 
   const dispatch = useDispatch();
 
@@ -55,8 +57,8 @@ const BoardForm = () => {
   };
 
   const changeBackground = (bg: string) => {
-    dispatch(setCurrentBg(bg));
     setFormData({ ...formData, background: bg });
+    dispatch(setCurrentBg(bg));
   };
 
   const {
@@ -81,7 +83,7 @@ const BoardForm = () => {
     e.stopPropagation();
     const { top, left } = selectRef.current!.getBoundingClientRect();
     dispatch(setAccessModifierPos({ top: top + 50, left: left }));
-    dispatch(setAccessModifierActive(!isAccessModifierActive));
+    dispatch(setAccessModifierActive(!isAccessModifierPopupActive));
   };
 
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -99,6 +101,12 @@ const BoardForm = () => {
     dispatch(setCreateBoardActive(false));
   };
 
+  const changeSubmitForm = (e: any) => {
+    e.preventDefault();
+    dispatch(changeBoardAction(formData));
+    dispatch(setCreateBoardActive(false));
+  };
+
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -108,8 +116,15 @@ const BoardForm = () => {
       tabIndex={0}
     >
       <div className={styles.title}>
-        <i onClick={handleBack} className="fa-solid fa-chevron-left"></i>
-        <h4>Create board</h4>
+        {!isEditActive && (
+          <i onClick={handleBack} className="fa-solid fa-chevron-left"></i>
+        )}
+        {isEditActive ? (
+          <h4 style={{ width: "100%", paddingLeft: "100px" }}>Edit board</h4>
+        ) : (
+          <h4>Create board</h4>
+        )}
+
         <i onClick={closeBoardForm} className="fa-solid fa-xmark"></i>
       </div>
       <div
@@ -180,13 +195,14 @@ const BoardForm = () => {
           </button>
         </div>
       </div>
-      <form onSubmit={submitForm}>
+      <form onSubmit={isEditActive ? changeSubmitForm : submitForm}>
         <label htmlFor="boardTitle">Board title</label>
         <input
           {...register("boardTitle", { required: true, maxLength: 30 })}
           type="text"
           name="boardTitle"
           data-name="inputOrButton"
+          value={formData.name}
           className={`${!value && styles.notValid}`}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
@@ -212,7 +228,7 @@ const BoardForm = () => {
           data-name="inputOrButton"
           className={styles.createBtn}
         >
-          Create
+          {isEditActive ? "Update" : "Create"}
         </button>
       </form>
 

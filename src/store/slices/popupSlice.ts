@@ -26,6 +26,15 @@ export const popupSlice = createSlice({
     },
     isProfilePopupActive: false,
     isAddActive: false,
+    closeBoardPopupPos: {
+      top: 0,
+      left: 0,
+      boardName: "",
+      boardId: 0,
+    },
+    isCloseBoardPopupActive: false,
+    isDeleteBoardPopupActive: false,
+    isEditActive: false,
   },
   reducers: {
     setAccessModifierActive: (state, { payload }: PayloadAction<boolean>) => {
@@ -74,6 +83,28 @@ export const popupSlice = createSlice({
     setAddActive: (state, { payload }: PayloadAction<boolean>) => {
       state.isProfilePopupActive = payload;
     },
+    setCloseBoardPopupPos: (
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        top: number;
+        left: number;
+        boardName: string;
+        boardId: number;
+      }>,
+    ) => {
+      state.closeBoardPopupPos = payload;
+    },
+    setCloseBoardPopupActive: (state, { payload }: PayloadAction<boolean>) => {
+      state.isCloseBoardPopupActive = payload;
+    },
+    setDeleteBoardPopupActive: (state, { payload }: PayloadAction<boolean>) => {
+      state.isDeleteBoardPopupActive = payload;
+    },
+    setEditActive: (state, { payload }: PayloadAction<boolean>) => {
+      state.isEditActive = payload;
+    },
   },
 });
 
@@ -88,4 +119,8 @@ export const {
   setIsMenuActive,
   setIsPopupActive,
   setAddActive,
+  setCloseBoardPopupPos,
+  setCloseBoardPopupActive,
+  setDeleteBoardPopupActive,
+  setEditActive,
 } = popupSlice.actions;

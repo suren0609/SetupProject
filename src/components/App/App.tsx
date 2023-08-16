@@ -16,9 +16,9 @@ function App() {
     <div className={styles.leyout_content}>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path="/:id" element={<Board />} />
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/:id" element={<Board />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

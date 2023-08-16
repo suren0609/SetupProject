@@ -6,7 +6,6 @@ export const getOneBoardService = async (id: string) => {
       `https://young-citadel-44598.herokuapp.com/boards/${id}`,
       { withCredentials: true },
     );
-    console.log(data);
 
     return data;
   } catch (err: any) {

@@ -11,7 +11,6 @@ import { getOneBoardAction } from "store/actions";
 const HomeBody: FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(typeof id);
 
   useEffect(() => {
     if (id !== undefined) dispatch(getOneBoardAction({ id }));

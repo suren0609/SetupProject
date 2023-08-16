@@ -7,6 +7,7 @@ import styles from "./Layout.module.scss";
 import { TaskDescription } from "components/TaskDescription";
 import { EditCard } from "components/EditCard";
 import {
+  popupState,
   taskCardActiveSelector,
   taskDetailsActiveSelector,
 } from "store/selectors";
@@ -18,32 +19,30 @@ import {
   setIsMenuActive,
   setIsPopupActive,
 } from "store/slices/popupSlice";
+import { CloseBoard } from "components/CloseBoard";
+import { DeleteBoardPopup } from "components/DeleteBoardPopup";
 
 interface ILayoutProps {
   children: ReactNode;
 }
 
 const Layout: FC<ILayoutProps> = ({ children }) => {
-  const isMenuActive = useSelector((state: any) => state.popup.isMenuActive);
+  const { isMenuActive } = useSelector(popupState);
 
-  const isAccessModifierActive = useSelector(
-    (state: any) => state.popup.isAccessModifierPopupActive,
-  );
+  const { isAccessModifierPopupActive } = useSelector(popupState);
 
-  const isCreateBoardActive = useSelector(
-    (state: any) => state.popup.isCreateBoardActive,
-  );
+  const { isCloseBoardPopupActive } = useSelector(popupState);
 
-  const isBoardBackgroundActive = useSelector(
-    (state: any) => state.popup.isBoardBackgroundActive,
-  );
+  const { isCreateBoardActive } = useSelector(popupState);
+
+  const { isBoardBackgroundActive } = useSelector(popupState);
   const dispatch = useDispatch();
 
-  const isProfilePopupActive = useSelector(
-    (state: any) => state.popup.isProfilePopupActive,
-  );
+  const { isProfilePopupActive } = useSelector(popupState);
 
-  const isAddActive = useSelector((state: any) => state.popup.isAddActive);
+  const { isDeleteBoardPopupActive } = useSelector(popupState);
+
+  const { isAddActive } = useSelector(popupState);
 
   const isTaskDeskActive = useSelector(taskDetailsActiveSelector);
 
@@ -52,6 +51,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
   useEffect(() => {
     dispatch(getUser());
   }, []);
+
   return (
     <>
       <Header />
@@ -62,8 +62,10 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
       {isTaskDeskActive && <TaskDescription />}
       {isTaskCardActive && <EditCard />}
       {isCreateBoardActive && <CreateBoardPopupRender />}
-      {isAccessModifierActive && <AccessModifierPopup />}
+      {isAccessModifierPopupActive && <AccessModifierPopup />}
       {isBoardBackgroundActive && <BoardBackground />}
+      {isCloseBoardPopupActive && <CloseBoard />}
+      {isDeleteBoardPopupActive && <DeleteBoardPopup />}
     </>
   );
 };

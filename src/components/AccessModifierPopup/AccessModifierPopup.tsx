@@ -4,15 +4,14 @@ import styles from "./AccessModifierPopup.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccessModifierActive } from "store/slices/popupSlice";
 import { setBoardSelect } from "store/slices/boardSlice";
+import { boardState } from "store/selectors";
 
 const AccessModifierPopup = () => {
   const { top, left } = useSelector(
     (state: any) => state.popup.accessModifierPos,
   );
 
-  const selectedValue = useSelector(
-    (state: any) => state.board.createBoardSelect,
-  );
+  const { createBoardSelect } = useSelector(boardState);
 
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +45,7 @@ const AccessModifierPopup = () => {
       <div
         onClick={() => changeSelectValue("Private")}
         className={
-          selectedValue === "Private"
+          createBoardSelect === "Private"
             ? `${styles.sections} ${styles.selectActive}`
             : `${styles.sections}`
         }
@@ -60,7 +59,7 @@ const AccessModifierPopup = () => {
       <div
         onClick={() => changeSelectValue("Workspace")}
         className={
-          selectedValue === "Workspace"
+          createBoardSelect === "Workspace"
             ? `${styles.sections} ${styles.selectActive}`
             : `${styles.sections}`
         }
@@ -77,7 +76,7 @@ const AccessModifierPopup = () => {
       <div
         onClick={() => changeSelectValue("Public")}
         className={
-          selectedValue === "Public"
+          createBoardSelect === "Public"
             ? `${styles.sections} ${styles.selectActive}`
             : `${styles.sections}`
         }

@@ -5,23 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setAccessModifierActive,
   setBoardPopupRender,
+  setCloseBoardPopupActive,
   setCreateBoardActive,
+  setEditActive,
 } from "store/slices/popupSlice";
 import { CREATE_BOARD } from "store/types";
 import styles from "./CreateBoardPopupRender.module.scss";
+import { popupState } from "store/selectors";
 
 const CreateBoardPopupRender = () => {
-  const popupChenger = useSelector(
-    (state: any) => state.popup.createBoardPopupRender,
-  );
+  const { createBoardPopupRender } = useSelector(popupState);
 
   const { top, left } = useSelector(
     (state: any) => state.popup.createBoardPopupPos,
   );
 
-  const isBoardBackgroundActive = useSelector(
-    (state: any) => state.popup.isBoardBackgroundActive,
-  );
+  const { isBoardBackgroundActive } = useSelector(popupState);
 
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -43,18 +42,28 @@ const CreateBoardPopupRender = () => {
     }
     dispatch(setCreateBoardActive(false));
     dispatch(setAccessModifierActive(false));
+    dispatch(setEditActive(false));
     dispatch(setBoardPopupRender(CREATE_BOARD.CREATEBOARD));
   };
+
+  const dynamicPos = (myTop: number) => {
+    if (window.innerHeight - myTop - 100 < 600) {
+      myTop -= myTop;
+    }
+    return myTop;
+  };
+
   return (
     <div
       onBlur={closePopup}
       tabIndex={0}
       ref={divRef}
       className={styles.CreateBoardPopupRender}
-      style={{ top: top, left: left }}
+      style={{ top: dynamicPos(top), left: left }}
+      data-name="inputOrButton"
     >
-      {popupChenger === CREATE_BOARD.CREATEBOARD && <CreateBoard />}
-      {popupChenger === CREATE_BOARD.BOARDFORM && <BoardForm />}
+      {createBoardPopupRender === CREATE_BOARD.CREATEBOARD && <CreateBoard />}
+      {createBoardPopupRender === CREATE_BOARD.BOARDFORM && <BoardForm />}
     </div>
   );
 };

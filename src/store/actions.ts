@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { IBoardData, IBoardDataAction } from "./types";
+import { IBoardData, IBoardDataAction, IDeleteBoardAction } from "./types";
 
 export const getUser = createAction("getUser");
 
@@ -12,3 +12,8 @@ export const getBoardsAction = createAction("getBoardsAction");
 export const getOneBoardAction = createAction<{ id: string }>(
   "getOneBoardAction",
 );
+
+export const deleteBoardAction =
+  createAction<IDeleteBoardAction>("deleteBoardAction");
+
+export const changeBoardAction = createAction<IBoardData>("changeBoardAction");
