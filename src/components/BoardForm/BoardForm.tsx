@@ -1,11 +1,12 @@
-import React, { useState, MouseEvent, useRef, FC, useEffect } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 
-import styles from "./BoardForm.module.scss";
-import { CreateBoard } from "components/CreateBoard";
 import { bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9 } from "imagesUrls";
-import classNames from "classnames";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { changeBoardAction, setBoardAction } from "store/actions";
+import { popupState } from "store/selectors";
+import { setCurrentBg } from "store/slices/boardSlice";
 import {
   setAccessModifierActive,
   setAccessModifierPos,
@@ -15,14 +16,21 @@ import {
   setCreateBoardActive,
 } from "store/slices/popupSlice";
 import { CREATE_BOARD } from "store/types";
-import { setCurrentBg } from "store/slices/boardSlice";
-import { createBoardService } from "services/createBoardService";
-import { useNavigate } from "react-router-dom";
-import { changeBoardAction, setBoardAction } from "store/actions";
-import { popupState } from "store/selectors";
+import styles from "./BoardForm.module.scss";
+
+interface BoardFormData {
+  boardTitle: string;
+}
 
 const BoardForm = () => {
   const currentBg = useSelector((state: any) => state.board.currentBg);
+  const dispatch = useDispatch();
+
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  const divRef = useRef<HTMLDivElement>(null);
+
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   const { isEditActive } = useSelector(popupState);
 
@@ -41,8 +49,6 @@ const BoardForm = () => {
   );
 
   const { isBoardBackgroundActive } = useSelector(popupState);
-
-  const dispatch = useDispatch();
 
   const handleBack = () => {
     dispatch(setBoardPopupRender(CREATE_BOARD.CREATEBOARD));
@@ -69,12 +75,6 @@ const BoardForm = () => {
     watch,
   } = useForm();
 
-  const value = watch("boardTitle");
-
-  const selectRef = useRef<HTMLDivElement>(null);
-
-  const divRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     divRef.current?.focus();
   }, []);
@@ -86,26 +86,49 @@ const BoardForm = () => {
     dispatch(setAccessModifierActive(!isAccessModifierPopupActive));
   };
 
-  const btnRef = useRef<HTMLButtonElement>(null);
-
   const BoardBackgroundPopupHandler = () => {
     const { top, left } = btnRef.current!.getBoundingClientRect();
-    dispatch(setBoardBackgroundPos({ top: top, left: left }));
+    if (left + 350 > window.innerWidth) {
+      dispatch(setBoardBackgroundPos({ top: top, left: left - 350 }));
+    } else {
+      dispatch(setBoardBackgroundPos({ top: top, left: left }));
+    }
+
     dispatch(setBoardBackgroundActive(!isBoardBackgroundActive));
   };
 
   const navigate = useNavigate();
-  const submitForm = (e: any) => {
-    e.preventDefault();
-    dispatch(setBoardAction({ board_data: formData, navigate }));
+
+  const submitForm: SubmitHandler<FieldValues> = (data) => {
+    // e.preventDefault();
+
+    dispatch(
+      setBoardAction({
+        board_data: {
+          name: data.boardTitle,
+          background: currentBg,
+        },
+        navigate,
+      }),
+    );
     dispatch(setCreateBoardActive(false));
+    dispatch(setBoardBackgroundActive(false));
   };
 
-  const changeSubmitForm = (e: any) => {
-    e.preventDefault();
-    dispatch(changeBoardAction(formData));
+  const changeSubmitForm: SubmitHandler<FieldValues> = (data) => {
+    // e.preventDefault();
+    dispatch(
+      changeBoardAction({
+        name: data.boardTitle,
+        background: currentBg,
+        id: editableBoard.id,
+      }),
+    );
     dispatch(setCreateBoardActive(false));
+    dispatch(setBoardBackgroundActive(false));
   };
+
+  const value = watch("boardTitle");
 
   return (
     <div
@@ -195,16 +218,15 @@ const BoardForm = () => {
           </button>
         </div>
       </div>
-      <form onSubmit={isEditActive ? changeSubmitForm : submitForm}>
+      <form
+        onSubmit={handleSubmit(isEditActive ? changeSubmitForm : submitForm)}
+      >
         <label htmlFor="boardTitle">Board title</label>
         <input
           {...register("boardTitle", { required: true, maxLength: 30 })}
           type="text"
-          name="boardTitle"
           data-name="inputOrButton"
-          value={formData.name}
           className={`${!value && styles.notValid}`}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
         {!value && (
           <p>

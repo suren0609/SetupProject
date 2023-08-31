@@ -87,8 +87,6 @@
       width: 100%;
       height: 35px;
       padding: 3px 10px;
-      background: #282c30;
-      margin-bottom: 3px;
       cursor: pointer;
       text-decoration: none;
       color: #9eacba;
@@ -126,6 +124,10 @@
 
     .boardName:hover .menuAndStar {
       display: flex;
+    }
+
+    .boardName.active {
+      background: #40474d;
     }
 
     .currentBoardName {

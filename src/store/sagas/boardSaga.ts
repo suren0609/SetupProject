@@ -1,6 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { log } from "console";
+import { toastParameters } from "helpers/toastAlertParams";
 import { bg1 } from "imagesUrls";
+import { toast } from "react-toastify";
 import { call, put, select, takeLatest } from "redux-saga/effects";
 import { changeBoardService } from "services/changeBoardService";
 import { createBoardService } from "services/createBoardService";
@@ -21,7 +22,6 @@ import {
   updateBoards,
 } from "store/slices/boardSlice";
 import {
-  IBoardData,
   IBoardDataAction,
   IBoardResponse,
   IDeleteBoardAction,
@@ -34,8 +34,10 @@ function* setBoardSaga(action: PayloadAction<IBoardDataAction>) {
       action.payload.board_data,
     );
     yield put(setBoardToBoards(data));
-    action.payload.navigate(`/${data.id}`);
+    toast.success("New board created successfuly!", toastParameters);
+    action.payload.navigate(`/board/${data.id}`);
   } catch (e: any) {
+    toast.success("Creating failed!", toastParameters);
     return e.message;
   }
 }
@@ -92,12 +94,17 @@ function* deleteSaga(action: PayloadAction<IDeleteBoardAction>) {
 function* changeSaga(action: PayloadAction<IBoardResponse>) {
   try {
     const data: IBoardResponse = yield call(changeBoardService, action.payload);
-    const { editableBoard, boardData } = yield select((state) => state.board);
+    const { editableBoard, boardData, currentBoard } = yield select(
+      (state) => state.board,
+    );
     const index = boardData.indexOf(editableBoard);
 
     console.log(data);
 
     yield put(updateBoards({ index, board: data }));
+    if (currentBoard.id === action.payload.id) {
+      yield put(setCurrentBoard(data));
+    }
   } catch (err) {
     return err;
   }

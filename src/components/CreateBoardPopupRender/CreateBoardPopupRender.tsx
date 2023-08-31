@@ -1,17 +1,16 @@
 import { BoardForm } from "components/BoardForm";
 import CreateBoard from "components/CreateBoard/CreateBoard";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { popupState } from "store/selectors";
 import {
   setAccessModifierActive,
   setBoardPopupRender,
-  setCloseBoardPopupActive,
   setCreateBoardActive,
   setEditActive,
 } from "store/slices/popupSlice";
 import { CREATE_BOARD } from "store/types";
 import styles from "./CreateBoardPopupRender.module.scss";
-import { popupState } from "store/selectors";
 
 const CreateBoardPopupRender = () => {
   const { createBoardPopupRender } = useSelector(popupState);
@@ -19,14 +18,15 @@ const CreateBoardPopupRender = () => {
   const { top, left } = useSelector(
     (state: any) => state.popup.createBoardPopupPos,
   );
+  const { isCreateBoardActive } = useSelector(popupState);
 
   const { isBoardBackgroundActive } = useSelector(popupState);
 
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    divRef.current?.focus();
-  }, []);
+    if (isCreateBoardActive) divRef.current?.focus();
+  }, [isCreateBoardActive]);
 
   useEffect(() => {
     if (isBoardBackgroundActive === false) {
@@ -54,17 +54,23 @@ const CreateBoardPopupRender = () => {
   };
 
   return (
-    <div
-      onBlur={closePopup}
-      tabIndex={0}
-      ref={divRef}
-      className={styles.CreateBoardPopupRender}
-      style={{ top: dynamicPos(top), left: left }}
-      data-name="inputOrButton"
-    >
-      {createBoardPopupRender === CREATE_BOARD.CREATEBOARD && <CreateBoard />}
-      {createBoardPopupRender === CREATE_BOARD.BOARDFORM && <BoardForm />}
-    </div>
+    <>
+      {isCreateBoardActive ? (
+        <div
+          onBlur={closePopup}
+          tabIndex={0}
+          ref={divRef}
+          className={styles.CreateBoardPopupRender}
+          style={{ top: dynamicPos(top), left: left }}
+          data-name="inputOrButton"
+        >
+          {createBoardPopupRender === CREATE_BOARD.CREATEBOARD && (
+            <CreateBoard />
+          )}
+          {createBoardPopupRender === CREATE_BOARD.BOARDFORM && <BoardForm />}
+        </div>
+      ) : null}
+    </>
   );
 };
 

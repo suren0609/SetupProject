@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./Sidebar.module.scss";
-import { NavLink as Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IBoardResponse } from "store/types";
+import { NavLink as Link, useNavigate } from "react-router-dom";
 import { getBoardsAction } from "store/actions";
+import { setEditableBoard } from "store/slices/boardSlice";
 import {
   setCloseBoardPopupActive,
   setCloseBoardPopupPos,
 } from "store/slices/popupSlice";
-import { setEditableBoard } from "store/slices/boardSlice";
+import { IBoardResponse } from "store/types";
+import styles from "./Sidebar.module.scss";
 
 const Sidebar = () => {
   const [isActive, setIsActive] = useState(true);
@@ -22,9 +22,6 @@ const Sidebar = () => {
   const isCloseBoardPopupActive = useSelector(
     (state: any) => state.popup.isCloseBoardPopupActive,
   );
-
-  const navigate = useNavigate();
-  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getBoardsAction());
@@ -48,10 +45,6 @@ const Sidebar = () => {
     dispatch(setCloseBoardPopupActive(!isCloseBoardPopupActive));
   };
 
-  const routeOnClick = (path: number) => {
-    navigate(`/${path}`);
-  };
-
   return (
     <div className={isActive ? styles.Sidebar : styles.sideBarNoActive}>
       <div className={styles.sidebarHeader}>
@@ -67,12 +60,12 @@ const Sidebar = () => {
       <div className={styles.sidebarBody}>
         <h4>Your boards</h4>
         {boardData.map((board: IBoardResponse) => (
-          <div
-            onClick={() => routeOnClick(board.id)}
-            className={
-              board.id === Number(id)
-                ? `${styles.boardName} ${styles.currentBoardName}`
-                : styles.boardName
+          <Link
+            to={`/board/${board.id}`}
+            className={({ isActive }) =>
+              isActive
+                ? `${styles.boardName} ${styles.active}`
+                : `${styles.boardName}`
             }
             key={board.id}
           >
@@ -92,7 +85,7 @@ const Sidebar = () => {
               ></i>
               <i className="fa-regular fa-star"></i>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

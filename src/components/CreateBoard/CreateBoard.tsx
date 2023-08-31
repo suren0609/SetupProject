@@ -1,18 +1,17 @@
-import React, { FC, useEffect, useRef, useState } from "react";
-
-import styles from "./CreateBoard.module.scss";
-import { BoardForm } from "components/BoardForm";
 import { useDispatch } from "react-redux";
 import {
   setBoardPopupRender,
   setCreateBoardActive,
+  setEditActive,
 } from "store/slices/popupSlice";
 import { CREATE_BOARD } from "store/types";
+import styles from "./CreateBoard.module.scss";
 
 const CreateBoard = () => {
   const dispatch = useDispatch();
 
   const createBoardActive = () => {
+    dispatch(setEditActive(false));
     dispatch(setBoardPopupRender(CREATE_BOARD.BOARDFORM));
   };
 
@@ -21,12 +20,7 @@ const CreateBoard = () => {
   };
 
   return (
-    <div
-      onClick={(e) => e.stopPropagation()}
-      // onBlur={closeCreateBoard}
-      // tabIndex={0}
-      className={styles.CreateBoard}
-    >
+    <div onClick={(e) => e.stopPropagation()} className={styles.CreateBoard}>
       <div onClick={createBoardActive} className={styles.sections}>
         <h6>
           <i className="fa-brands fa-trello"></i> Create board

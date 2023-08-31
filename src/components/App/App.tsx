@@ -1,27 +1,29 @@
-import { Route, Routes } from "react-router-dom";
-import { HomePage } from "../../pages/HomePage";
-import { LoginPage } from "../../pages/LoginPage";
-import { RegisterPage } from "../../pages/RegisterPage";
+import { AccessModifierPopup } from "components/AccessModifierPopup";
+import { BoardBackground } from "components/BoardBackground";
+import { CloseBoard } from "components/CloseBoard";
+import { CreateBoardPopupRender } from "components/CreateBoardPopupRender";
+import { DeleteBoardPopup } from "components/DeleteBoardPopup";
+import { EditCard } from "components/EditCard";
+import { Layout } from "components/Layout";
+import RoutesComponent from "components/RoutesComponent/RoutesComponent";
+import { TaskDescription } from "components/TaskDescription";
 import { ToastContainer } from "react-toastify";
-import { ProtectedAuth } from "hoc/ProtectedAuth";
 import styles from "./App.module.scss";
-import { Board } from "components/Board";
 
 function App() {
-  const Home = ProtectedAuth(HomePage, "/login");
-  const Login = ProtectedAuth(LoginPage, "/");
-  const Register = ProtectedAuth(RegisterPage, "/");
-
   return (
     <div className={styles.leyout_content}>
       <ToastContainer />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:id" element={<Board />} />
-
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <Layout>
+        <RoutesComponent />
+      </Layout>
+      <TaskDescription />
+      <EditCard />
+      <CreateBoardPopupRender />
+      <AccessModifierPopup />
+      <BoardBackground />
+      <CloseBoard />
+      <DeleteBoardPopup />
     </div>
   );
 }

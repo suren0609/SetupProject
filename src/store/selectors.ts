@@ -1,3 +1,4 @@
+import { RootState } from "store";
 import { IState } from "./types";
 
 export const stateSelector = (state: IState) => state;
@@ -20,5 +21,5 @@ export const taskCardActiveSelector = (state: any) =>
 
 export const isTaskTemplateSelector = (state: any) =>
   state.tasks.isTaskTemplate;
-export const popupState = (state: any) => state.popup;
+export const popupState = (state: RootState) => state.popup;
 export const boardState = (state: any) => state.board;

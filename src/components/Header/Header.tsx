@@ -1,17 +1,18 @@
-import React, { FC, useRef, useState } from "react";
-import { logoutUser } from "services/logout";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./Header.module.scss";
 import LogoSvg from "components/LogoSvg/LogoSvg";
+import React, { FC, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import { logoutUser } from "services/logout";
 import { popupState, userSelector } from "store/selectors";
-import { CreateBoard } from "components/CreateBoard";
 import {
   setCreateBoardActive,
   setCreateBoardPopupPos,
   setIsMenuActive,
   setIsPopupActive,
 } from "store/slices/popupSlice";
+import { setToken } from "store/slices/userSlice";
+import styles from "./Header.module.scss";
 
 const Header: FC = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const Header: FC = () => {
   const { isProfilePopupActive } = useSelector(popupState);
 
   const { isCreateBoardActive } = useSelector(popupState);
+
+  const isLoading = useSelector((state: any) => state.isLoading);
 
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -68,6 +71,9 @@ const Header: FC = () => {
 
   const handleLogout = async () => {
     await logoutUser();
+
+    dispatch(setToken(""));
+    ChangeprofilePopupState();
     navigate("login");
   };
 
@@ -130,7 +136,11 @@ const Header: FC = () => {
             onClick={(e) => profilePopupHandler(e)}
           >
             <div className={styles.userAva}>
-              {`${user.firstname[0]}${user.lastname[0]}`}
+              {!isLoading ? (
+                <ClipLoader color="#1c2422" loading={!isLoading} />
+              ) : (
+                `${user.firstname[0]}${user.lastname[0]}`
+              )}
             </div>
             <div
               className={styles.profilePopup}

@@ -11,12 +11,16 @@ export const userSlice = createSlice({
       age: "",
       gender: "",
     },
+    token: "",
   },
   reducers: {
     setUser: (state, { payload }: PayloadAction<{ data: IUserData }>) => {
       state.user = { ...payload.data };
     },
+    setToken: (state, { payload }: PayloadAction<string>) => {
+      state.token = payload;
+    },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setToken } = userSlice.actions;

@@ -81,7 +81,7 @@ export const popupSlice = createSlice({
       state.isProfilePopupActive = payload;
     },
     setAddActive: (state, { payload }: PayloadAction<boolean>) => {
-      state.isProfilePopupActive = payload;
+      state.isAddActive = payload;
     },
     setCloseBoardPopupPos: (
       state,
