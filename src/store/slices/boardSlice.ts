@@ -12,6 +12,7 @@ const initialState: IBoardSliceInititalState = {
   currentBg: bg6,
   currentBoard: { name: "", background: bg1, userId: 0, sortId: 0, id: 0 },
   editableBoard: {},
+  createBoardLoading: false,
 };
 
 export const boardSlice = createSlice({
@@ -44,6 +45,9 @@ export const boardSlice = createSlice({
     setEditableBoard: (state, { payload }: PayloadAction<IBoardResponse>) => {
       state.editableBoard = payload;
     },
+    setCreateBoardLoading: (state, { payload }: PayloadAction<boolean>) => {
+      state.createBoardLoading = payload;
+    },
   },
 });
 
@@ -55,4 +59,5 @@ export const {
   setCurrentBoard,
   updateBoards,
   setEditableBoard,
+  setCreateBoardLoading,
 } = boardSlice.actions;

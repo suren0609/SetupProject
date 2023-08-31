@@ -8,6 +8,7 @@ export interface IBoardSliceInititalState {
   currentBg: string;
   currentBoard: IBoardResponse;
   editableBoard: Partial<IBoardResponse>;
+  createBoardLoading: boolean;
 }
 
 export type PostType = {

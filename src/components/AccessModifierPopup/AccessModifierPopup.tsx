@@ -19,12 +19,12 @@ const AccessModifierPopup = () => {
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    divRef.current?.focus();
-  }, []);
+    if (isAccessModifierPopupActive) divRef.current?.focus();
+  }, [isAccessModifierPopupActive]);
 
   const closePopup = (e: React.FocusEvent<HTMLElement>) => {
     const relatedTarget = e.relatedTarget as HTMLElement;
-    if (relatedTarget.dataset?.name === "inputOrButton") {
+    if (relatedTarget?.dataset?.name === "inputOrButton") {
       return;
     }
     dispatch(setAccessModifierActive(false));

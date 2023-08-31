@@ -130,6 +130,12 @@
       background: #40474d;
     }
 
+    .boardName.editable {
+      .menuAndStar {
+        display: flex;
+      }
+    }
+
     .currentBoardName {
       background: #40474d;
 

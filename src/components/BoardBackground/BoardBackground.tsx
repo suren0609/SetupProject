@@ -33,7 +33,7 @@ const BoardBackground = () => {
   };
 
   const closeBackgrounds = (e: any) => {
-    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+    if (e.relatedTarget?.dataset?.name === "inputOrButton1") {
       return;
     }
     dispatch(setBoardBackgroundActive(false));
@@ -43,7 +43,7 @@ const BoardBackground = () => {
 
   useEffect(() => {
     backgroundsRef.current?.focus();
-  }, []);
+  }, [isBoardBackgroundActive]);
 
   return (
     <>
@@ -54,7 +54,7 @@ const BoardBackground = () => {
           style={{ top: top - 200, left: left + 50 }}
           ref={backgroundsRef}
           tabIndex={0}
-          data-name="inputOrButton"
+          data-name="inputOrButton1"
         >
           <div className={styles.title}>
             <h4>Board background</h4>

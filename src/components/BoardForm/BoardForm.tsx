@@ -17,6 +17,7 @@ import {
 } from "store/slices/popupSlice";
 import { CREATE_BOARD } from "store/types";
 import styles from "./BoardForm.module.scss";
+import Loading from "components/Loading/Loading";
 
 interface BoardFormData {
   boardTitle: string;
@@ -34,7 +35,9 @@ const BoardForm = () => {
 
   const { isEditActive } = useSelector(popupState);
 
-  const { editableBoard } = useSelector((state: any) => state.board);
+  const { editableBoard, createBoardLoading } = useSelector(
+    (state: any) => state.board,
+  );
 
   const [formData, setFormData] = useState({
     name: isEditActive ? editableBoard.name : "",
@@ -55,7 +58,10 @@ const BoardForm = () => {
   };
 
   const closeBoardForm = (e: any) => {
-    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+    if (
+      e.relatedTarget?.dataset?.name === "inputOrButton" ||
+      e.relatedTarget?.dataset?.name === "inputOrButton1"
+    ) {
       return;
     }
     dispatch(setCreateBoardActive(false));
@@ -111,7 +117,6 @@ const BoardForm = () => {
         navigate,
       }),
     );
-    dispatch(setCreateBoardActive(false));
     dispatch(setBoardBackgroundActive(false));
   };
 
@@ -133,7 +138,7 @@ const BoardForm = () => {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      data-name="inputOrButton"
+      data-name="inputOrButton1"
       className={styles.BoardForm}
       ref={divRef}
       tabIndex={0}
@@ -212,7 +217,7 @@ const BoardForm = () => {
             onClick={BoardBackgroundPopupHandler}
             ref={btnRef}
             className={styles.more}
-            data-name="inputOrButton"
+            data-name="inputOrButton1"
           >
             <i className="fa-solid fa-ellipsis"></i>
           </button>
@@ -245,12 +250,15 @@ const BoardForm = () => {
           <i data-name="inputOrButton" className="fa-solid fa-chevron-down"></i>
         </div>
         <button
-          disabled={!value}
+          disabled={!value || createBoardLoading}
           type="submit"
           data-name="inputOrButton"
           className={styles.createBtn}
         >
           {isEditActive ? "Update" : "Create"}
+          <div className={styles.loadingEl}>
+            {createBoardLoading && <Loading />}
+          </div>
         </button>
       </form>
 

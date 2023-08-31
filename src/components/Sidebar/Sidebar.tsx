@@ -16,7 +16,7 @@ const Sidebar = () => {
   const sidebarActiveHandler = () => {
     setIsActive((prev) => !prev);
   };
-  const { boardData } = useSelector((state: any) => state.board);
+  const { boardData, editableBoard } = useSelector((state: any) => state.board);
   const dispatch = useDispatch();
 
   const isCloseBoardPopupActive = useSelector(
@@ -63,8 +63,12 @@ const Sidebar = () => {
           <Link
             to={`/board/${board.id}`}
             className={({ isActive }) =>
-              isActive
+              isActive && editableBoard.name === board.name
+                ? `${styles.boardName} ${styles.active}  ${styles.editable}`
+                : isActive
                 ? `${styles.boardName} ${styles.active}`
+                : editableBoard.name === board.name
+                ? `${styles.boardName} ${styles.editable}`
                 : `${styles.boardName}`
             }
             key={board.id}

@@ -18,9 +18,11 @@ import {
 import {
   setBoard,
   setBoardToBoards,
+  setCreateBoardLoading,
   setCurrentBoard,
   updateBoards,
 } from "store/slices/boardSlice";
+import { setCreateBoardActive } from "store/slices/popupSlice";
 import {
   IBoardDataAction,
   IBoardResponse,
@@ -29,14 +31,18 @@ import {
 
 function* setBoardSaga(action: PayloadAction<IBoardDataAction>) {
   try {
+    yield put(setCreateBoardLoading(true));
     const data: IBoardResponse = yield call(
       createBoardService,
       action.payload.board_data,
     );
     yield put(setBoardToBoards(data));
+    yield put(setCreateBoardLoading(false));
+    yield put(setCreateBoardActive(false));
     toast.success("New board created successfuly!", toastParameters);
     action.payload.navigate(`/board/${data.id}`);
   } catch (e: any) {
+    yield put(setCreateBoardLoading(false));
     toast.success("Creating failed!", toastParameters);
     return e.message;
   }
@@ -93,19 +99,20 @@ function* deleteSaga(action: PayloadAction<IDeleteBoardAction>) {
 
 function* changeSaga(action: PayloadAction<IBoardResponse>) {
   try {
+    yield put(setCreateBoardLoading(true));
     const data: IBoardResponse = yield call(changeBoardService, action.payload);
     const { editableBoard, boardData, currentBoard } = yield select(
       (state) => state.board,
     );
     const index = boardData.indexOf(editableBoard);
 
-    console.log(data);
-
     yield put(updateBoards({ index, board: data }));
+    yield put(setCreateBoardLoading(false));
     if (currentBoard.id === action.payload.id) {
       yield put(setCurrentBoard(data));
     }
   } catch (err) {
+    yield put(setCreateBoardLoading(false));
     return err;
   }
 }

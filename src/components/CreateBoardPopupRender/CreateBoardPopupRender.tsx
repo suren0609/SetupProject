@@ -37,7 +37,10 @@ const CreateBoardPopupRender = () => {
   const dispatch = useDispatch();
 
   const closePopup = (e: any) => {
-    if (e.relatedTarget?.dataset?.name === "inputOrButton") {
+    if (
+      e.relatedTarget?.dataset?.name === "inputOrButton" ||
+      e.relatedTarget?.dataset?.name === "inputOrButton1"
+    ) {
       return;
     }
     dispatch(setCreateBoardActive(false));

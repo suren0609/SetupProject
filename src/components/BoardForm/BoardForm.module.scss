@@ -225,9 +225,17 @@
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      position: relative;
 
       &:disabled {
         background: #3c4247;
+      }
+
+      .loadingEl {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }

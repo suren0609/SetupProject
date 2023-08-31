@@ -1,19 +1,12 @@
 import { HomeBody } from "components/HomeBody";
+import Loading from "components/Loading/Loading";
 import { useSelector } from "react-redux";
 import { ClipLoader } from "react-spinners";
 
 const Board = () => {
   const isLoading = useSelector((state: any) => state.isLoading);
 
-  return (
-    <>
-      {!isLoading ? (
-        <ClipLoader color="#1c2422" loading={!isLoading} />
-      ) : (
-        <HomeBody />
-      )}
-    </>
-  );
+  return <>{!isLoading ? <Loading /> : <HomeBody />}</>;
 };
 
 export default Board;
