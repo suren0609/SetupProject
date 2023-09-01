@@ -63,11 +63,11 @@ const Sidebar = () => {
           <Link
             to={`/board/${board.id}`}
             className={({ isActive }) =>
-              isActive && editableBoard.name === board.name
+              isActive && editableBoard.id === board.id
                 ? `${styles.boardName} ${styles.active}  ${styles.editable}`
                 : isActive
                 ? `${styles.boardName} ${styles.active}`
-                : editableBoard.name === board.name
+                : editableBoard.id === board.id
                 ? `${styles.boardName} ${styles.editable}`
                 : `${styles.boardName}`
             }

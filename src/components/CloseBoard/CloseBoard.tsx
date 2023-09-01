@@ -31,8 +31,6 @@ const CloseBoard = () => {
   const dispatch = useDispatch();
 
   const onBlurCloseBoardPopup = (e: any) => {
-    console.log(e);
-
     if (
       e.relatedTarget?.dataset?.name === "inputOrButton" ||
       e.relatedTarget?.dataset?.name === boardName

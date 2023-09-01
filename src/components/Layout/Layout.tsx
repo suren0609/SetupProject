@@ -32,15 +32,15 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
   return (
     <>
       {token?.length ? (
-        <>
+        <div className={styles.container}>
           <Header />
           <div className={styles.HomeBodyContainer}>
             <Sidebar />
             {children}
           </div>
-        </>
+        </div>
       ) : (
-        <>{children}</>
+        <div className={styles.container}>{children}</div>
       )}
     </>
   );

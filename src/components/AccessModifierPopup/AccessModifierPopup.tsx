@@ -2,7 +2,10 @@ import React, { useEffect, useRef } from "react";
 
 import styles from "./AccessModifierPopup.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setAccessModifierActive } from "store/slices/popupSlice";
+import {
+  setAccessModifierActive,
+  setCreateBoardActive,
+} from "store/slices/popupSlice";
 import { setBoardSelect } from "store/slices/boardSlice";
 import { boardState, popupState } from "store/selectors";
 
@@ -26,8 +29,12 @@ const AccessModifierPopup = () => {
     const relatedTarget = e.relatedTarget as HTMLElement;
     if (relatedTarget?.dataset?.name === "inputOrButton") {
       return;
+    } else if (relatedTarget?.dataset?.name === "inputOrButton1") {
+      dispatch(setAccessModifierActive(false));
+    } else {
+      dispatch(setAccessModifierActive(false));
+      dispatch(setCreateBoardActive(false));
     }
-    dispatch(setAccessModifierActive(false));
   };
 
   const changeSelectValue = (value: string) => {
