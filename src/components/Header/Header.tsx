@@ -43,7 +43,7 @@ const Header: FC = () => {
         );
   };
 
-  const ChangeprofilePopupState = () => {
+  const ChangeProfilePopupState = () => {
     dispatch(setIsPopupActive(!isProfilePopupActive));
     dispatch(setIsMenuActive({ rightMenu: false, leftMenu: false }));
   };
@@ -64,7 +64,7 @@ const Header: FC = () => {
 
   const profilePopupHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    ChangeprofilePopupState();
+    ChangeProfilePopupState();
   };
 
   const navigate = useNavigate();
@@ -72,8 +72,8 @@ const Header: FC = () => {
   const handleLogout = async () => {
     await logoutUser();
 
-    dispatch(setToken(""));
-    ChangeprofilePopupState();
+    dispatch(setToken(null));
+    ChangeProfilePopupState();
     navigate("login");
   };
 

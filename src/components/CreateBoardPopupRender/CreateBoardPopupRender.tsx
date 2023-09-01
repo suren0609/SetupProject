@@ -57,7 +57,7 @@ const CreateBoardPopupRender = () => {
   };
 
   return (
-    <>
+    <div>
       {isCreateBoardActive ? (
         <div
           onBlur={closePopup}
@@ -73,7 +73,7 @@ const CreateBoardPopupRender = () => {
           {createBoardPopupRender === CREATE_BOARD.BOARDFORM && <BoardForm />}
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 

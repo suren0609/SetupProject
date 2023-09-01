@@ -106,8 +106,6 @@ const BoardForm = () => {
   const navigate = useNavigate();
 
   const submitForm: SubmitHandler<FieldValues> = (data) => {
-    // e.preventDefault();
-
     dispatch(
       setBoardAction({
         board_data: {
@@ -121,7 +119,6 @@ const BoardForm = () => {
   };
 
   const changeSubmitForm: SubmitHandler<FieldValues> = (data) => {
-    // e.preventDefault();
     dispatch(
       changeBoardAction({
         name: data.boardTitle,

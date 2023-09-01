@@ -21,7 +21,7 @@ const DeleteBoardPopup = () => {
     dispatch(setDeleteBoardPopupActive(false));
   };
   return (
-    <>
+    <div>
       {isDeleteBoardPopupActive ? (
         <div onClick={closePopup} className={styles.container}>
           <div className={styles.DeleteBoardPopup}>
@@ -45,7 +45,7 @@ const DeleteBoardPopup = () => {
           </div>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 

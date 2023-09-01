@@ -62,7 +62,7 @@ const EditCard = () => {
   };
 
   return (
-    <>
+    <div>
       {isTaskCardActive ? (
         <div onClick={hidePopup} className={styles.container}>
           <div
@@ -154,7 +154,7 @@ const EditCard = () => {
           </div>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 

@@ -11,6 +11,17 @@ export interface IBoardSliceInititalState {
   createBoardLoading: boolean;
 }
 
+export interface IUserSliceInititalState {
+  user: {
+    firstname: string;
+    lastname: string;
+    email: string;
+    age: string;
+    gender: string;
+  };
+  token: null | string;
+}
+
 export type PostType = {
   userId: number;
   id: number;

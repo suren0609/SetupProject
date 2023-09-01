@@ -30,7 +30,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
   }, [token]);
 
   return (
-    <>
+    <div className={styles.container}>
       {token?.length ? (
         <div className={styles.container}>
           <Header />
@@ -42,7 +42,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
       ) : (
         <div className={styles.container}>{children}</div>
       )}
-    </>
+    </div>
   );
 };
 
