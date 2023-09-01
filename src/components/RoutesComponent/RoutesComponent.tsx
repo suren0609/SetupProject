@@ -1,4 +1,4 @@
-import { Board } from "components/Board";
+import Board from "components/Board/Board";
 import { ProtectedAuth } from "hoc/ProtectedAuth";
 import { HomePage } from "pages/HomePage";
 import { LoginPage } from "pages/LoginPage";

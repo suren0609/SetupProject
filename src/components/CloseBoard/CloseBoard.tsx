@@ -32,7 +32,7 @@ const CloseBoard = () => {
 
   const onBlurCloseBoardPopup = (e: any) => {
     if (
-      e.relatedTarget?.dataset?.name === "inputOrButton" ||
+      e.relatedTarget?.dataset?.name === "inputOrButton1" ||
       e.relatedTarget?.dataset?.name === boardName
     ) {
       return;
@@ -121,7 +121,7 @@ const CloseBoard = () => {
                 </p>
                 <button
                   onClick={closeBoardHandler}
-                  data-name="inputOrButton"
+                  data-name="inputOrButton1"
                   className={styles.closeBtn}
                 >
                   Close

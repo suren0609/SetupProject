@@ -9,6 +9,7 @@ export interface IBoardSliceInititalState {
   currentBoard: IBoardResponse;
   editableBoard: Partial<IBoardResponse>;
   createBoardLoading: boolean;
+  getBoardsLoading: boolean;
 }
 
 export interface IUserSliceInititalState {

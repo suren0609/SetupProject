@@ -18,6 +18,7 @@ import {
 import {
   setBoard,
   setBoardToBoards,
+  setBoardsLoading,
   setCreateBoardLoading,
   setCurrentBoard,
   updateBoards,
@@ -50,9 +51,13 @@ function* setBoardSaga(action: PayloadAction<IBoardDataAction>) {
 
 function* getBoardSaga(action: any) {
   try {
+    console.log("saga");
+
+    put(setBoardsLoading(true));
     const { data } = yield call(getBoardsService);
 
     yield put(setBoard(data));
+    put(setBoardsLoading(false));
   } catch (err) {
     return err;
   }
@@ -60,7 +65,13 @@ function* getBoardSaga(action: any) {
 
 function* getOneSaga(action: PayloadAction<{ id: string }>) {
   try {
+    const { boardData } = yield select((state) => state.board);
+    const prevBoard = boardData.find(
+      (board: IBoardResponse) => board.id === Number(action.payload.id),
+    );
+    yield put(setCurrentBoard(prevBoard));
     const { data } = yield call(getOneBoardService, action.payload.id);
+
     yield put(setCurrentBoard(data));
   } catch (err) {
     return err;
