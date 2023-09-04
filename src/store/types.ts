@@ -10,6 +10,7 @@ export interface IBoardSliceInititalState {
   editableBoard: Partial<IBoardResponse>;
   createBoardLoading: boolean;
   getBoardsLoading: boolean;
+  deleteBoardLoading: boolean;
 }
 
 export interface IUserSliceInititalState {

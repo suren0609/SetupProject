@@ -6,6 +6,7 @@ import { ClipLoader } from "react-spinners";
 import { logoutUser } from "services/logout";
 import { popupState, userSelector } from "store/selectors";
 import {
+  setBoardPopupRender,
   setCreateBoardActive,
   setCreateBoardPopupPos,
   setIsMenuActive,
@@ -13,6 +14,7 @@ import {
 } from "store/slices/popupSlice";
 import { setToken } from "store/slices/userSlice";
 import styles from "./Header.module.scss";
+import { CREATE_BOARD } from "store/types";
 
 const Header: FC = () => {
   const dispatch = useDispatch();
@@ -51,6 +53,7 @@ const Header: FC = () => {
   const createBoardPopupHandler = () => {
     const { top, left } = btnRef.current!.getBoundingClientRect();
     dispatch(setCreateBoardPopupPos({ top: top, left: left }));
+    dispatch(setBoardPopupRender(CREATE_BOARD.CREATEBOARD));
     dispatch(setCreateBoardActive(!isCreateBoardActive));
   };
 

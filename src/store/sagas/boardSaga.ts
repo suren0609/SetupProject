@@ -21,9 +21,13 @@ import {
   setBoardsLoading,
   setCreateBoardLoading,
   setCurrentBoard,
+  setDeleteBoardLoading,
   updateBoards,
 } from "store/slices/boardSlice";
-import { setCreateBoardActive } from "store/slices/popupSlice";
+import {
+  setCreateBoardActive,
+  setDeleteBoardPopupActive,
+} from "store/slices/popupSlice";
 import {
   IBoardDataAction,
   IBoardResponse,
@@ -51,8 +55,6 @@ function* setBoardSaga(action: PayloadAction<IBoardDataAction>) {
 
 function* getBoardSaga(action: any) {
   try {
-    console.log("saga");
-
     put(setBoardsLoading(true));
     const { data } = yield call(getBoardsService);
 
@@ -80,6 +82,7 @@ function* getOneSaga(action: PayloadAction<{ id: string }>) {
 
 function* deleteSaga(action: PayloadAction<IDeleteBoardAction>) {
   try {
+    yield put(setDeleteBoardLoading(true));
     yield call(deleteBoardService, action.payload.id);
 
     const { boardData, currentBoard } = yield select((state) => state.board);
@@ -90,6 +93,8 @@ function* deleteSaga(action: PayloadAction<IDeleteBoardAction>) {
     const curId = currentBoard.id;
 
     yield put(setBoard(newBoards));
+    yield put(setDeleteBoardLoading(false));
+    yield put(setDeleteBoardPopupActive(false));
 
     if (action.payload.id === curId) {
       yield put(
@@ -101,6 +106,7 @@ function* deleteSaga(action: PayloadAction<IDeleteBoardAction>) {
           id: 0,
         }),
       );
+
       action.payload.navigate(`/`);
     }
   } catch (err) {

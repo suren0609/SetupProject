@@ -33,7 +33,7 @@ const Sidebar = () => {
       setCloseBoardPopupPos({
         top: top,
         left: left,
-        boardName: e.currentTarget?.dataset.name,
+        boardName: board.name,
         boardId: board.id,
       }),
     );
@@ -41,8 +41,15 @@ const Sidebar = () => {
     dispatch(setCloseBoardPopupActive(!isCloseBoardPopupActive));
   };
 
+  const onBlurBoardCard = () => {
+    dispatch(setEditableBoard({}));
+  };
+
   return (
-    <div className={isActive ? styles.Sidebar : styles.sideBarNoActive}>
+    <div
+      onClick={onBlurBoardCard}
+      className={isActive ? styles.Sidebar : styles.sideBarNoActive}
+    >
       <div className={styles.sidebarHeader}>
         <div className={styles.counts}>
           <div className={styles.count1}>4</div>
@@ -81,7 +88,7 @@ const Sidebar = () => {
                 onClick={(e) => closeBoardPopupHandler(e, board)}
                 className="fa-solid fa-ellipsis"
                 tabIndex={0}
-                data-name={board.name}
+                data-name={board.id}
               ></i>
               <i className="fa-regular fa-star"></i>
             </div>

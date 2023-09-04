@@ -76,14 +76,28 @@ const BoardForm = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
     watch,
   } = useForm();
 
   useEffect(() => {
+    if (isEditActive) {
+      setValue("boardTitle", editableBoard.name);
+    }
+  }, [setValue]);
+
+  useEffect(() => {
     divRef.current?.focus();
+    if (isEditActive) {
+      dispatch(setCurrentBg(editableBoard.background));
+    }
   }, []);
+
+  useEffect(() => {
+    divRef.current?.focus();
+  }, [selectedValue]);
 
   const handleAccessModifierActive = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -224,12 +238,14 @@ const BoardForm = () => {
         onSubmit={handleSubmit(isEditActive ? changeSubmitForm : submitForm)}
       >
         <label htmlFor="boardTitle">Board title</label>
+
         <input
           {...register("boardTitle", { required: true, maxLength: 30 })}
           type="text"
           data-name="inputOrButton"
           className={`${!value && styles.notValid}`}
         />
+
         {!value && (
           <p>
             <i className="fa-solid fa-hand"></i> Board title is required

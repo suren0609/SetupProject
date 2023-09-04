@@ -33,11 +33,12 @@ const CloseBoard = () => {
   const onBlurCloseBoardPopup = (e: any) => {
     if (
       e.relatedTarget?.dataset?.name === "inputOrButton1" ||
-      e.relatedTarget?.dataset?.name === boardName
+      e.relatedTarget?.dataset?.name === boardId
     ) {
       return;
     }
     dispatch(setCloseBoardPopupActive(false));
+    setDeleteActive(false);
   };
 
   const handleDeleteActive = () => {

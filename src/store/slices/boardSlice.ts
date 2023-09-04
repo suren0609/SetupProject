@@ -14,6 +14,7 @@ const initialState: IBoardSliceInititalState = {
   editableBoard: {},
   createBoardLoading: false,
   getBoardsLoading: false,
+  deleteBoardLoading: false,
 };
 
 export const boardSlice = createSlice({
@@ -43,7 +44,10 @@ export const boardSlice = createSlice({
     ) => {
       state.boardData[payload.index] = payload.board;
     },
-    setEditableBoard: (state, { payload }: PayloadAction<IBoardResponse>) => {
+    setEditableBoard: (
+      state,
+      { payload }: PayloadAction<IBoardResponse | {}>,
+    ) => {
       state.editableBoard = payload;
     },
     setCreateBoardLoading: (state, { payload }: PayloadAction<boolean>) => {
@@ -51,6 +55,9 @@ export const boardSlice = createSlice({
     },
     setBoardsLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.getBoardsLoading = payload;
+    },
+    setDeleteBoardLoading: (state, { payload }: PayloadAction<boolean>) => {
+      state.deleteBoardLoading = payload;
     },
   },
 });
@@ -65,4 +72,5 @@ export const {
   setEditableBoard,
   setCreateBoardLoading,
   setBoardsLoading,
+  setDeleteBoardLoading,
 } = boardSlice.actions;
