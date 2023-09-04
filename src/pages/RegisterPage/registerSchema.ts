@@ -13,7 +13,7 @@ export const registerSchema = yup.object().shape({
     .matches(passwordRegex, "Is not in correct format"),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password"), null as any], "Passwords must match")
+    .oneOf([yup.ref("password"), ""], "Passwords must match")
     .required(),
   age: yup.string().required(),
   gender: yup.string().required(),
