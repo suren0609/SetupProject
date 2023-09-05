@@ -23,6 +23,10 @@ const Sidebar = () => {
     (state: any) => state.popup.isCloseBoardPopupActive,
   );
 
+  useEffect(() => {
+    dispatch(getBoardsAction());
+  }, []);
+
   const closeBoardPopupHandler = (e: any, board: IBoardResponse) => {
     e.preventDefault();
     e.stopPropagation();

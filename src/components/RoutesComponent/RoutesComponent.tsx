@@ -2,6 +2,7 @@ import Board from "components/Board/Board";
 import { ProtectedAuth } from "hoc/ProtectedAuth";
 import { HomePage } from "pages/HomePage";
 import { LoginPage } from "pages/LoginPage";
+import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
 import { RegisterPage } from "pages/RegisterPage";
 import { Route, Routes } from "react-router-dom";
 
@@ -15,6 +16,7 @@ const RoutesComponent = () => {
       <Route path="/board/:id" element={<Board />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

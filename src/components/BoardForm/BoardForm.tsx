@@ -92,6 +92,8 @@ const BoardForm = () => {
     divRef.current?.focus();
     if (isEditActive) {
       dispatch(setCurrentBg(editableBoard.background));
+    } else {
+      dispatch(setCurrentBg(bg6));
     }
   }, []);
 
@@ -120,6 +122,7 @@ const BoardForm = () => {
   const navigate = useNavigate();
 
   const submitForm: SubmitHandler<FieldValues> = (data) => {
+    dispatch(setAccessModifierActive(false));
     dispatch(
       setBoardAction({
         board_data: {

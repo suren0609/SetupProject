@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setBoardPopupRender,
   setCloseBoardPopupActive,
+  setCloseBoardPopupPos,
   setCreateBoardActive,
   setCreateBoardPopupPos,
   setDeleteBoardPopupActive,
@@ -13,9 +14,11 @@ import styles from "./CloseBoard.module.scss";
 
 import { popupState } from "store/selectors";
 import { CREATE_BOARD } from "store/types";
+import { setEditableBoard } from "store/slices/boardSlice";
 
 const CloseBoard = () => {
   const [isDeleteActive, setDeleteActive] = useState(false);
+  // const [popupTop, setPopupTop] = useState(0);
   const { top, left, boardName, boardId } = useSelector(
     (state: any) => state.popup.closeBoardPopupPos,
   );
@@ -28,16 +31,30 @@ const CloseBoard = () => {
     if (isCloseBoardPopupActive) popupRef.current?.focus();
   }, [isCloseBoardPopupActive]);
 
+  useEffect(() => {
+    if (top + 200 > window.innerHeight) {
+      dispatch(
+        setCloseBoardPopupPos({
+          top: top - 160,
+          left,
+          boardName,
+          boardId,
+        }),
+      );
+    }
+  }, [isCloseBoardPopupActive]);
+
   const dispatch = useDispatch();
 
   const onBlurCloseBoardPopup = (e: any) => {
     if (
       e.relatedTarget?.dataset?.name === "inputOrButton1" ||
-      e.relatedTarget?.dataset?.name === boardId
+      e.relatedTarget?.dataset?.name === boardId.toString()
     ) {
       return;
     }
     dispatch(setCloseBoardPopupActive(false));
+    dispatch(setEditableBoard({}));
     setDeleteActive(false);
   };
 

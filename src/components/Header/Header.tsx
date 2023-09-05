@@ -19,10 +19,12 @@ import { CREATE_BOARD } from "store/types";
 const Header: FC = () => {
   const dispatch = useDispatch();
 
-  const { isMenuActive } = useSelector(popupState);
-  const { isProfilePopupActive } = useSelector(popupState);
-
-  const { isCreateBoardActive } = useSelector(popupState);
+  const {
+    isMenuActive,
+    isCreateBoardActive,
+    isProfilePopupActive,
+    isEditActive,
+  } = useSelector(popupState);
 
   const isLoading = useSelector((state: any) => state.isLoading);
 
@@ -54,7 +56,9 @@ const Header: FC = () => {
     const { top, left } = btnRef.current!.getBoundingClientRect();
     dispatch(setCreateBoardPopupPos({ top: top, left: left }));
     dispatch(setBoardPopupRender(CREATE_BOARD.CREATEBOARD));
-    dispatch(setCreateBoardActive(!isCreateBoardActive));
+    if (!isEditActive) {
+      dispatch(setCreateBoardActive(!isCreateBoardActive));
+    }
   };
 
   const menuActiveHandler = (

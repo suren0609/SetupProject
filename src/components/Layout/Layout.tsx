@@ -26,14 +26,10 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (token !== "") {
+    if (token !== null) {
       dispatch(getUser());
     }
   }, [token]);
-
-  useEffect(() => {
-    dispatch(getBoardsAction());
-  }, []);
 
   return (
     <div className={styles.container}>
