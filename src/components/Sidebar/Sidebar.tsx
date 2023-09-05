@@ -41,17 +41,26 @@ const Sidebar = () => {
         boardId: board.id,
       }),
     );
-    dispatch(setEditableBoard(board));
     dispatch(setCloseBoardPopupActive(!isCloseBoardPopupActive));
+    if (isCloseBoardPopupActive) {
+      dispatch(setEditableBoard({}));
+      return;
+    }
+    dispatch(setEditableBoard(board));
   };
 
-  const onBlurBoardCard = () => {
+  const onBlurBoardCard = (e: any, id: number) => {
+    console.log(e.relatedTarget?.dataset?.name);
+
+    if (e.relatedTarget?.dataset?.name === id.toString()) {
+      return;
+    }
     dispatch(setEditableBoard({}));
   };
 
   return (
     <div
-      onClick={onBlurBoardCard}
+      // onClick={onBlurBoardCard}
       className={isActive ? styles.Sidebar : styles.sideBarNoActive}
     >
       <div className={styles.sidebarHeader}>

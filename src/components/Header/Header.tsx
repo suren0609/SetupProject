@@ -9,12 +9,14 @@ import {
   setBoardPopupRender,
   setCreateBoardActive,
   setCreateBoardPopupPos,
+  setEditActive,
   setIsMenuActive,
   setIsPopupActive,
 } from "store/slices/popupSlice";
 import { setToken } from "store/slices/userSlice";
 import styles from "./Header.module.scss";
 import { CREATE_BOARD } from "store/types";
+import { setEditableBoard } from "store/slices/boardSlice";
 
 const Header: FC = () => {
   const dispatch = useDispatch();
@@ -55,7 +57,9 @@ const Header: FC = () => {
   const createBoardPopupHandler = () => {
     const { top, left } = btnRef.current!.getBoundingClientRect();
     dispatch(setCreateBoardPopupPos({ top: top, left: left }));
+    dispatch(setEditActive(false));
     dispatch(setBoardPopupRender(CREATE_BOARD.CREATEBOARD));
+    dispatch(setEditableBoard({}));
     if (!isEditActive) {
       dispatch(setCreateBoardActive(!isCreateBoardActive));
     }

@@ -11,6 +11,7 @@ import {
 } from "store/slices/popupSlice";
 import { CREATE_BOARD } from "store/types";
 import styles from "./CreateBoardPopupRender.module.scss";
+import { setEditableBoard } from "store/slices/boardSlice";
 
 const CreateBoardPopupRender = () => {
   const { createBoardPopupRender } = useSelector(popupState);
@@ -25,8 +26,13 @@ const CreateBoardPopupRender = () => {
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isCreateBoardActive) divRef.current?.focus();
-  }, [isCreateBoardActive]);
+    if (
+      isCreateBoardActive ||
+      createBoardPopupRender === CREATE_BOARD.CREATEBOARD
+    ) {
+      divRef.current?.focus();
+    }
+  }, [isCreateBoardActive, createBoardPopupRender]);
 
   useEffect(() => {
     if (isBoardBackgroundActive === false) {

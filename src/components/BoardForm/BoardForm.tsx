@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { changeBoardAction, setBoardAction } from "store/actions";
 import { popupState } from "store/selectors";
-import { setCurrentBg } from "store/slices/boardSlice";
+import { setBoardSelect, setCurrentBg } from "store/slices/boardSlice";
 import {
   setAccessModifierActive,
   setAccessModifierPos,
@@ -89,6 +89,7 @@ const BoardForm = () => {
   }, [setValue]);
 
   useEffect(() => {
+    dispatch(setBoardSelect("Workspace"));
     divRef.current?.focus();
     if (isEditActive) {
       dispatch(setCurrentBg(editableBoard.background));
