@@ -9,6 +9,7 @@ import {
 } from "store/slices/popupSlice";
 import { IBoardResponse } from "store/types";
 import styles from "./Sidebar.module.scss";
+import classNames from "classnames";
 
 const Sidebar = () => {
   const [isActive, setIsActive] = useState(true);
@@ -60,8 +61,10 @@ const Sidebar = () => {
 
   return (
     <div
-      // onClick={onBlurBoardCard}
-      className={isActive ? styles.Sidebar : styles.sideBarNoActive}
+      className={classNames({
+        [styles.Sidebar]: isActive,
+        [styles.sideBarNoActive]: !isActive,
+      })}
     >
       <div className={styles.sidebarHeader}>
         <div className={styles.counts}>

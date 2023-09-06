@@ -86,7 +86,8 @@ const BoardForm = () => {
     if (isEditActive) {
       setValue("boardTitle", editableBoard.name);
     }
-  }, [setValue]);
+    divRef.current?.focus();
+  }, [setValue, selectedValue]);
 
   useEffect(() => {
     dispatch(setBoardSelect("Workspace"));
@@ -97,10 +98,6 @@ const BoardForm = () => {
       dispatch(setCurrentBg(bg6));
     }
   }, []);
-
-  useEffect(() => {
-    divRef.current?.focus();
-  }, [selectedValue]);
 
   const handleAccessModifierActive = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
