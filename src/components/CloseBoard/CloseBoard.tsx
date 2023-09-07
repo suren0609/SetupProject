@@ -18,7 +18,6 @@ import { setEditableBoard } from "store/slices/boardSlice";
 
 const CloseBoard = () => {
   const [isDeleteActive, setDeleteActive] = useState(false);
-  // const [popupTop, setPopupTop] = useState(0);
   const { top, left, boardName, boardId } = useSelector(
     (state: any) => state.popup.closeBoardPopupPos,
   );

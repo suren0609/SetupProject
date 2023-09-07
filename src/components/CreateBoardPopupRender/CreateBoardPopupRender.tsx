@@ -62,25 +62,19 @@ const CreateBoardPopupRender = () => {
     return myTop;
   };
 
-  return (
-    <div>
-      {isCreateBoardActive ? (
-        <div
-          onBlur={closePopup}
-          tabIndex={0}
-          ref={divRef}
-          className={styles.CreateBoardPopupRender}
-          style={{ top: dynamicPos(top), left: left }}
-          data-name="inputOrButton"
-        >
-          {createBoardPopupRender === CREATE_BOARD.CREATEBOARD && (
-            <CreateBoard />
-          )}
-          {createBoardPopupRender === CREATE_BOARD.BOARDFORM && <BoardForm />}
-        </div>
-      ) : null}
+  return isCreateBoardActive ? (
+    <div
+      onBlur={closePopup}
+      tabIndex={0}
+      ref={divRef}
+      className={styles.CreateBoardPopupRender}
+      style={{ top: dynamicPos(top), left: left }}
+      data-name="inputOrButton"
+    >
+      {createBoardPopupRender === CREATE_BOARD.CREATEBOARD && <CreateBoard />}
+      {createBoardPopupRender === CREATE_BOARD.BOARDFORM && <BoardForm />}
     </div>
-  );
+  ) : null;
 };
 
 export default CreateBoardPopupRender;

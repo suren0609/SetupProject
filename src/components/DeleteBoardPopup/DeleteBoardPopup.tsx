@@ -23,37 +23,33 @@ const DeleteBoardPopup = () => {
   const closePopup = () => {
     dispatch(setDeleteBoardPopupActive(false));
   };
-  return (
-    <div>
-      {isDeleteBoardPopupActive ? (
-        <div onClick={closePopup} className={styles.container}>
-          {deleteBoardLoading ? (
-            <Loading />
-          ) : (
-            <div className={styles.DeleteBoardPopup}>
-              <p>Permanently delete board?</p>
-              <div className={styles.btns}>
-                <button
-                  onClick={deleteBoardHandletr}
-                  data-name="inputOrButton"
-                  className={styles.yes}
-                >
-                  Yes
-                </button>
-                <button
-                  onClick={closePopup}
-                  data-name="inputOrButton"
-                  className={styles.no}
-                >
-                  No
-                </button>
-              </div>
-            </div>
-          )}
+  return isDeleteBoardPopupActive ? (
+    <div onClick={closePopup} className={styles.container}>
+      {deleteBoardLoading ? (
+        <Loading />
+      ) : (
+        <div className={styles.DeleteBoardPopup}>
+          <p>Permanently delete board?</p>
+          <div className={styles.btns}>
+            <button
+              onClick={deleteBoardHandletr}
+              data-name="inputOrButton"
+              className={styles.yes}
+            >
+              Yes
+            </button>
+            <button
+              onClick={closePopup}
+              data-name="inputOrButton"
+              className={styles.no}
+            >
+              No
+            </button>
+          </div>
         </div>
-      ) : null}
+      )}
     </div>
-  );
+  ) : null;
 };
 
 export default DeleteBoardPopup;

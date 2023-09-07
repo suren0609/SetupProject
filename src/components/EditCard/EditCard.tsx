@@ -61,101 +61,97 @@ const EditCard = () => {
     dispatch(setTaskCardActive(false));
   };
 
-  return (
-    <div>
-      {isTaskCardActive ? (
-        <div onClick={hidePopup} className={styles.container}>
-          <div
-            style={{ top: top, left: left }}
-            className={styles.EditCard}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className={styles.cardActive}>
-              <textarea name="card-title" id=""></textarea>
-              <div className={styles.cardBottom}>
-                <div className={styles.cardBottomControls}>
-                  <i className="fa-solid fa-bars"></i>
-                  <div>
-                    <i className="fa-regular fa-comment"></i> 1
-                  </div>
-                </div>
-                <div className={styles.profile}>
-                  <div className={styles.userAva}>
-                    {`${user.firstname[0]}${user.lastname[0]}`}
-                  </div>
-                </div>
-              </div>
-              <div className={styles.transitionPopup}>
-                <ul>
-                  <li onClick={handleTaskDetails}>
-                    <i className="fa-solid fa-credit-card"></i> Open card
-                  </li>
-                  <li
-                    onClick={() => handleClick(setLabelActive)}
-                    onBlur={(e) => closePopup(setLabelActive, e)}
-                    tabIndex={0}
-                    ref={labelsRef}
-                  >
-                    <i className="fa-solid fa-tag"></i> Edit lables
-                    {isLabelActive && <Labels popupRef={labelsRef} />}
-                  </li>
-                  <li
-                    onClick={() => handleClick(setMembersActive)}
-                    onBlur={(e) => closePopup(setMembersActive, e)}
-                    tabIndex={0}
-                    ref={membersRef}
-                  >
-                    <i className="fa-regular fa-user"></i> Change members
-                    {isMembersActive && <Members popupRef={membersRef} />}
-                  </li>
-                  <li
-                    onClick={() => handleClick(setCoverActive)}
-                    onBlur={(e) => closePopup(setCoverActive, e)}
-                    tabIndex={0}
-                    ref={coverRef}
-                  >
-                    <i className="fa-solid fa-credit-card"></i> Change cover
-                    {isCoverActive && <Cover popupRef={coverRef} />}
-                  </li>
-                  <li
-                    onClick={() => handleClick(setMoveActive)}
-                    onBlur={(e) => closePopup(setMoveActive, e)}
-                    tabIndex={0}
-                    ref={moveRef}
-                  >
-                    <i className="fa-solid fa-arrow-right"></i> Move
-                    {isMoveActive && <Move popupRef={moveRef} />}
-                  </li>
-                  <li
-                    onClick={() => handleClick(setCopyActive)}
-                    onBlur={(e) => closePopup(setCopyActive, e)}
-                    tabIndex={0}
-                    ref={copyRef}
-                  >
-                    <i className="fa-solid fa-credit-card"></i> Copy
-                    {isCopyActive && <Copy popupRef={copyRef} />}
-                  </li>
-                  <li
-                    onClick={() => handleClick(setDatesActive)}
-                    onBlur={(e) => closePopup(setDatesActive, e)}
-                    tabIndex={0}
-                    ref={popupRef}
-                  >
-                    <i className="fa-regular fa-clock"></i> Edit dates
-                    {isDatesActive && <Dates popupRef={popupRef} />}
-                  </li>
-                  <li>
-                    <i className="fa-solid fa-box-archive"></i> Archive
-                  </li>
-                </ul>
+  return isTaskCardActive ? (
+    <div onClick={hidePopup} className={styles.container}>
+      <div
+        style={{ top: top, left: left }}
+        className={styles.EditCard}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className={styles.cardActive}>
+          <textarea name="card-title" id=""></textarea>
+          <div className={styles.cardBottom}>
+            <div className={styles.cardBottomControls}>
+              <i className="fa-solid fa-bars"></i>
+              <div>
+                <i className="fa-regular fa-comment"></i> 1
               </div>
             </div>
-            <button className={styles.save}>Save</button>
+            <div className={styles.profile}>
+              <div className={styles.userAva}>
+                {`${user.firstname[0]}${user.lastname[0]}`}
+              </div>
+            </div>
+          </div>
+          <div className={styles.transitionPopup}>
+            <ul>
+              <li onClick={handleTaskDetails}>
+                <i className="fa-solid fa-credit-card"></i> Open card
+              </li>
+              <li
+                onClick={() => handleClick(setLabelActive)}
+                onBlur={(e) => closePopup(setLabelActive, e)}
+                tabIndex={0}
+                ref={labelsRef}
+              >
+                <i className="fa-solid fa-tag"></i> Edit lables
+                {isLabelActive && <Labels popupRef={labelsRef} />}
+              </li>
+              <li
+                onClick={() => handleClick(setMembersActive)}
+                onBlur={(e) => closePopup(setMembersActive, e)}
+                tabIndex={0}
+                ref={membersRef}
+              >
+                <i className="fa-regular fa-user"></i> Change members
+                {isMembersActive && <Members popupRef={membersRef} />}
+              </li>
+              <li
+                onClick={() => handleClick(setCoverActive)}
+                onBlur={(e) => closePopup(setCoverActive, e)}
+                tabIndex={0}
+                ref={coverRef}
+              >
+                <i className="fa-solid fa-credit-card"></i> Change cover
+                {isCoverActive && <Cover popupRef={coverRef} />}
+              </li>
+              <li
+                onClick={() => handleClick(setMoveActive)}
+                onBlur={(e) => closePopup(setMoveActive, e)}
+                tabIndex={0}
+                ref={moveRef}
+              >
+                <i className="fa-solid fa-arrow-right"></i> Move
+                {isMoveActive && <Move popupRef={moveRef} />}
+              </li>
+              <li
+                onClick={() => handleClick(setCopyActive)}
+                onBlur={(e) => closePopup(setCopyActive, e)}
+                tabIndex={0}
+                ref={copyRef}
+              >
+                <i className="fa-solid fa-credit-card"></i> Copy
+                {isCopyActive && <Copy popupRef={copyRef} />}
+              </li>
+              <li
+                onClick={() => handleClick(setDatesActive)}
+                onBlur={(e) => closePopup(setDatesActive, e)}
+                tabIndex={0}
+                ref={popupRef}
+              >
+                <i className="fa-regular fa-clock"></i> Edit dates
+                {isDatesActive && <Dates popupRef={popupRef} />}
+              </li>
+              <li>
+                <i className="fa-solid fa-box-archive"></i> Archive
+              </li>
+            </ul>
           </div>
         </div>
-      ) : null}
+        <button className={styles.save}>Save</button>
+      </div>
     </div>
-  );
+  ) : null;
 };
 
 export default EditCard;
