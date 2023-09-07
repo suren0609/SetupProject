@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink as Link, useNavigate } from "react-router-dom";
 import { getBoardsAction } from "store/actions";
@@ -6,6 +6,7 @@ import { setEditableBoard } from "store/slices/boardSlice";
 import {
   setCloseBoardPopupActive,
   setCloseBoardPopupPos,
+  setCreateBoardPopupPos,
 } from "store/slices/popupSlice";
 import { IBoardResponse } from "store/types";
 import styles from "./Sidebar.module.scss";
@@ -34,6 +35,19 @@ const Sidebar = () => {
 
     const { top, left } = e.target!.getBoundingClientRect();
 
+    if (window.innerHeight <= 650) {
+      dispatch(setCreateBoardPopupPos({ top: 0, left: left + 50 }));
+    } else if (top + 650 > window.innerHeight) {
+      dispatch(
+        setCreateBoardPopupPos({
+          top: top - (top + 650 - window.innerHeight),
+          left: left + 50,
+        }),
+      );
+    } else {
+      dispatch(setCreateBoardPopupPos({ top: top - 50, left: left + 50 }));
+    }
+
     dispatch(
       setCloseBoardPopupPos({
         top: top,
@@ -48,15 +62,6 @@ const Sidebar = () => {
       return;
     }
     dispatch(setEditableBoard(board));
-  };
-
-  const onBlurBoardCard = (e: any, id: number) => {
-    console.log(e.relatedTarget?.dataset?.name);
-
-    if (e.relatedTarget?.dataset?.name === id.toString()) {
-      return;
-    }
-    dispatch(setEditableBoard({}));
   };
 
   return (

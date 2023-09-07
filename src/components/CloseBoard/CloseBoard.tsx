@@ -31,7 +31,7 @@ const CloseBoard = () => {
   }, [isCloseBoardPopupActive]);
 
   useEffect(() => {
-    if (top + 200 > window.innerHeight) {
+    if (top + 200 > window.innerHeight && isCloseBoardPopupActive) {
       dispatch(
         setCloseBoardPopupPos({
           top: top - 160,
@@ -41,7 +41,7 @@ const CloseBoard = () => {
         }),
       );
     }
-  }, [isCloseBoardPopupActive]);
+  }, [isCloseBoardPopupActive, top]);
 
   const dispatch = useDispatch();
 
@@ -73,83 +73,77 @@ const CloseBoard = () => {
   const editRef = useRef<HTMLDivElement>(null);
 
   const editBoardPopupHandler = () => {
-    const { top, left } = editRef.current!.getBoundingClientRect();
-    dispatch(setCreateBoardPopupPos({ top: top - 50, left: left + 50 }));
     dispatch(setBoardPopupRender(CREATE_BOARD.BOARDFORM));
     dispatch(setEditActive(true));
     dispatch(setCloseBoardPopupActive(false));
     dispatch(setCreateBoardActive(!isCreateBoardActive));
   };
 
-  return (
-    <>
-      {isCloseBoardPopupActive ? (
-        <div
-          className={styles.CloseBoard}
-          onBlur={onBlurCloseBoardPopup}
-          tabIndex={0}
-          style={{ top: top + 30, left: left }}
-          ref={popupRef}
-        >
-          {!isDeleteActive ? (
-            <>
-              <div className={styles.header}>
-                <h4>{boardName}</h4>
-                <i
-                  onClick={onBlurCloseBoardPopup}
-                  className="fa-solid fa-xmark"
-                ></i>
-              </div>
+  return isCloseBoardPopupActive ? (
+    <div
+      className={styles.CloseBoard}
+      onBlur={onBlurCloseBoardPopup}
+      tabIndex={0}
+      style={{ top: top + 30, left: left }}
+      ref={popupRef}
+    >
+      {!isDeleteActive ? (
+        <>
+          <div className={styles.header}>
+            <h4>{boardName}</h4>
+            <i
+              onClick={onBlurCloseBoardPopup}
+              className="fa-solid fa-xmark"
+            ></i>
+          </div>
 
-              <div onClick={handleDeleteActive} className={styles.closeAndEdit}>
-                <span>Close board</span>{" "}
-                <i className="fa-solid fa-chevron-right"></i>
-              </div>
-              <div
-                onClick={editBoardPopupHandler}
-                ref={editRef}
-                className={styles.closeAndEdit}
-                data-name="inputOrButton"
-              >
-                <span data-name="inputOrButton">Edit board</span>{" "}
-                <i
-                  data-name="inputOrButton"
-                  className="fa-solid fa-chevron-right"
-                ></i>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className={styles.header2}>
-                <i
-                  onClick={handleDeleteUnactive}
-                  className="fa-solid fa-chevron-right fa-rotate-180"
-                ></i>
-                <h4>Close board?</h4>
-                <i
-                  onClick={onBlurCloseBoardPopup}
-                  className="fa-solid fa-xmark"
-                ></i>
-              </div>
-              <div className={styles.secondBody}>
-                <p>
-                  You can find and reopen closed boards at the bottom of your
-                  boards page.
-                </p>
-                <button
-                  onClick={closeBoardHandler}
-                  data-name="inputOrButton1"
-                  className={styles.closeBtn}
-                >
-                  Close
-                </button>
-              </div>
-            </>
-          )}
-        </div>
-      ) : null}
-    </>
-  );
+          <div onClick={handleDeleteActive} className={styles.closeAndEdit}>
+            <span>Close board</span>{" "}
+            <i className="fa-solid fa-chevron-right"></i>
+          </div>
+          <div
+            onClick={editBoardPopupHandler}
+            ref={editRef}
+            className={styles.closeAndEdit}
+            data-name="inputOrButton"
+          >
+            <span data-name="inputOrButton">Edit board</span>{" "}
+            <i
+              data-name="inputOrButton"
+              className="fa-solid fa-chevron-right"
+            ></i>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={styles.header2}>
+            <i
+              onClick={handleDeleteUnactive}
+              className="fa-solid fa-chevron-right fa-rotate-180"
+            ></i>
+            <h4>Close board?</h4>
+            <i
+              onClick={onBlurCloseBoardPopup}
+              className="fa-solid fa-xmark"
+            ></i>
+          </div>
+          <div className={styles.secondBody}>
+            <p>
+              You can find and reopen closed boards at the bottom of your boards
+              page.
+            </p>
+            <button
+              onClick={closeBoardHandler}
+              data-name="inputOrButton1"
+              className={styles.closeBtn}
+            >
+              Close
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  ) : null;
 };
 
 export default CloseBoard;

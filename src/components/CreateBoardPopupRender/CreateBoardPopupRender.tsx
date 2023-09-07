@@ -19,6 +19,7 @@ const CreateBoardPopupRender = () => {
   const { top, left } = useSelector(
     (state: any) => state.popup.createBoardPopupPos,
   );
+
   const { isCreateBoardActive } = useSelector(popupState);
 
   const { isBoardBackgroundActive } = useSelector(popupState);
@@ -55,20 +56,13 @@ const CreateBoardPopupRender = () => {
     dispatch(setBoardPopupRender(CREATE_BOARD.CREATEBOARD));
   };
 
-  const dynamicPos = (myTop: number) => {
-    if (window.innerHeight - myTop - 100 < 600) {
-      myTop -= myTop;
-    }
-    return myTop;
-  };
-
   return isCreateBoardActive ? (
     <div
       onBlur={closePopup}
       tabIndex={0}
       ref={divRef}
       className={styles.CreateBoardPopupRender}
-      style={{ top: dynamicPos(top), left: left }}
+      style={{ top: top, left: left }}
       data-name="inputOrButton"
     >
       {createBoardPopupRender === CREATE_BOARD.CREATEBOARD && <CreateBoard />}
