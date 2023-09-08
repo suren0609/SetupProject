@@ -17,14 +17,10 @@ const Board: FC = () => {
   const { getBoardLoading } = useSelector((state: any) => state.board);
   const { boardData } = useSelector(boardState);
   useEffect(() => {
-    console.log("id -> ", id);
-    // if (id) {
     dispatch(getOneBoardAction({ id: id as string }));
-    // }
-  }, []);
+  }, [id]);
 
   const currentBoard = useSelector((state: any) => state.board.currentBoard);
-  // console.log("currentBoard -> ", currentBoard);
 
   return (
     <div className={styles.container}>
