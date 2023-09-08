@@ -4,12 +4,17 @@ import { HomePage } from "pages/HomePage";
 import { LoginPage } from "pages/LoginPage";
 import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
 import { RegisterPage } from "pages/RegisterPage";
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
 
 const RoutesComponent = () => {
+  useEffect(() => {
+    console.log("RoutesComponent");
+  }, []);
   const Home = ProtectedAuth(HomePage, "/login");
   const Login = ProtectedAuth(LoginPage, "/");
   const Register = ProtectedAuth(RegisterPage, "/");
+  const { id } = useParams();
   return (
     <Routes>
       <Route path="/" element={<Home />} />

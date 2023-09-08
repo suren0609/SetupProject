@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink as Link, useNavigate } from "react-router-dom";
+import { NavLink as Link, useLocation, useNavigate } from "react-router-dom";
 import { getBoardsAction } from "store/actions";
-import { setEditableBoard } from "store/slices/boardSlice";
+import { setBoardsLoading, setEditableBoard } from "store/slices/boardSlice";
 import {
   setCloseBoardPopupActive,
   setCloseBoardPopupPos,
@@ -14,6 +14,7 @@ import classNames from "classnames";
 
 const Sidebar = () => {
   const [isActive, setIsActive] = useState(true);
+  const { pathname } = useLocation();
 
   const sidebarActiveHandler = () => {
     setIsActive((prev) => !prev);

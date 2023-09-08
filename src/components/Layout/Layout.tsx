@@ -20,6 +20,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
   const cookieToken = Cookies.get("token");
 
   useEffect(() => {
+    console.log("Layout ->");
     if (cookieToken) {
       dispatch(setToken(cookieToken));
     }

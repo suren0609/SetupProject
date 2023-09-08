@@ -10,10 +10,10 @@ const initialState: IBoardSliceInititalState = {
   boardData: [],
   createBoardSelect: "Workspace",
   currentBg: bg6,
-  currentBoard: { name: "", background: bg1, userId: 0, sortId: 0, id: 0 },
+  currentBoard: {},
   editableBoard: {},
   createBoardLoading: false,
-  getBoardsLoading: false,
+  getBoardLoading: true,
   deleteBoardLoading: false,
 };
 
@@ -54,7 +54,7 @@ export const boardSlice = createSlice({
       state.createBoardLoading = payload;
     },
     setBoardsLoading: (state, { payload }: PayloadAction<boolean>) => {
-      state.getBoardsLoading = payload;
+      state.getBoardLoading = payload;
     },
     setDeleteBoardLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.deleteBoardLoading = payload;

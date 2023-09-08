@@ -6,10 +6,10 @@ export interface IBoardSliceInititalState {
   boardData: IBoardData[];
   createBoardSelect: string;
   currentBg: string;
-  currentBoard: IBoardResponse;
+  currentBoard: Partial<IBoardResponse>;
   editableBoard: Partial<IBoardResponse>;
   createBoardLoading: boolean;
-  getBoardsLoading: boolean;
+  getBoardLoading: boolean;
   deleteBoardLoading: boolean;
 }
 
