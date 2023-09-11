@@ -1,11 +1,12 @@
 import Board from "components/Board/Board";
+import Loading from "components/Loading/Loading";
 import { ProtectedAuth } from "hoc/ProtectedAuth";
-import { HomePage } from "pages/HomePage";
-import { LoginPage } from "pages/LoginPage";
-import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
-import { RegisterPage } from "pages/RegisterPage";
-import { useEffect } from "react";
-import { Navigate, Route, Routes, useParams } from "react-router-dom";
+import { Suspense, lazy, useEffect } from "react";
+import { Route, Routes, useParams } from "react-router-dom";
+const HomePage = lazy(() => import("pages/HomePage"));
+const LoginPage = lazy(() => import("pages/LoginPage"));
+const NotFoundPage = lazy(() => import("pages/NotFoundPage/NotFoundPage"));
+const RegisterPage = lazy(() => import("pages/RegisterPage"));
 
 const RoutesComponent = () => {
   useEffect(() => {
@@ -16,13 +17,15 @@ const RoutesComponent = () => {
   const Register = ProtectedAuth(RegisterPage, "/");
   const { id } = useParams();
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/board/:id" element={<Board />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/board/:id" element={<Board />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Suspense>
   );
 };
 

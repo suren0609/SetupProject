@@ -1,5 +1,6 @@
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
+import Loading from "components/Loading/Loading";
 import { bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9 } from "imagesUrls";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +18,6 @@ import {
 } from "store/slices/popupSlice";
 import { CREATE_BOARD } from "store/types";
 import styles from "./BoardForm.module.scss";
-import Loading from "components/Loading/Loading";
 
 interface BoardFormData {
   boardTitle: string;

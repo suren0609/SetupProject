@@ -6,15 +6,14 @@ import {
   setCloseBoardPopupActive,
   setCloseBoardPopupPos,
   setCreateBoardActive,
-  setCreateBoardPopupPos,
   setDeleteBoardPopupActive,
   setEditActive,
 } from "store/slices/popupSlice";
 import styles from "./CloseBoard.module.scss";
 
 import { popupState } from "store/selectors";
-import { CREATE_BOARD } from "store/types";
 import { setEditableBoard } from "store/slices/boardSlice";
+import { CREATE_BOARD } from "store/types";
 
 const CloseBoard = () => {
   const [isDeleteActive, setDeleteActive] = useState(false);

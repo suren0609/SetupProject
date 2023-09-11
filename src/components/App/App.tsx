@@ -4,19 +4,17 @@ import { CloseBoard } from "components/CloseBoard";
 import { CreateBoardPopupRender } from "components/CreateBoardPopupRender";
 import { DeleteBoardPopup } from "components/DeleteBoardPopup";
 import { EditCard } from "components/EditCard";
-import { Layout } from "components/Layout";
 import RoutesComponent from "components/RoutesComponent/RoutesComponent";
 import { TaskDescription } from "components/TaskDescription";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./App.module.scss";
 
 function App() {
   return (
     <div className={styles.leyout_content}>
       <ToastContainer />
-      <Layout>
-        <RoutesComponent />
-      </Layout>
+      <RoutesComponent />
       <TaskDescription />
       <EditCard />
       <CreateBoardPopupRender />

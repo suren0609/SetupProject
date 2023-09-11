@@ -11,6 +11,7 @@ import {
 import { IBoardResponse } from "store/types";
 import styles from "./Sidebar.module.scss";
 import classNames from "classnames";
+import { calculatePopupPosition } from "helpers/createBoardPopupPosHelper";
 
 const Sidebar = () => {
   const [isActive, setIsActive] = useState(true);
@@ -36,18 +37,7 @@ const Sidebar = () => {
 
     const { top, left } = e.target!.getBoundingClientRect();
 
-    if (window.innerHeight <= 650) {
-      dispatch(setCreateBoardPopupPos({ top: 0, left: left + 50 }));
-    } else if (top + 650 > window.innerHeight) {
-      dispatch(
-        setCreateBoardPopupPos({
-          top: top - (top + 650 - window.innerHeight),
-          left: left + 50,
-        }),
-      );
-    } else {
-      dispatch(setCreateBoardPopupPos({ top: top - 50, left: left + 50 }));
-    }
+    dispatch(setCreateBoardPopupPos(calculatePopupPosition(top, left)));
 
     dispatch(
       setCloseBoardPopupPos({

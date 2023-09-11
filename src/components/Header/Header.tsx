@@ -85,7 +85,7 @@ const Header: FC = () => {
 
     dispatch(setToken(null));
     ChangeProfilePopupState();
-    navigate("login");
+    navigate("/login");
   };
 
   const user = useSelector(userSelector);
