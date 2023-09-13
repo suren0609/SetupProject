@@ -4,13 +4,18 @@ import { TaskCard } from "components/TaskCard";
 import { UserProfile } from "components/UserProfile";
 import { getTemplatePos } from "helpers/getPosition";
 import { getParameters } from "helpers/parametersForPosition";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { FC, MouseEvent, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userProfileActiveSelector } from "store/selectors";
 import { setIsUserProfileActive } from "store/slices/userPopupSlice";
 import styles from "./TaskList.module.scss";
+import { IListData } from "store/types";
 
-const TaskList = () => {
+interface IProps {
+  list: IListData;
+}
+
+const TaskList: FC<IProps> = ({ list }) => {
   const user = useSelector((state: any) => state.user.user);
 
   const [isTemplateActive, setTemplateActive] = useState(false);
@@ -85,7 +90,7 @@ const TaskList = () => {
   return (
     <div className={styles.TaskList}>
       <div className={styles.listHeader}>
-        <h5>To DO</h5>
+        <h5>{list.name}</h5>
         <i
           onClick={handleListAction}
           onBlur={closeListAction}
@@ -97,12 +102,6 @@ const TaskList = () => {
         )}
       </div>
       <div ref={listRef} className={styles.listBody}>
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
 
         {isAddCardActive && (

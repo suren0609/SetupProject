@@ -9,9 +9,7 @@ const NotFoundPage = lazy(() => import("pages/NotFoundPage/NotFoundPage"));
 const RegisterPage = lazy(() => import("pages/RegisterPage"));
 
 const RoutesComponent = () => {
-  useEffect(() => {
-    console.log("RoutesComponent");
-  }, []);
+  useEffect(() => {}, []);
   const Home = ProtectedAuth(HomePage, "/login");
   const Login = ProtectedAuth(LoginPage, "/");
   const Register = ProtectedAuth(RegisterPage, "/");

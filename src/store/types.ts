@@ -13,6 +13,26 @@ export interface IBoardSliceInititalState {
   deleteBoardLoading: boolean;
 }
 
+export interface IListSliceInitialState {
+  lists: {
+    boardId: string;
+    categories: IListData[];
+  };
+  addListLoading: boolean;
+}
+
+export interface IListsState {
+  boardId: string;
+  categories: IListData[];
+}
+
+export interface IListData {
+  name: string;
+  boardId: string;
+  id: number;
+  sortId: number;
+}
+
 export interface IUserSliceInititalState {
   user: {
     firstname: string;

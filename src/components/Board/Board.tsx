@@ -5,21 +5,22 @@ import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getOneBoardAction } from "store/actions";
+import { getListAction, getOneBoardAction } from "store/actions";
 import { boardState } from "store/selectors";
 import { HomeDetails } from "../HomeDetails";
 import styles from "./Board.module.scss";
+import axios from "axios";
 
 const Board: FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { getBoardLoading } = useSelector((state: any) => state.board);
-  const { boardData } = useSelector(boardState);
+  const { boardData, currentBoard } = useSelector(boardState);
+
   useEffect(() => {
     dispatch(getOneBoardAction({ id: id as string }));
+    dispatch(getListAction({ boardId: id as string }));
   }, [id]);
-
-  const currentBoard = useSelector((state: any) => state.board.currentBoard);
 
   return (
     <Layout>

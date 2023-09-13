@@ -4,9 +4,10 @@ import { all, fork } from "redux-saga/effects";
 import { watchCommonSaga } from "./sagas/userSaga";
 import { rootReducer } from "./rootReducer";
 import { watchBoardSaga } from "./sagas/boardSaga";
+import { watchListSaga } from "./sagas/listSaga";
 
 function* RootSaga() {
-  yield all([fork(watchCommonSaga), fork(watchBoardSaga)]);
+  yield all([fork(watchCommonSaga), fork(watchBoardSaga), fork(watchListSaga)]);
 }
 
 const sagaMiddleware = saga();
