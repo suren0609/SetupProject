@@ -1,11 +1,11 @@
 import axios from "axios";
+import { boardsUrl } from "utils/apiUrls";
 
 export const deleteBoardService = async (id: number) => {
   try {
-    const res = await axios.delete(
-      `https://young-citadel-44598.herokuapp.com/boards/${id}`,
-      { withCredentials: true },
-    );
+    const res = await axios.delete(`${boardsUrl}${id}`, {
+      withCredentials: true,
+    });
     return res.data;
   } catch (err) {
     return err;

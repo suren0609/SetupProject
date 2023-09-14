@@ -1,8 +1,9 @@
 import axios from "axios";
+import { boardsUrl } from "utils/apiUrls";
 
 export const getBoardsService = async () => {
   try {
-    return await axios("https://young-citadel-44598.herokuapp.com/boards", {
+    return await axios(boardsUrl, {
       withCredentials: true,
     });
   } catch (err: any) {

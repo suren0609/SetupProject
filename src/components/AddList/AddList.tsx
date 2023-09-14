@@ -55,14 +55,22 @@ const AddList: FC = () => {
           autoFocus
         />
         <div className={styles.buttonAndClose}>
-          <input type="submit" className={styles.add} value={"Add list"} />
-          <button className={styles.close}>
-            <i
-              onClick={(e) => changeAddIsActive(e)}
-              className="fa-solid fa-xmark"
-            ></i>
-          </button>
-          {addListLoading ? <Loading /> : null}
+          <input
+            type="submit"
+            disabled={addListLoading}
+            className={styles.add}
+            value={"Add list"}
+          />
+          {addListLoading ? (
+            <Loading />
+          ) : (
+            <button className={styles.close}>
+              <i
+                onClick={(e) => changeAddIsActive(e)}
+                className="fa-solid fa-xmark"
+              ></i>
+            </button>
+          )}
         </div>
       </form>
     </div>

@@ -111,7 +111,7 @@ const TaskList: FC<IProps> = ({ list }) => {
   };
 
   const closeInput = () => {
-    dispatch(updateListAction(titleValue));
+    if (list.name !== titleValue.name) dispatch(updateListAction(titleValue));
     setTitleInput(false);
   };
 
