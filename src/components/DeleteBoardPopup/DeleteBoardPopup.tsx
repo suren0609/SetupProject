@@ -1,11 +1,10 @@
+import Loading from "components/Loading/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteBoardAction } from "store/actions";
 import { boardState, popupState } from "store/selectors";
 import { setDeleteBoardPopupActive } from "store/slices/popupSlice";
 import styles from "./DeleteBoardPopup.module.scss";
-import Loading from "components/Loading/Loading";
-import { setDeleteBoardLoading } from "store/slices/boardSlice";
 
 const DeleteBoardPopup = () => {
   const { boardId } = useSelector(

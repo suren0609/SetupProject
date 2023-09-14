@@ -7,14 +7,12 @@ import { useSelector } from "react-redux";
 import { listState } from "store/selectors";
 
 const HomeDetails: FC = () => {
-  const {
-    lists: { categories },
-  } = useSelector(listState);
+  const { lists } = useSelector(listState);
 
   return (
     <div className={styles.HomeDetails}>
       <div className={styles.scrollContainer}>
-        {categories.map((list) => (
+        {lists.map((list) => (
           <TaskList key={list?.id} list={list} />
         ))}
 

@@ -36,6 +36,7 @@ const AddList: FC = () => {
         boardId: currentBoard.id.toString(),
       }),
     );
+    reset();
   };
 
   const value = watch("listTitle");

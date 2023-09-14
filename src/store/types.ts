@@ -14,16 +14,14 @@ export interface IBoardSliceInititalState {
 }
 
 export interface IListSliceInitialState {
-  lists: {
-    boardId: string;
-    categories: IListData[];
-  };
+  lists: IListData[];
   addListLoading: boolean;
+  currentList: IListData | {};
+  deleteListLoading: boolean;
 }
 
 export interface IListsState {
-  boardId: string;
-  categories: IListData[];
+  lists: IListData[];
 }
 
 export interface IListData {

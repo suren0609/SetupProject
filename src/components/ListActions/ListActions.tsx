@@ -1,14 +1,38 @@
-import React from "react";
+import React, { FC, useEffect, useRef } from "react";
 
 import styles from "./ListActions.module.scss";
+import { IListData } from "store/types";
+import { useDispatch } from "react-redux";
+import { setCurrentList } from "store/slices/listSlice";
+import { setDeleteListPopupActive } from "store/slices/popupSlice";
 
 interface IProp {
   closeListAction: (e: any) => void;
+  list: IListData;
 }
 
-const ListActions = ({ closeListAction }: IProp) => {
+const ListActions: FC<IProp> = ({ closeListAction, list }) => {
+  const divRef = useRef<HTMLDivElement>(null);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    divRef.current?.focus();
+  }, []);
+
+  const onDeleteList = (e: any) => {
+    dispatch(setCurrentList(list));
+    dispatch(setDeleteListPopupActive(true));
+    closeListAction(e);
+  };
+
   return (
-    <div data-name="listAction" tabIndex={0} className={styles.ListActions}>
+    <div
+      data-name="listAction"
+      onBlur={closeListAction}
+      tabIndex={0}
+      ref={divRef}
+      className={styles.ListActions}
+    >
       <div className={styles.header}>
         <h4>List action</h4>
         <i onClick={closeListAction} className="fa-solid fa-xmark"></i>
@@ -50,8 +74,10 @@ const ListActions = ({ closeListAction }: IProp) => {
         <li>
           <a href="">Archive all cards in this list</a>
         </li>
-        <li>
-          <a href="">Archive this list</a>
+        <li data-name="listAction">
+          <div onClick={onDeleteList} data-name="listAction">
+            Delete this list
+          </div>
         </li>
       </ul>
     </div>

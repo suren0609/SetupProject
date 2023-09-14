@@ -35,6 +35,7 @@ export const popupSlice = createSlice({
     isCloseBoardPopupActive: false,
     isDeleteBoardPopupActive: false,
     isEditActive: false,
+    isDeleteListPopupActive: false,
   },
   reducers: {
     setAccessModifierActive: (state, { payload }: PayloadAction<boolean>) => {
@@ -105,6 +106,9 @@ export const popupSlice = createSlice({
     setEditActive: (state, { payload }: PayloadAction<boolean>) => {
       state.isEditActive = payload;
     },
+    setDeleteListPopupActive: (state, { payload }: PayloadAction<boolean>) => {
+      state.isDeleteListPopupActive = payload;
+    },
   },
 });
 
@@ -123,4 +127,5 @@ export const {
   setCloseBoardPopupActive,
   setDeleteBoardPopupActive,
   setEditActive,
+  setDeleteListPopupActive,
 } = popupSlice.actions;

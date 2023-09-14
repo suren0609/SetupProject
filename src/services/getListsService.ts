@@ -6,5 +6,5 @@ export const getListsService = async (boardId: string) => {
     { withCredentials: true },
   );
 
-  return res;
+  return res.data;
 };

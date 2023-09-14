@@ -4,26 +4,36 @@ import { TaskCard } from "components/TaskCard";
 import { UserProfile } from "components/UserProfile";
 import { getTemplatePos } from "helpers/getPosition";
 import { getParameters } from "helpers/parametersForPosition";
-import { FC, MouseEvent, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  FC,
+  MouseEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userProfileActiveSelector } from "store/selectors";
 import { setIsUserProfileActive } from "store/slices/userPopupSlice";
 import styles from "./TaskList.module.scss";
 import { IListData } from "store/types";
+import { setCurrentList } from "store/slices/listSlice";
+import { updateListAction } from "store/actions";
 
 interface IProps {
   list: IListData;
 }
 
 const TaskList: FC<IProps> = ({ list }) => {
-  const user = useSelector((state: any) => state.user.user);
-
   const [isTemplateActive, setTemplateActive] = useState(false);
   const [isAddCardActive, setAddCardActive] = useState(false);
   const [isListActionActive, setListActionActive] = useState(false);
   const [pos, setPos] = useState({ currentTop: 0, currentLeft: 0 });
+  const [isTitleInput, setTitleInput] = useState(false);
+  const [titleValue, setTitleValue] = useState<IListData>(list);
 
   const listRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (isAddCardActive) {
@@ -33,6 +43,9 @@ const TaskList: FC<IProps> = ({ list }) => {
       });
     }
   }, [isAddCardActive]);
+  useEffect(() => {
+    inputRef.current?.select();
+  }, [isTitleInput]);
 
   const isUserProfileActive = useSelector(userProfileActiveSelector);
 
@@ -46,6 +59,7 @@ const TaskList: FC<IProps> = ({ list }) => {
     if (e.relatedTarget?.dataset?.name === "listAction") {
       return;
     }
+
     setListActionActive(false);
   };
 
@@ -87,18 +101,49 @@ const TaskList: FC<IProps> = ({ list }) => {
     setTemplateActive(false);
   };
 
+  const handleInputTitle = () => {
+    setTitleInput(true);
+  };
+
+  const updateList = () => {
+    dispatch(updateListAction(titleValue));
+    setTitleInput(false);
+  };
+
+  const closeInput = () => {
+    dispatch(updateListAction(titleValue));
+    setTitleInput(false);
+  };
+
+  const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitleValue({ ...list, name: e.target.value });
+  };
+
   return (
     <div className={styles.TaskList}>
       <div className={styles.listHeader}>
-        <h5>{list.name}</h5>
+        {isTitleInput ? (
+          <form onSubmit={updateList}>
+            <input
+              onBlur={closeInput}
+              type="text"
+              value={titleValue.name}
+              ref={inputRef}
+              onChange={changeTitle}
+            />
+          </form>
+        ) : (
+          <h5 onClick={handleInputTitle}>{titleValue.name}</h5>
+        )}
+
         <i
           onClick={handleListAction}
-          onBlur={closeListAction}
           tabIndex={0}
+          data-name="listAction"
           className="fa-solid fa-ellipsis"
         ></i>
         {isListActionActive && (
-          <ListActions closeListAction={closeListAction} />
+          <ListActions closeListAction={closeListAction} list={list} />
         )}
       </div>
       <div ref={listRef} className={styles.listBody}>

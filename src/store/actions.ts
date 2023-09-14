@@ -27,3 +27,7 @@ export const changeBoardAction =
 export const getListAction = createAction<{ boardId: string }>("getListAction");
 export const createListAction =
   createAction<Partial<IListData>>("createListAction");
+export const deleteListAction = createAction<IListData | {}>(
+  "deleteListAction",
+);
+export const updateListAction = createAction<IListData>("updateListAction");

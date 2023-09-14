@@ -9,6 +9,7 @@ import { TaskDescription } from "components/TaskDescription";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./App.module.scss";
+import DeleteListPopup from "components/DeleteListPopup/DeleteListPopup";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <BoardBackground />
       <CloseBoard />
       <DeleteBoardPopup />
+      <DeleteListPopup />
     </div>
   );
 }
