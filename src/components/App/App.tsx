@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./App.module.scss";
 import DeleteListPopup from "components/DeleteListPopup/DeleteListPopup";
+import { getTasksService } from "services/getTasksService";
 
 function App() {
   return (

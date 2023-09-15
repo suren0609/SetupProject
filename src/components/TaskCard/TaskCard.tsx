@@ -1,4 +1,4 @@
-import { MouseEvent, useRef } from "react";
+import { FC, MouseEvent, useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { isTaskTemplateSelector, userSelector } from "store/selectors";
@@ -12,12 +12,14 @@ import {
   setProfilePosition,
 } from "store/slices/userPopupSlice";
 import styles from "./TaskCard.module.scss";
+import { ITaskData } from "store/types";
 
 interface ICardProps {
   changeUserProfileActive: () => void;
+  task: ITaskData;
 }
 
-const TaskCard = ({ changeUserProfileActive }: ICardProps) => {
+const TaskCard: FC<ICardProps> = ({ changeUserProfileActive, task }) => {
   const user = useSelector(userSelector);
 
   const dispatch = useDispatch();
@@ -53,7 +55,7 @@ const TaskCard = ({ changeUserProfileActive }: ICardProps) => {
   return (
     <div onClick={handleTaskDetails} className={styles.taskCard} ref={divRef}>
       <div className={styles.cardTop}>
-        <p>Create Task`s UI</p>
+        <p>{task.title}</p>
         <div onClick={handleCardActive} className={styles.cardTopEdit}>
           <i className="fa-solid fa-pencil"></i>
         </div>

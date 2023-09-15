@@ -13,6 +13,23 @@ export interface IBoardSliceInititalState {
   deleteBoardLoading: boolean;
 }
 
+export interface ITaskData {
+  title: string;
+  description: string;
+  date: string;
+  deadline: string;
+  listId: string;
+  id: number;
+}
+
+export interface ITaskSliceInitialState {
+  tasks: ITaskData[];
+  isTaskDetailsActive: boolean;
+  isTaskCardActive: boolean;
+  taskCardPosition: { top: number; left: number };
+  isTaskTemplate: boolean;
+}
+
 export interface IListSliceInitialState {
   lists: IListData[];
   addListLoading: boolean;

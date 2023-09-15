@@ -13,7 +13,7 @@ import {
   useState,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userProfileActiveSelector } from "store/selectors";
+import { taskState, userProfileActiveSelector } from "store/selectors";
 import { setIsUserProfileActive } from "store/slices/userPopupSlice";
 import styles from "./TaskList.module.scss";
 import { IListData } from "store/types";
@@ -35,6 +35,7 @@ const TaskList: FC<IProps> = ({ list }) => {
 
   const listRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
+  const { tasks } = useSelector(taskState);
 
   const {
     register,
@@ -156,7 +157,13 @@ const TaskList: FC<IProps> = ({ list }) => {
         )}
       </div>
       <div ref={listRef} className={styles.listBody}>
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
+        {tasks.map((task) => (
+          <TaskCard
+            key={task.id}
+            task={task}
+            changeUserProfileActive={changeUserProfileActive}
+          />
+        ))}
 
         {isAddCardActive && (
           <div

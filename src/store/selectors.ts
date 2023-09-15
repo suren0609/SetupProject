@@ -25,3 +25,5 @@ export const popupState = (state: RootState) => state.popup;
 export const boardState = (state: any) => state.board;
 
 export const listState = (state: RootState) => state.list;
+
+export const taskState = (state: RootState) => state.tasks;

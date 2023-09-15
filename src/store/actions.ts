@@ -31,3 +31,6 @@ export const deleteListAction = createAction<IListData | {}>(
   "deleteListAction",
 );
 export const updateListAction = createAction<IListData>("updateListAction");
+export const getTasksAction = createAction<{ listId: string }>(
+  "getTasksAction",
+);

@@ -5,9 +5,15 @@ import { watchCommonSaga } from "./sagas/userSaga";
 import { rootReducer } from "./rootReducer";
 import { watchBoardSaga } from "./sagas/boardSaga";
 import { watchListSaga } from "./sagas/listSaga";
+import { watchTaskSaga } from "./sagas/taskSaga";
 
 function* RootSaga() {
-  yield all([fork(watchCommonSaga), fork(watchBoardSaga), fork(watchListSaga)]);
+  yield all([
+    fork(watchCommonSaga),
+    fork(watchBoardSaga),
+    fork(watchListSaga),
+    fork(watchTaskSaga),
+  ]);
 }
 
 const sagaMiddleware = saga();
