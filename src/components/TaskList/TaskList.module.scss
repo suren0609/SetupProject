@@ -18,15 +18,22 @@
     color: #b6c2cf;
     position: relative;
 
-    input {
-      background: #252424;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 3px;
-      color: white;
+    form {
+      width: 100%;
+      margin-right: 5px;
+
+      input {
+        width: 100%;
+        background: #252424;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        color: white;
+      }
     }
 
     h5 {
+      width: 100%;
       margin: 0;
       cursor: pointer;
     }

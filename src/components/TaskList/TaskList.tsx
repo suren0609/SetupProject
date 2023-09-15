@@ -58,10 +58,12 @@ const TaskList: FC<IProps> = ({ list }) => {
     }
   }, [isAddCardActive]);
   useEffect(() => {
-    const inputValue = formRef.current?.querySelector<HTMLInputElement>(
-      'input[name="listTitle"]',
-    );
-    inputValue?.select();
+    if (isTitleInput) {
+      const inputValue = formRef.current?.querySelector<HTMLInputElement>(
+        'input[name="listTitle"]',
+      );
+      inputValue?.select();
+    }
   }, [isTitleInput]);
 
   const isUserProfileActive = useSelector(userProfileActiveSelector);
