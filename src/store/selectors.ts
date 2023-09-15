@@ -1,4 +1,5 @@
-import { IState } from "./types";
+import { RootState } from "store";
+import { IListSliceInitialState, IState } from "./types";
 
 export const stateSelector = (state: IState) => state;
 
@@ -20,3 +21,7 @@ export const taskCardActiveSelector = (state: any) =>
 
 export const isTaskTemplateSelector = (state: any) =>
   state.tasks.isTaskTemplate;
+export const popupState = (state: RootState) => state.popup;
+export const boardState = (state: any) => state.board;
+
+export const listState = (state: RootState) => state.list;

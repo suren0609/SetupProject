@@ -1,24 +1,53 @@
-import React, { useState, MouseEvent, useRef, useEffect } from "react";
-import styles from "./TaskList.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsUserProfileActive, setTaskDetailsActive } from "store/slices";
+import { CardTemplate } from "components/CardTemplate";
+import { ListActions } from "components/ListActions";
 import { TaskCard } from "components/TaskCard";
 import { UserProfile } from "components/UserProfile";
-import { ListActions } from "components/ListActions";
-import { getPosition, getTemplatePos } from "helpers/getPosition";
-import { CardTemplate } from "components/CardTemplate";
+import { getTemplatePos } from "helpers/getPosition";
 import { getParameters } from "helpers/parametersForPosition";
+import {
+  ChangeEvent,
+  FC,
+  MouseEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { userProfileActiveSelector } from "store/selectors";
+import { setIsUserProfileActive } from "store/slices/userPopupSlice";
+import styles from "./TaskList.module.scss";
+import { IListData } from "store/types";
+import { setCurrentList } from "store/slices/listSlice";
+import { updateListAction } from "store/actions";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
-const TaskList = () => {
-  const user = useSelector((state: any) => state.user.user);
+interface IProps {
+  list: IListData;
+}
 
+const TaskList: FC<IProps> = ({ list }) => {
   const [isTemplateActive, setTemplateActive] = useState(false);
   const [isAddCardActive, setAddCardActive] = useState(false);
   const [isListActionActive, setListActionActive] = useState(false);
   const [pos, setPos] = useState({ currentTop: 0, currentLeft: 0 });
+  const [isTitleInput, setTitleInput] = useState(false);
+  const [titleValue, setTitleValue] = useState<IListData>(list);
 
   const listRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    defaultValues: {
+      listTitle: list.name,
+    },
+  });
+
+  const { listTitle } = watch();
 
   useEffect(() => {
     if (isAddCardActive) {
@@ -28,6 +57,14 @@ const TaskList = () => {
       });
     }
   }, [isAddCardActive]);
+  useEffect(() => {
+    if (isTitleInput) {
+      const inputValue = formRef.current?.querySelector<HTMLInputElement>(
+        'input[name="listTitle"]',
+      );
+      inputValue?.select();
+    }
+  }, [isTitleInput]);
 
   const isUserProfileActive = useSelector(userProfileActiveSelector);
 
@@ -41,11 +78,12 @@ const TaskList = () => {
     if (e.relatedTarget?.dataset?.name === "listAction") {
       return;
     }
+
     setListActionActive(false);
   };
 
   const changeUserProfileActive = () => {
-    dispatch(setIsUserProfileActive(true));
+    dispatch(setIsUserProfileActive(!isUserProfileActive));
   };
 
   const templateRef = useRef<any>(null);
@@ -82,27 +120,42 @@ const TaskList = () => {
     setTemplateActive(false);
   };
 
+  const handleInputTitle = () => {
+    setTitleInput(true);
+  };
+
+  const updateList: SubmitHandler<FieldValues> = () => {
+    if (list.name !== listTitle)
+      dispatch(updateListAction({ ...list, name: listTitle }));
+    setTitleInput(false);
+  };
+
   return (
     <div className={styles.TaskList}>
       <div className={styles.listHeader}>
-        <h5>To DO</h5>
+        {isTitleInput ? (
+          <form onSubmit={handleSubmit(updateList)} ref={formRef}>
+            <input
+              {...register("listTitle")}
+              onBlur={updateList}
+              autoFocus={isTitleInput}
+            />
+          </form>
+        ) : (
+          <h5 onClick={handleInputTitle}>{listTitle}</h5>
+        )}
+
         <i
           onClick={handleListAction}
-          onBlur={closeListAction}
           tabIndex={0}
+          data-name="listAction"
           className="fa-solid fa-ellipsis"
         ></i>
         {isListActionActive && (
-          <ListActions closeListAction={closeListAction} />
+          <ListActions closeListAction={closeListAction} list={list} />
         )}
       </div>
       <div ref={listRef} className={styles.listBody}>
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
-        <TaskCard changeUserProfileActive={changeUserProfileActive} />
         <TaskCard changeUserProfileActive={changeUserProfileActive} />
 
         {isAddCardActive && (

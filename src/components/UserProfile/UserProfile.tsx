@@ -1,9 +1,7 @@
-import React from "react";
-
-import styles from "./UserProfile.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsUserProfileActive } from "store/slices";
 import { userProfilePosSelector, userSelector } from "store/selectors";
+import { setIsUserProfileActive } from "store/slices/userPopupSlice";
+import styles from "./UserProfile.module.scss";
 
 const UserProfile = () => {
   const user = useSelector(userSelector);

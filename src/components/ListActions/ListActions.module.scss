@@ -11,6 +11,8 @@
   left: 240px;
   top: 40px;
   z-index: 120;
+  box-shadow: 5px 0px 20px black;
+  outline: none;
 
   .header {
     display: flex;
@@ -56,6 +58,21 @@
       }
       a:hover {
         background: #505861;
+      }
+
+      div {
+        display: block;
+        text-decoration: none;
+        color: #a7b3bf;
+        height: 100%;
+        margin: 0 -10px;
+        padding: 10px 15px;
+        color: rgb(161, 0, 0);
+      }
+
+      div:hover {
+        background: #505861;
+        color: red;
       }
     }
 

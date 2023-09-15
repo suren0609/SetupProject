@@ -133,6 +133,8 @@ $btnColor: #579dff;
         padding: 10px 15px;
         border-radius: 5px;
         cursor: pointer;
+        position: relative;
+
         @media (max-width: 1250px) {
           margin: 0 5px;
           padding: 7px 10px;
@@ -298,6 +300,7 @@ $btnColor: #579dff;
       flex-direction: column;
       color: #abb7c3;
       border: 0.5px solid #3a444b;
+      box-shadow: 5px 0px 20px black;
 
       .profileData {
         display: flex;

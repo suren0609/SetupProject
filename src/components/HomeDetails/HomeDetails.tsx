@@ -3,30 +3,20 @@ import React, { FC, MouseEvent } from "react";
 import { AddList } from "components/AddList";
 import { TaskList } from "components/TaskList";
 import styles from "./HomeDetails.module.scss";
+import { useSelector } from "react-redux";
+import { listState } from "store/selectors";
 
-interface IHomeDetailsProps {
-  isAddActive: boolean;
-  changeAddIsActive: (e: MouseEvent<HTMLElement>) => void;
-}
+const HomeDetails: FC = () => {
+  const { lists } = useSelector(listState);
 
-const HomeDetails: FC<IHomeDetailsProps> = ({
-  isAddActive,
-  changeAddIsActive,
-}) => {
   return (
     <div className={styles.HomeDetails}>
       <div className={styles.scrollContainer}>
-        <TaskList />
-        <TaskList />
-        <TaskList />
-        <TaskList />
-        <TaskList />
-        <TaskList />
-        <TaskList />
-        <AddList
-          isAddActive={isAddActive}
-          changeAddIsActive={changeAddIsActive}
-        />
+        {lists.map((list) => (
+          <TaskList key={list?.id} list={list} />
+        ))}
+
+        <AddList />
       </div>
     </div>
   );

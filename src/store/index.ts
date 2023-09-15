@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import saga from "redux-saga";
 import { all, fork } from "redux-saga/effects";
-import { watchCommonSaga } from "./sagas";
+import { watchCommonSaga } from "./sagas/userSaga";
 import { rootReducer } from "./rootReducer";
+import { watchBoardSaga } from "./sagas/boardSaga";
+import { watchListSaga } from "./sagas/listSaga";
 
 function* RootSaga() {
-  yield all([fork(watchCommonSaga)]);
+  yield all([fork(watchCommonSaga), fork(watchBoardSaga), fork(watchListSaga)]);
 }
 
 const sagaMiddleware = saga();

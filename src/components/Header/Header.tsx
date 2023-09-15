@@ -1,27 +1,70 @@
-import React, { FC } from "react";
-import { logoutUser } from "services/logout";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import styles from "./Header.module.scss";
 import LogoSvg from "components/LogoSvg/LogoSvg";
-import { userSelector } from "store/selectors";
+import React, { FC, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import { logoutUser } from "services/logout";
+import { popupState, userSelector } from "store/selectors";
+import {
+  setBoardPopupRender,
+  setCreateBoardActive,
+  setCreateBoardPopupPos,
+  setEditActive,
+  setIsMenuActive,
+  setIsPopupActive,
+} from "store/slices/popupSlice";
+import { setToken } from "store/slices/userSlice";
+import styles from "./Header.module.scss";
+import { CREATE_BOARD } from "store/types";
+import { setEditableBoard } from "store/slices/boardSlice";
 
-interface IHeaderProps {
-  isMenuActive: {
-    leftMenu: boolean;
-    rightMenu: boolean;
+const Header: FC = () => {
+  const dispatch = useDispatch();
+
+  const {
+    isMenuActive,
+    isCreateBoardActive,
+    isProfilePopupActive,
+    isEditActive,
+  } = useSelector(popupState);
+
+  const isLoading = useSelector((state: any) => state.isLoading);
+
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  const changeMenuState = (leftOrRight: string) => {
+    setIsPopupActive(false);
+    leftOrRight === "left"
+      ? dispatch(
+          setIsMenuActive({
+            rightMenu: false,
+            leftMenu: !isMenuActive.leftMenu,
+          }),
+        )
+      : dispatch(
+          setIsMenuActive({
+            leftMenu: false,
+            rightMenu: !isMenuActive.rightMenu,
+          }),
+        );
   };
-  changeMenuState: (leftOrRight: string) => void;
-  ChangeprofilePopupState: () => void;
-  isProfilePopupActive: boolean;
-}
 
-const Header: FC<IHeaderProps> = ({
-  isMenuActive,
-  changeMenuState,
-  ChangeprofilePopupState,
-  isProfilePopupActive,
-}) => {
+  const ChangeProfilePopupState = () => {
+    dispatch(setIsPopupActive(!isProfilePopupActive));
+    dispatch(setIsMenuActive({ rightMenu: false, leftMenu: false }));
+  };
+
+  const createBoardPopupHandler = () => {
+    const { top, left } = btnRef.current!.getBoundingClientRect();
+    dispatch(setCreateBoardPopupPos({ top: top, left: left }));
+    dispatch(setEditActive(false));
+    dispatch(setBoardPopupRender(CREATE_BOARD.CREATEBOARD));
+    dispatch(setEditableBoard({}));
+    if (!isEditActive) {
+      dispatch(setCreateBoardActive(!isCreateBoardActive));
+    }
+  };
+
   const menuActiveHandler = (
     e: React.MouseEvent<HTMLElement>,
     side: string,
@@ -32,14 +75,17 @@ const Header: FC<IHeaderProps> = ({
 
   const profilePopupHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    ChangeprofilePopupState();
+    ChangeProfilePopupState();
   };
 
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     await logoutUser();
-    navigate("login");
+
+    dispatch(setToken(null));
+    ChangeProfilePopupState();
+    navigate("/login");
   };
 
   const user = useSelector(userSelector);
@@ -78,7 +124,13 @@ const Header: FC<IHeaderProps> = ({
               </span>
             </li>
           </ul>
-          <button>Create</button>
+          <button
+            onClick={createBoardPopupHandler}
+            data-name="inputOrButton"
+            ref={btnRef}
+          >
+            Create
+          </button>
         </div>
       </div>
       <div className={styles.headerRight}>
@@ -95,7 +147,11 @@ const Header: FC<IHeaderProps> = ({
             onClick={(e) => profilePopupHandler(e)}
           >
             <div className={styles.userAva}>
-              {`${user.firstname[0]}${user.lastname[0]}`}
+              {!isLoading ? (
+                <ClipLoader color="#1c2422" loading={!isLoading} />
+              ) : (
+                `${user.firstname[0]}${user.lastname[0]}`
+              )}
             </div>
             <div
               className={styles.profilePopup}

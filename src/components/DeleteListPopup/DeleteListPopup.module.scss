@@ -1,0 +1,64 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: #373e4654;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  .DeleteListPopup {
+    width: 304px;
+    border: 0.5px solid #373e46;
+    border-radius: 10px;
+    background: #282e33;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 120;
+    color: #9aa7b6;
+    box-shadow: 5px 0px 20px black;
+
+    p {
+      width: 100%;
+      font-size: 16px;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    .btns {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-top: 20px;
+
+      button {
+        border: none;
+        border-radius: 3px;
+        padding: 10px;
+        width: 100px;
+        cursor: pointer;
+      }
+
+      .yes {
+        background: #f87462;
+        color: #282e33;
+      }
+
+      .no {
+        background: transparent;
+        border: 0.5px solid #f87462;
+        color: #9aa7b6;
+      }
+
+      button:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}

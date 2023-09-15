@@ -1,0 +1,57 @@
+.AccessModifierPopup {
+  width: 280px;
+  border: 0.5px solid #373e46;
+  border-radius: 4px;
+  background: #282e33;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 7px 0;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  z-index: 120;
+  color: #9aa7b6;
+  box-shadow: 5px 0px 20px black;
+  overflow-x: hidden;
+  max-height: calc(100vh - 500px);
+
+  .selectActive {
+    background: #092957 !important;
+  }
+
+  .sections {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    i {
+      font-size: 18px;
+      padding: 15px;
+    }
+
+    .sectionInfo {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 2px;
+
+      h4 {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .sections:hover {
+    background: #555c63;
+  }
+}

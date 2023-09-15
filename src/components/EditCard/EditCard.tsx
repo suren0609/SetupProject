@@ -1,22 +1,21 @@
-import React, {
-  RefObject,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-  forwardRef,
-} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setTaskCardActive, setTaskDetailsActive } from "store/slices";
-import styles from "./EditCard.module.scss";
+import { Copy } from "components/Copy";
+import { Cover } from "components/Cover";
+import { Dates } from "components/Dates";
 import { Labels } from "components/Labels";
 import { Members } from "components/Members";
-import { Cover } from "components/Cover";
 import { Move } from "components/Move";
-import { Copy } from "components/Copy";
-import { Dates } from "components/Dates";
-import { ref } from "yup";
-import { taskCardPosSelector, userSelector } from "store/selectors";
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  taskCardActiveSelector,
+  taskCardPosSelector,
+  userSelector,
+} from "store/selectors";
+import {
+  setTaskCardActive,
+  setTaskDetailsActive,
+} from "store/slices/taskSlice";
+import styles from "./EditCard.module.scss";
 
 const EditCard = () => {
   const [isLabelActive, setLabelActive] = useState(false);
@@ -27,6 +26,7 @@ const EditCard = () => {
   const [isDatesActive, setDatesActive] = useState(false);
 
   const user = useSelector(userSelector);
+  const isTaskCardActive = useSelector(taskCardActiveSelector);
   const dispatch = useDispatch();
 
   const { top, left } = useSelector(taskCardPosSelector);
@@ -61,7 +61,7 @@ const EditCard = () => {
     dispatch(setTaskCardActive(false));
   };
 
-  return (
+  return isTaskCardActive ? (
     <div onClick={hidePopup} className={styles.container}>
       <div
         style={{ top: top, left: left }}
@@ -151,7 +151,7 @@ const EditCard = () => {
         <button className={styles.save}>Save</button>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default EditCard;

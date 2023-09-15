@@ -2,6 +2,46 @@ export type GetPostsApiPayload = {
   limit: number;
 };
 
+export interface IBoardSliceInititalState {
+  boardData: IBoardData[];
+  createBoardSelect: string;
+  currentBg: string;
+  currentBoard: Partial<IBoardResponse>;
+  editableBoard: Partial<IBoardResponse>;
+  createBoardLoading: boolean;
+  getBoardLoading: boolean;
+  deleteBoardLoading: boolean;
+}
+
+export interface IListSliceInitialState {
+  lists: IListData[];
+  addListLoading: boolean;
+  currentList: IListData | {};
+  deleteListLoading: boolean;
+}
+
+export interface IListsState {
+  lists: IListData[];
+}
+
+export interface IListData {
+  name: string;
+  boardId: string;
+  id: number;
+  sortId: number;
+}
+
+export interface IUserSliceInititalState {
+  user: {
+    firstname: string;
+    lastname: string;
+    email: string;
+    age: string;
+    gender: string;
+  };
+  token: null | string;
+}
+
 export type PostType = {
   userId: number;
   id: number;
@@ -48,4 +88,32 @@ export enum statusText {
 
 export interface IProp {
   popupRef: any;
+}
+
+export enum CREATE_BOARD {
+  CREATEBOARD = "createBoard",
+  BOARDFORM = "boardForm",
+}
+
+export interface IBoardData {
+  name: string;
+  background: string;
+}
+
+export interface IBoardResponse {
+  name: string;
+  background: string;
+  userId: number;
+  sortId: number;
+  id: number;
+}
+
+export interface IBoardDataAction {
+  board_data: IBoardData;
+  navigate: (to: string, options?: object) => void;
+}
+
+export interface IDeleteBoardAction {
+  id: number;
+  navigate: (to: string, options?: object) => void;
 }
