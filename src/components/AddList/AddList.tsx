@@ -61,16 +61,13 @@ const AddList: FC = () => {
             className={styles.add}
             value={"Add list"}
           />
-          {addListLoading ? (
-            <Loading />
-          ) : (
-            <button className={styles.close}>
-              <i
-                onClick={(e) => changeAddIsActive(e)}
-                className="fa-solid fa-xmark"
-              ></i>
-            </button>
-          )}
+          <button className={styles.close}>
+            <i
+              onClick={(e) => changeAddIsActive(e)}
+              className="fa-solid fa-xmark"
+            ></i>
+          </button>
+          <div className={styles.loading}>{addListLoading && <Loading />}</div>
         </div>
       </form>
     </div>

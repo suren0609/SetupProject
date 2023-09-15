@@ -19,6 +19,7 @@ import styles from "./TaskList.module.scss";
 import { IListData } from "store/types";
 import { setCurrentList } from "store/slices/listSlice";
 import { updateListAction } from "store/actions";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 interface IProps {
   list: IListData;
@@ -33,7 +34,20 @@ const TaskList: FC<IProps> = ({ list }) => {
   const [titleValue, setTitleValue] = useState<IListData>(list);
 
   const listRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    defaultValues: {
+      listTitle: list.name,
+    },
+  });
+
+  const { listTitle } = watch();
 
   useEffect(() => {
     if (isAddCardActive) {
@@ -44,7 +58,10 @@ const TaskList: FC<IProps> = ({ list }) => {
     }
   }, [isAddCardActive]);
   useEffect(() => {
-    inputRef.current?.select();
+    const inputValue = formRef.current?.querySelector<HTMLInputElement>(
+      'input[name="listTitle"]',
+    );
+    inputValue?.select();
   }, [isTitleInput]);
 
   const isUserProfileActive = useSelector(userProfileActiveSelector);
@@ -105,35 +122,25 @@ const TaskList: FC<IProps> = ({ list }) => {
     setTitleInput(true);
   };
 
-  const updateList = () => {
-    dispatch(updateListAction(titleValue));
+  const updateList: SubmitHandler<FieldValues> = () => {
+    if (list.name !== listTitle)
+      dispatch(updateListAction({ ...list, name: listTitle }));
     setTitleInput(false);
-  };
-
-  const closeInput = () => {
-    if (list.name !== titleValue.name) dispatch(updateListAction(titleValue));
-    setTitleInput(false);
-  };
-
-  const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitleValue({ ...list, name: e.target.value });
   };
 
   return (
     <div className={styles.TaskList}>
       <div className={styles.listHeader}>
         {isTitleInput ? (
-          <form onSubmit={updateList}>
+          <form onSubmit={handleSubmit(updateList)} ref={formRef}>
             <input
-              onBlur={closeInput}
-              type="text"
-              value={titleValue.name}
-              ref={inputRef}
-              onChange={changeTitle}
+              {...register("listTitle")}
+              onBlur={updateList}
+              autoFocus={isTitleInput}
             />
           </form>
         ) : (
-          <h5 onClick={handleInputTitle}>{titleValue.name}</h5>
+          <h5 onClick={handleInputTitle}>{listTitle}</h5>
         )}
 
         <i
