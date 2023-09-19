@@ -36,6 +36,7 @@ export const popupSlice = createSlice({
     isDeleteBoardPopupActive: false,
     isEditActive: false,
     isDeleteListPopupActive: false,
+    isAddCardActive: false,
   },
   reducers: {
     setAccessModifierActive: (state, { payload }: PayloadAction<boolean>) => {
@@ -109,6 +110,9 @@ export const popupSlice = createSlice({
     setDeleteListPopupActive: (state, { payload }: PayloadAction<boolean>) => {
       state.isDeleteListPopupActive = payload;
     },
+    setAddCardActive: (state, { payload }: PayloadAction<boolean>) => {
+      state.isAddCardActive = payload;
+    },
   },
 });
 
@@ -128,4 +132,5 @@ export const {
   setDeleteBoardPopupActive,
   setEditActive,
   setDeleteListPopupActive,
+  setAddCardActive,
 } = popupSlice.actions;

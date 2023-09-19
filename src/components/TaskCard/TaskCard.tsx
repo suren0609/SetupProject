@@ -55,7 +55,7 @@ const TaskCard: FC<ICardProps> = ({ changeUserProfileActive, task }) => {
   return (
     <div onClick={handleTaskDetails} className={styles.taskCard} ref={divRef}>
       <div className={styles.cardTop}>
-        <p>{task.title}</p>
+        <p>{task.name}</p>
         <div onClick={handleCardActive} className={styles.cardTopEdit}>
           <i className="fa-solid fa-pencil"></i>
         </div>

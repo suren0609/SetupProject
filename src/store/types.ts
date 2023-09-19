@@ -14,20 +14,21 @@ export interface IBoardSliceInititalState {
 }
 
 export interface ITaskData {
-  title: string;
+  name: string;
   description: string;
-  date: string;
-  deadline: string;
-  listId: string;
+  startDate: string | null;
+  date: string | null;
+  categoryId: number;
   id: number;
 }
 
 export interface ITaskSliceInitialState {
-  tasks: ITaskData[];
+  tasks: { [listTasks: number]: ITaskData[] };
   isTaskDetailsActive: boolean;
   isTaskCardActive: boolean;
   taskCardPosition: { top: number; left: number };
   isTaskTemplate: boolean;
+  addTaskLoading: boolean;
 }
 
 export interface IListSliceInitialState {

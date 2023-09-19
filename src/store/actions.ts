@@ -4,6 +4,7 @@ import {
   IBoardResponse,
   IDeleteBoardAction,
   IListData,
+  ITaskData,
 } from "./types";
 
 export const getUser = createAction("getUser");
@@ -31,6 +32,9 @@ export const deleteListAction = createAction<IListData | {}>(
   "deleteListAction",
 );
 export const updateListAction = createAction<IListData>("updateListAction");
-export const getTasksAction = createAction<{ listId: string }>(
+export const getTasksAction = createAction<{ categoryId: number }>(
   "getTasksAction",
 );
+
+export const createTaskAction =
+  createAction<Partial<ITaskData>>("createAction");

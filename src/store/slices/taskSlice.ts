@@ -2,19 +2,23 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ITaskData, ITaskSliceInitialState } from "store/types";
 
 const initialState: ITaskSliceInitialState = {
-  tasks: [],
+  tasks: {},
   isTaskDetailsActive: false,
   isTaskCardActive: false,
   taskCardPosition: { top: 0, left: 0 },
   isTaskTemplate: false,
+  addTaskLoading: false,
 };
 
 export const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    setTasks: (state, { payload }: PayloadAction<ITaskData[]>) => {
-      state.tasks = payload;
+    setTasks: (
+      state,
+      { payload }: PayloadAction<{ data: ITaskData[]; categoryId: number }>,
+    ) => {
+      state.tasks[payload.categoryId] = payload.data;
     },
     setTaskDetailsActive: (state, { payload }: PayloadAction<boolean>) => {
       state.isTaskDetailsActive = payload;
@@ -31,6 +35,9 @@ export const tasksSlice = createSlice({
     setTaskTemplate: (state, { payload }: PayloadAction<boolean>) => {
       state.isTaskTemplate = payload;
     },
+    setAddTaskLoading: (state, { payload }: PayloadAction<boolean>) => {
+      state.addTaskLoading = payload;
+    },
   },
 });
 
@@ -40,4 +47,5 @@ export const {
   setTaskCardActive,
   setTaskCardPosition,
   setTaskTemplate,
+  setAddTaskLoading,
 } = tasksSlice.actions;

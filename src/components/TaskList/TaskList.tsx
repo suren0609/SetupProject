@@ -13,13 +13,24 @@ import {
   useState,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { taskState, userProfileActiveSelector } from "store/selectors";
+import {
+  popupState,
+  taskState,
+  userProfileActiveSelector,
+} from "store/selectors";
 import { setIsUserProfileActive } from "store/slices/userPopupSlice";
 import styles from "./TaskList.module.scss";
 import { IListData } from "store/types";
 import { setCurrentList } from "store/slices/listSlice";
-import { updateListAction } from "store/actions";
+import {
+  createTaskAction,
+  getTasksAction,
+  updateListAction,
+} from "store/actions";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { setAddTaskLoading } from "store/slices/taskSlice";
+import Loading from "components/Loading/Loading";
+import { setAddCardActive } from "store/slices/popupSlice";
 
 interface IProps {
   list: IListData;
@@ -27,15 +38,23 @@ interface IProps {
 
 const TaskList: FC<IProps> = ({ list }) => {
   const [isTemplateActive, setTemplateActive] = useState(false);
-  const [isAddCardActive, setAddCardActive] = useState(false);
+  // const [isAddCardActive, setAddCardActive] = useState(false);
   const [isListActionActive, setListActionActive] = useState(false);
   const [pos, setPos] = useState({ currentTop: 0, currentLeft: 0 });
   const [isTitleInput, setTitleInput] = useState(false);
   const [titleValue, setTitleValue] = useState<IListData>(list);
+  const [taskData, setTaskData] = useState({
+    name: "",
+    description: "",
+    startDate: Date.now().toString(),
+    endDate: null,
+    categoryId: list.id,
+  });
 
   const listRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
-  const { tasks } = useSelector(taskState);
+  const { tasks, addTaskLoading } = useSelector(taskState);
+  const { isAddCardActive } = useSelector(popupState);
 
   const {
     register,
@@ -49,6 +68,9 @@ const TaskList: FC<IProps> = ({ list }) => {
   });
 
   const { listTitle } = watch();
+  useEffect(() => {
+    dispatch(getTasksAction({ categoryId: list.id }));
+  }, []);
 
   useEffect(() => {
     if (isAddCardActive) {
@@ -104,14 +126,14 @@ const TaskList: FC<IProps> = ({ list }) => {
   };
 
   const handleAddCardActive = () => {
-    setAddCardActive(true);
+    dispatch(setAddCardActive(true));
   };
 
   const closeAddCard = (e: any) => {
     if (e.relatedTarget?.dataset?.name === "addCardActive") {
       return;
     }
-    setAddCardActive(false);
+    dispatch(setAddCardActive(false));
   };
 
   const hideTemplate = (e: any) => {
@@ -130,6 +152,17 @@ const TaskList: FC<IProps> = ({ list }) => {
       dispatch(updateListAction({ ...list, name: listTitle }));
     setTitleInput(false);
   };
+
+  const changeTaskInput = (e: any) => {
+    setTaskData({ ...taskData, name: e.target.value });
+  };
+
+  const addTaskHandler = () => {
+    dispatch(setAddTaskLoading(true));
+    dispatch(createTaskAction(taskData));
+  };
+
+  const categoryId = list.id;
 
   return (
     <div className={styles.TaskList}>
@@ -157,7 +190,7 @@ const TaskList: FC<IProps> = ({ list }) => {
         )}
       </div>
       <div ref={listRef} className={styles.listBody}>
-        {tasks.map((task) => (
+        {tasks[categoryId]?.map((task) => (
           <TaskCard
             key={task.id}
             task={task}
@@ -175,10 +208,18 @@ const TaskList: FC<IProps> = ({ list }) => {
           >
             <textarea
               placeholder="Enter a title for this card..."
+              onChange={changeTaskInput}
               autoFocus
             ></textarea>
             <div className={styles.buttonAndClose}>
-              <button className={styles.add}>Add a card</button>
+              <button
+                onClick={addTaskHandler}
+                data-name="addCardActive"
+                className={styles.add}
+                disabled={taskData.name ? false : true}
+              >
+                {addTaskLoading ? <Loading /> : "Add a card"}
+              </button>
               <button onClick={closeAddCard} className={styles.close}>
                 <i className="fa-solid fa-xmark"></i>
               </button>
