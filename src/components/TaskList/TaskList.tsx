@@ -21,40 +21,43 @@ import {
 import { setIsUserProfileActive } from "store/slices/userPopupSlice";
 import styles from "./TaskList.module.scss";
 import { IListData } from "store/types";
-import { setCurrentList } from "store/slices/listSlice";
+import { listsSelector, setCurrentList } from "store/slices/listSlice";
 import {
   createTaskAction,
   getTasksAction,
   updateListAction,
 } from "store/actions";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { setAddTaskLoading } from "store/slices/taskSlice";
+import { setAddTaskLoading, tasksSelector } from "store/slices/taskSlice";
 import Loading from "components/Loading/Loading";
 import { setAddCardActive } from "store/slices/popupSlice";
+import { EntityId } from "@reduxjs/toolkit";
 
 interface IProps {
-  list: IListData;
+  id: EntityId;
 }
 
-const TaskList: FC<IProps> = ({ list }) => {
+const TaskList: FC<IProps> = ({ id }) => {
   const [isTemplateActive, setTemplateActive] = useState(false);
   // const [isAddCardActive, setAddCardActive] = useState(false);
   const [isListActionActive, setListActionActive] = useState(false);
   const [pos, setPos] = useState({ currentTop: 0, currentLeft: 0 });
   const [isTitleInput, setTitleInput] = useState(false);
-  const [titleValue, setTitleValue] = useState<IListData>(list);
+  // const [titleValue, setTitleValue] = useState<IListData>(list);
+  const lists = useSelector(listsSelector.selectEntities);
   const [taskData, setTaskData] = useState({
     name: "",
     description: "",
     startDate: Date.now().toString(),
     endDate: null,
-    categoryId: list.id,
+    categoryId: id,
   });
 
   const listRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
   const { tasks, addTaskLoading } = useSelector(taskState);
   const { isAddCardActive } = useSelector(popupState);
+  const tasksEntities = useSelector(tasksSelector.selectEntities);
 
   const {
     register,
@@ -63,13 +66,14 @@ const TaskList: FC<IProps> = ({ list }) => {
     watch,
   } = useForm({
     defaultValues: {
-      listTitle: list.name,
+      listTitle: lists[id]?.name,
     },
   });
 
   const { listTitle } = watch();
+  console.log(listTitle);
   useEffect(() => {
-    dispatch(getTasksAction({ categoryId: list.id }));
+    dispatch(getTasksAction({ categoryId: id }));
   }, []);
 
   useEffect(() => {
@@ -148,8 +152,8 @@ const TaskList: FC<IProps> = ({ list }) => {
   };
 
   const updateList: SubmitHandler<FieldValues> = () => {
-    if (list.name !== listTitle)
-      dispatch(updateListAction({ ...list, name: listTitle }));
+    if (lists[id]?.name !== listTitle)
+      dispatch(updateListAction({ ...lists[id], name: listTitle }));
     setTitleInput(false);
   };
 
@@ -161,8 +165,6 @@ const TaskList: FC<IProps> = ({ list }) => {
     dispatch(setAddTaskLoading(true));
     dispatch(createTaskAction(taskData));
   };
-
-  const categoryId = list.id;
 
   return (
     <div className={styles.TaskList}>
@@ -186,14 +188,14 @@ const TaskList: FC<IProps> = ({ list }) => {
           className="fa-solid fa-ellipsis"
         ></i>
         {isListActionActive && (
-          <ListActions closeListAction={closeListAction} list={list} />
+          <ListActions closeListAction={closeListAction} list={lists[id]} />
         )}
       </div>
       <div ref={listRef} className={styles.listBody}>
-        {tasks[categoryId]?.map((task) => (
+        {tasks.ids?.map((id) => (
           <TaskCard
-            key={task.id}
-            task={task}
+            key={id}
+            id={id}
             changeUserProfileActive={changeUserProfileActive}
           />
         ))}

@@ -1,3 +1,5 @@
+import { EntityId } from "@reduxjs/toolkit";
+
 export type GetPostsApiPayload = {
   limit: number;
 };
@@ -17,13 +19,13 @@ export interface ITaskData {
   name: string;
   description: string;
   startDate: string | null;
-  date: string | null;
-  categoryId: number;
+  endDate: string | null;
+  categoryId: number | EntityId;
   id: number;
 }
 
 export interface ITaskSliceInitialState {
-  tasks: { [listTasks: number]: ITaskData[] };
+  //tasks: { ids: number[]; entities: { [key: number]: ITaskData } };
   isTaskDetailsActive: boolean;
   isTaskCardActive: boolean;
   taskCardPosition: { top: number; left: number };
@@ -32,7 +34,7 @@ export interface ITaskSliceInitialState {
 }
 
 export interface IListSliceInitialState {
-  lists: IListData[];
+  // lists: IListData[];
   addListLoading: boolean;
   currentList: IListData | {};
   deleteListLoading: boolean;

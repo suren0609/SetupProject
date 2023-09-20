@@ -6,6 +6,7 @@ import {
   setTaskCardActive,
   setTaskCardPosition,
   setTaskDetailsActive,
+  tasksSelector,
 } from "store/slices/taskSlice";
 import {
   setIsUserProfileActive,
@@ -13,18 +14,21 @@ import {
 } from "store/slices/userPopupSlice";
 import styles from "./TaskCard.module.scss";
 import { ITaskData } from "store/types";
+import { EntityId } from "@reduxjs/toolkit";
 
 interface ICardProps {
   changeUserProfileActive: () => void;
-  task: ITaskData;
+  id: EntityId;
 }
 
-const TaskCard: FC<ICardProps> = ({ changeUserProfileActive, task }) => {
+const TaskCard: FC<ICardProps> = ({ changeUserProfileActive, id }) => {
   const user = useSelector(userSelector);
 
   const dispatch = useDispatch();
 
   const isTemplate = useSelector(isTaskTemplateSelector);
+
+  const tasksEntities = useSelector(tasksSelector.selectEntities);
 
   const handleTaskDetails = () => {
     dispatch(setTaskDetailsActive(true));
@@ -55,7 +59,7 @@ const TaskCard: FC<ICardProps> = ({ changeUserProfileActive, task }) => {
   return (
     <div onClick={handleTaskDetails} className={styles.taskCard} ref={divRef}>
       <div className={styles.cardTop}>
-        <p>{task.name}</p>
+        <p>{tasksEntities[id]?.name}</p>
         <div onClick={handleCardActive} className={styles.cardTopEdit}>
           <i className="fa-solid fa-pencil"></i>
         </div>

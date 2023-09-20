@@ -1,4 +1,4 @@
-import { createAction } from "@reduxjs/toolkit";
+import { EntityId, createAction } from "@reduxjs/toolkit";
 import {
   IBoardDataAction,
   IBoardResponse,
@@ -32,7 +32,7 @@ export const deleteListAction = createAction<IListData | {}>(
   "deleteListAction",
 );
 export const updateListAction = createAction<IListData>("updateListAction");
-export const getTasksAction = createAction<{ categoryId: number }>(
+export const getTasksAction = createAction<{ categoryId: number | EntityId }>(
   "getTasksAction",
 );
 

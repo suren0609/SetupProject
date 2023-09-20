@@ -1,8 +1,20 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import {
+  PayloadAction,
+  createEntityAdapter,
+  createSlice,
+} from "@reduxjs/toolkit";
+import { RootState } from "store";
 import { IListData, IListSliceInitialState, IListsState } from "store/types";
 
+const listsAdapter = createEntityAdapter<IListData>({
+  selectId: (list) => list.id,
+});
+
+export const listsSelector = listsAdapter.getSelectors(
+  (state: RootState) => state.list.lists,
+);
+
 const initialState: IListSliceInitialState = {
-  lists: [],
   addListLoading: false,
   currentList: {},
   deleteListLoading: false,
@@ -10,20 +22,23 @@ const initialState: IListSliceInitialState = {
 
 export const listSlice = createSlice({
   name: "list",
-  initialState,
+  initialState: {
+    lists: listsAdapter.getInitialState(),
+    ...initialState,
+  },
   reducers: {
     setLists: (state, { payload }: PayloadAction<IListData[]>) => {
-      state.lists = payload;
+      listsAdapter.setAll(state.lists, payload);
     },
-    addList: (state, { payload }: PayloadAction<IListData>) => {
-      state.lists.push(payload);
-    },
+    // addList: (state, { payload }: PayloadAction<IListData>) => {
+    //   state.lists.push(payload);
+    // },
     setAddListLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.addListLoading = payload;
     },
-    removeList: (state, { payload }: PayloadAction<IListData>) => {
-      state.lists = state.lists.filter((list) => list.id !== payload.id);
-    },
+    // removeList: (state, { payload }: PayloadAction<IListData>) => {
+    //   state.lists = state.lists.filter((list) => list.id !== payload.id);
+    // },
     setCurrentList: (state, { payload }: PayloadAction<IListData | {}>) => {
       state.currentList = payload;
     },
@@ -35,9 +50,9 @@ export const listSlice = createSlice({
 
 export const {
   setLists,
-  addList,
+  // addList,
   setAddListLoading,
-  removeList,
+  // removeList,
   setCurrentList,
   setDeleteListLoading,
 } = listSlice.actions;
