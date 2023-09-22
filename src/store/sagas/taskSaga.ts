@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { createTaskService } from "services/createTaskService";
 import { getTasksService } from "services/getTasksService";
 import { createTaskAction, getTasksAction } from "store/actions";
@@ -14,7 +14,7 @@ function* getTasksSaga(action: PayloadAction<{ categoryId: number }>) {
       action.payload.categoryId,
     );
 
-    yield put(setTasks({ data, categoryId: action.payload.categoryId }));
+    yield put(setTasks({ data }));
   } catch (err) {
     return err;
   }
@@ -28,9 +28,7 @@ function* createTaskSaga(action: PayloadAction<ITaskData>) {
       action.payload.categoryId,
     );
 
-    console.log(tasks);
-
-    yield put(setTasks({ data: tasks, categoryId: action.payload.categoryId }));
+    yield put(setTasks({ data: tasks }));
     yield put(setAddTaskLoading(false));
     yield put(setAddCardActive(false));
   } catch (err) {
@@ -39,6 +37,6 @@ function* createTaskSaga(action: PayloadAction<ITaskData>) {
 }
 
 export function* watchTaskSaga() {
-  yield takeLatest(getTasksAction.type, getTasksSaga);
+  yield takeEvery(getTasksAction.type, getTasksSaga);
   yield takeLatest(createTaskAction.type, createTaskSaga);
 }

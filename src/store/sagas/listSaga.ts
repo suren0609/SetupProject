@@ -11,7 +11,6 @@ import {
   updateListAction,
 } from "store/actions";
 import {
-  addList,
   setAddListLoading,
   setDeleteListLoading,
   setLists,
@@ -37,9 +36,13 @@ function* getListSaga(action: PayloadAction<{ boardId: string }>) {
 
 function* createListSaga(action: PayloadAction<IListData>) {
   try {
-    const { data } = yield call(createListService, action.payload);
-
-    yield put(addList(data));
+    yield call(createListService, action.payload);
+    const data: IListData[] = yield call(
+      getListsService,
+      action.payload.boardId,
+    );
+    // yield put(addList(data));
+    yield put(setLists(data));
     yield put(setAddListLoading(false));
     yield put(setAddActive(false));
   } catch (err) {

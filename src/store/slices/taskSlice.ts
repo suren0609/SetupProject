@@ -29,11 +29,8 @@ export const tasksSlice = createSlice({
     ...initialState,
   },
   reducers: {
-    setTasks: (
-      state,
-      { payload }: PayloadAction<{ data: ITaskData[]; categoryId: number }>,
-    ) => {
-      tasksAdapter.setAll(state.tasks, payload.data);
+    setTasks: (state, { payload }: PayloadAction<{ data: ITaskData[] }>) => {
+      tasksAdapter.setMany(state.tasks, payload.data);
     },
     setTaskDetailsActive: (state, { payload }: PayloadAction<boolean>) => {
       state.isTaskDetailsActive = payload;

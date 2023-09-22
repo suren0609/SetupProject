@@ -15,9 +15,13 @@ const HomeDetails: FC = () => {
   return (
     <div className={styles.HomeDetails}>
       <div className={styles.scrollContainer}>
-        {listsIds.map((id) => (
-          <TaskList key={id} id={id} />
-        ))}
+        {listsIds.map((id) => {
+          const list = listsEntities[id];
+          if (list !== undefined) {
+            return <TaskList key={id} list={list} />;
+          }
+          return null;
+        })}
 
         <AddList />
       </div>

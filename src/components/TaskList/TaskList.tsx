@@ -34,23 +34,23 @@ import { setAddCardActive } from "store/slices/popupSlice";
 import { EntityId } from "@reduxjs/toolkit";
 
 interface IProps {
-  id: EntityId;
+  list: IListData;
 }
 
-const TaskList: FC<IProps> = ({ id }) => {
+const TaskList: FC<IProps> = ({ list }) => {
   const [isTemplateActive, setTemplateActive] = useState(false);
   // const [isAddCardActive, setAddCardActive] = useState(false);
   const [isListActionActive, setListActionActive] = useState(false);
   const [pos, setPos] = useState({ currentTop: 0, currentLeft: 0 });
   const [isTitleInput, setTitleInput] = useState(false);
   // const [titleValue, setTitleValue] = useState<IListData>(list);
-  const lists = useSelector(listsSelector.selectEntities);
+  // const lists = useSelector(listsSelector.selectEntities);
   const [taskData, setTaskData] = useState({
     name: "",
     description: "",
     startDate: Date.now().toString(),
     endDate: null,
-    categoryId: id,
+    categoryId: list.id,
   });
 
   const listRef = useRef<HTMLDivElement>(null);
@@ -66,14 +66,13 @@ const TaskList: FC<IProps> = ({ id }) => {
     watch,
   } = useForm({
     defaultValues: {
-      listTitle: lists[id]?.name,
+      listTitle: list?.name,
     },
   });
 
   const { listTitle } = watch();
-  console.log(listTitle);
   useEffect(() => {
-    dispatch(getTasksAction({ categoryId: id }));
+    dispatch(getTasksAction({ categoryId: list.id }));
   }, []);
 
   useEffect(() => {
@@ -137,6 +136,7 @@ const TaskList: FC<IProps> = ({ id }) => {
     if (e.relatedTarget?.dataset?.name === "addCardActive") {
       return;
     }
+
     dispatch(setAddCardActive(false));
   };
 
@@ -152,8 +152,10 @@ const TaskList: FC<IProps> = ({ id }) => {
   };
 
   const updateList: SubmitHandler<FieldValues> = () => {
-    if (lists[id]?.name !== listTitle)
-      dispatch(updateListAction({ ...lists[id], name: listTitle }));
+    if (list.name !== undefined && list.name !== listTitle) {
+      dispatch(updateListAction({ ...list, name: listTitle }));
+    }
+
     setTitleInput(false);
   };
 
@@ -188,17 +190,19 @@ const TaskList: FC<IProps> = ({ id }) => {
           className="fa-solid fa-ellipsis"
         ></i>
         {isListActionActive && (
-          <ListActions closeListAction={closeListAction} list={lists[id]} />
+          <ListActions closeListAction={closeListAction} list={list} />
         )}
       </div>
       <div ref={listRef} className={styles.listBody}>
-        {tasks.ids?.map((id) => (
-          <TaskCard
-            key={id}
-            id={id}
-            changeUserProfileActive={changeUserProfileActive}
-          />
-        ))}
+        {tasks.ids
+          ?.filter((id) => tasksEntities[id]?.categoryId === list.id)
+          .map((id) => (
+            <TaskCard
+              key={id}
+              id={id}
+              changeUserProfileActive={changeUserProfileActive}
+            />
+          ))}
 
         {isAddCardActive && (
           <div
@@ -209,6 +213,7 @@ const TaskList: FC<IProps> = ({ id }) => {
             data-name="addCardActive"
           >
             <textarea
+              data-name="addCardActive"
               placeholder="Enter a title for this card..."
               onChange={changeTaskInput}
               autoFocus
